@@ -9,6 +9,7 @@ import {
 import logo from "./logo.svg";
 import "./App.css";
 import Main from "./components/Main";
+import TypingPage from "./components/TypingPage";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
       <Router>
         <Routes>
           <Route path="/" element={<Main />} />
+          <Route path="/typing-page" element={<TypingPage />} />
           <Route path="*" element={<Navigate to="/" />} />
         </Routes>
       </Router>
