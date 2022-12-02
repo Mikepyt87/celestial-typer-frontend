@@ -1,4 +1,3 @@
-import React from "react";
 import {
   BrowserRouter as Router,
   Navigate,
@@ -9,7 +8,7 @@ import {
 import logo from "./logo.svg";
 import "./App.css";
 import Main from "./components/Main";
-import TypingPage from "./components/TypingPage";
+import TypingMainPage from "./components/TypingGame/TypingMainPage";
 
 function App() {
   return (
@@ -17,7 +16,7 @@ function App() {
       <Router>
         <Routes>
           <Route path="/" element={<Main />} />
-          <Route path="/typing-page" element={<TypingPage />} />
+          <Route path="/typing-page" element={<TypingMainPage />} />
           <Route path="*" element={<Navigate to="/" />} />
         </Routes>
       </Router>
