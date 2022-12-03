@@ -1,5 +1,4 @@
 import "./TypingMainPage.css";
-import { faker } from "@faker-js/faker"; /*2.7M (gzipped: 883k)*/
 import { useEffect, useState } from "react";
 import Article from "../../models/Article";
 import { getAllArticles } from "../../services/spaceFlightApiService";
@@ -8,6 +7,8 @@ import CountdownTimer from "./CountdownTimer";
 import RestartButton from "./RestartButton";
 import Results from "./Results";
 import UserTypings from "./UserTypings";
+import { faker } from "@faker-js/faker";
+import { motion } from "framer-motion";
 
 // const words = faker.random.words(10);
 
@@ -67,24 +68,31 @@ const TypingMainPage = () => {
           <CountdownTimer timeLeft={30} />
           {/* <WordsContainer/> */}
 
-          <div
-            // class: "position: relative, max-width: 576px;, add margin to top,
-            // font-size: 30px; line-height: 36px;, line-height: 1.625;, adds line
-            // breaks whenever necessary, without trying to preserve whole words"
-            className="relative max-w-xl mt-3 text-3xl leading-relaxed break-all"
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 1 }}
           >
-            <GeneratedWords words={articles[index].summary} />
-            <UserTypings
-              // class: "position: absolute, top: 0px; right: 0px; bottom: 0px; left: 0px;"
-              className="absolute inset-0"
-              userInput={articles[index].summary}
+            <div
+              // class: "position: relative, max-width: 576px;, add margin to top,
+              // font-size: 30px; line-height: 36px;, line-height: 1.625;, adds line
+              // breaks whenever necessary, without trying to preserve whole words"
+              className="relative max-w-xl mt-3 text-3xl leading-relaxed break-all"
+            >
+              <GeneratedWords words={articles[index].summary} />
+              <UserTypings
+                // class: "position: absolute, top: 0px; right: 0px; bottom: 0px; left: 0px;"
+                className="absolute inset-0"
+                userInput={""}
+              />
+            </div>
+            <RestartButton
+              // class: "auto center container, add margin to top, color: rgb(100 116 139);"
+              className={"mx-auto mt-10 text-slate-500"}
+              onRestart={() => null}
             />
-          </div>
-          <RestartButton
-            // class: "auto center container, add margin to top, color: rgb(100 116 139);"
-            className={"mx-auto mt-10 text-slate-500"}
-            onRestart={() => null}
-          />
+          </motion.div>
+
           <Results
             // class: "add margin to top"
             className="mt-10"
