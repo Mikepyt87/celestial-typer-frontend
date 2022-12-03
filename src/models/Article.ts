@@ -1,3 +1,4 @@
+// Interface describes the return from the endpoint from Splace Flight Api
 export default interface Article {
   id: number;
   title: string;

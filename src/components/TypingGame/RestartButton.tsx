@@ -17,10 +17,14 @@ const RestartButton = ({
 
   return (
     <button
+      // class: display style, border-radius: 4px, horizontial padding, vertical padding, when hovering: background color
       className={`block rounded px-8 py-2 hover:bg-slate-700/50 ${className}`}
       onClick={handleRestart}
     >
-      <MdRefresh className="w-6 h-6" />
+      <MdRefresh
+        // class: "width, height"
+        className="w-6 h-6"
+      />
     </button>
   );
 };

@@ -4,10 +4,8 @@ import {
   Route,
   Routes,
 } from "react-router-dom";
-
-import logo from "./logo.svg";
 import "./App.css";
-import Main from "./components/Main";
+import Home from "./components/Home";
 import TypingMainPage from "./components/TypingGame/TypingMainPage";
 
 function App() {
@@ -15,8 +13,9 @@ function App() {
     <div className="App">
       <Router>
         <Routes>
-          <Route path="/" element={<Main />} />
+          <Route path="/" element={<Home />} />
           <Route path="/typing-page" element={<TypingMainPage />} />
+          {/* wildcard */}
           <Route path="*" element={<Navigate to="/" />} />
         </Routes>
       </Router>
