@@ -85,14 +85,14 @@ const TypingMainPage = () => {
               onRestart={restart}
             /> */}
           </motion.div>
-          <Results
+          {/* <Results
             // class: "add margin to top"
             className="mt-10"
             state={state}
             errors={errors}
             accuracyPercentage={calculateAccuracyPercentage(errors, totalTyped)}
             total={totalTyped}
-          />
+          /> */}
         </div>
       </>
     );
