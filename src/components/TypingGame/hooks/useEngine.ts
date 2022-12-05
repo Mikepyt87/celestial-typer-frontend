@@ -9,7 +9,7 @@ import useWords from "./useWords";
 export type State = "start" | "run" | "finish";
 
 // const NUMBER_OF_WORDS = 12;
-const COUNTDOWN_SECONDS = 30;
+const COUNTDOWN_SECONDS = 1;
 
 const useEngine = (articles: Article[]) => {
   const [state, setState] = useState<State>("start");
