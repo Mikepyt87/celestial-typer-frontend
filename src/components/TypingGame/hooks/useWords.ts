@@ -1,10 +1,19 @@
+import { faker } from "@faker-js/faker";
 import { useCallback, useState } from "react";
 
-// TODO
-const nextArticle = (index: number) => {
-  return index + 1;
+const generateWords = (count: number) => {
+  return faker.random.words(count).toLowerCase();
 };
 
-const useWords = () => {};
+const useWords = (count: number) => {
+  // needs to change
+  const [words, setWords] = useState<string>(generateWords(count));
+
+  const updateWords = useCallback(() => {
+    setWords(generateWords(count));
+  }, [count]);
+
+  return { words, updateWords };
+};
 
 export default useWords;

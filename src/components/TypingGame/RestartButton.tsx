@@ -1,13 +1,12 @@
 import { useRef } from "react";
 import { MdRefresh } from "react-icons/md";
 
-const RestartButton = ({
-  onRestart: handleRestart,
-  className = "",
-}: {
+interface Props {
   onRestart: () => void;
   className?: string;
-}) => {
+}
+
+const RestartButton = ({ onRestart: handleRestart, className = "" }: Props) => {
   const buttonRef = useRef<HTMLButtonElement>(null);
 
   const handleClick = () => {
