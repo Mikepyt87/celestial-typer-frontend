@@ -9,6 +9,8 @@ import Results from "./Results";
 import UserTypings from "./UserTypings";
 import { faker } from "@faker-js/faker";
 import { motion } from "framer-motion";
+import useEngine from "./hooks/useEngine";
+import { calculateAccuracyPercentage } from "./utils/helpers";
 
 // const words = faker.random.words(10);
 
@@ -58,6 +60,8 @@ const TypingMainPage = () => {
   useEffect(() => {
     getAllArticles().then((res) => setArticles(randomArticles(res)));
   }, []);
+  const { words, typed, timeLeft, errors, state, restart, totalTyped } =
+    useEngine();
 
   // once articles load, page is rendered
   if (articles) {
@@ -65,7 +69,7 @@ const TypingMainPage = () => {
       <>
         <div className="TypingMainPage">
           {/* elements from video */}
-          <CountdownTimer timeLeft={30} />
+          <CountdownTimer timeLeft={timeLeft} />
           {/* <WordsContainer/> */}
 
           <motion.div
@@ -79,26 +83,31 @@ const TypingMainPage = () => {
               // breaks whenever necessary, without trying to preserve whole words"
               className="relative max-w-xl mt-3 text-3xl leading-relaxed break-all"
             >
-              <GeneratedWords words={articles[index].summary} />
+              <GeneratedWords
+                key={articles[index].summary}
+                words={articles[index].summary}
+              />
               <UserTypings
                 // class: "position: absolute, top: 0px; right: 0px; bottom: 0px; left: 0px;"
                 className="absolute inset-0"
-                userInput={""}
+                words={articles[index].summary}
+                userInput={typed}
               />
             </div>
             <RestartButton
               // class: "auto center container, add margin to top, color: rgb(100 116 139);"
               className={"mx-auto mt-10 text-slate-500"}
-              onRestart={() => null}
+              onRestart={restart}
             />
           </motion.div>
-
+          <button onClick={() => setIndex(index + 1)}>Next</button>
           <Results
             // class: "add margin to top"
             className="mt-10"
-            errors={10}
-            accuracyPercentage={100}
-            total={200}
+            state={state}
+            errors={errors}
+            accuracyPercentage={calculateAccuracyPercentage(errors, totalTyped)}
+            total={totalTyped}
           />
         </div>
       </>

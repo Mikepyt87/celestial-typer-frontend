@@ -1,4 +1,8 @@
-const GeneratedWords = ({ words }: { words: string }) => {
+interface Props {
+  words: string;
+}
+
+const GeneratedWords = ({ words }: Props) => {
   return (
     <div
       // class: "textColor: rgb(100 116 139)"
