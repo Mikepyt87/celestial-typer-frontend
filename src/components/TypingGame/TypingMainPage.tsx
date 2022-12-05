@@ -41,20 +41,7 @@ const randomArticles = (articles: Article[]): Article[] => {
 };
 
 const TypingMainPage = () => {
-  const [articles, setArticles] = useState<Article[]>([
-    // {
-    //   id: 3,
-    //   title: "",
-    //   url: "",
-    //   imageUrl: "",
-    //   newsSite: "",
-    //   summary: "dfgdfg",
-    //   publishedAt: "",
-    //   updatedAt: "",
-    // },
-  ]);
-
-  const [index, setIndex] = useState(0);
+  const [articles, setArticles] = useState<Article[]>([]);
 
   useEffect(() => {
     getAllArticles().then((res) => setArticles(randomArticles(res)));
@@ -65,7 +52,7 @@ const TypingMainPage = () => {
     useEngine(articles);
 
   // once articles load, page is rendered
-  if (words && timeLeft) {
+  if (articles) {
     return (
       <>
         <div className="TypingMainPage">
@@ -98,7 +85,6 @@ const TypingMainPage = () => {
               onRestart={restart}
             /> */}
           </motion.div>
-          <button onClick={() => setIndex(index + 1)}>Next</button>
           <Results
             // class: "add margin to top"
             className="mt-10"
