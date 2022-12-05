@@ -67,7 +67,11 @@ const useEngine = (articles: Article[]) => {
         errors,
         totalTyped
       );
-      setResults({ errors, accuracyPercentage, total: totalTyped });
+      setResults({
+        errors: errors,
+        accuracyPercentage: accuracyPercentage,
+        total: totalTyped,
+      });
       sumErrors();
       navigate("/results");
     }
