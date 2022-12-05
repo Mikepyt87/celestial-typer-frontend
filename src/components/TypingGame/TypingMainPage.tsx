@@ -39,32 +39,33 @@ const randomArticles = (articles: Article[]): Article[] => {
   }
   return numOfArticles;
 };
-// 2. hold those articles inside a useState variable.✓
-
-// 3. display first random article summary on page.✓
-
-// 4. declare useState variable that holds all articles that were started for useContext.
-
-// 5. create function that displays the next article from the array of articles.
-// 6. display that article on the page.
 
 const TypingMainPage = () => {
-  const [articles, setArticles] = useState<Article[]>();
-  const [articlesThatHaveBeenStarted, setArticlesThatHaveBeenStarted] =
-    useState<Article[]>([]);
+  const [articles, setArticles] = useState<Article[]>([
+    // {
+    //   id: 3,
+    //   title: "",
+    //   url: "",
+    //   imageUrl: "",
+    //   newsSite: "",
+    //   summary: "dfgdfg",
+    //   publishedAt: "",
+    //   updatedAt: "",
+    // },
+  ]);
 
   const [index, setIndex] = useState(0);
 
-  // const [summary, setSummary] = useState<String[]>([]);
-
   useEffect(() => {
     getAllArticles().then((res) => setArticles(randomArticles(res)));
+    console.log(articles);
   }, []);
-  const { words, typed, timeLeft, errors, state, restart, totalTyped } =
-    useEngine();
+
+  const { words, typed, timeLeft, errors, state, totalTyped } =
+    useEngine(articles);
 
   // once articles load, page is rendered
-  if (articles) {
+  if (words && timeLeft) {
     return (
       <>
         <div className="TypingMainPage">
@@ -83,22 +84,19 @@ const TypingMainPage = () => {
               // breaks whenever necessary, without trying to preserve whole words"
               className="relative max-w-xl mt-3 text-3xl leading-relaxed break-all"
             >
-              <GeneratedWords
-                key={articles[index].summary}
-                words={articles[index].summary}
-              />
+              <GeneratedWords key={words} words={words} />
               <UserTypings
                 // class: "position: absolute, top: 0px; right: 0px; bottom: 0px; left: 0px;"
                 className="absolute inset-0"
-                words={articles[index].summary}
+                words={words}
                 userInput={typed}
               />
             </div>
-            <RestartButton
+            {/* <RestartButton
               // class: "auto center container, add margin to top, color: rgb(100 116 139);"
               className={"mx-auto mt-10 text-slate-500"}
               onRestart={restart}
-            />
+            /> */}
           </motion.div>
           <button onClick={() => setIndex(index + 1)}>Next</button>
           <Results
