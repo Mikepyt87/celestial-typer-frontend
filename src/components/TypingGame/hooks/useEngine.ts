@@ -9,14 +9,14 @@ import useWords from "./useWords";
 export type State = "start" | "run" | "finish";
 
 // const NUMBER_OF_WORDS = 12;
-const COUNTDOWN_SECONDS = 3;
+const COUNTDOWN_SECONDS = 30;
 
 const useEngine = (articles: Article[]) => {
   const [state, setState] = useState<State>("start");
   const { timeLeft, startCountdown, resetCountdown } =
     useCountdown(COUNTDOWN_SECONDS);
 
-  const { words, updateWords } = useWords(articles, 0);
+  const { words, updateWords } = useWords(articles);
 
   const { cursor, typed, clearTyped, totalTyped, resetTotalTyped } = useTypings(
     state !== "finish"
