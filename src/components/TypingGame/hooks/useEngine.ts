@@ -1,7 +1,13 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useContext, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import ResultsContext from "../../../context/ResultsContext";
 import Article from "../../../models/Article";
 import { getAllArticles } from "../../../services/spaceFlightApiService";
-import { countErrors, debug } from "../utils/helpers";
+import {
+  calculateAccuracyPercentage,
+  countErrors,
+  debug,
+} from "../utils/helpers";
 import useCountdown from "./useCountdown";
 import useTypings from "./useTypings";
 import useWords from "./useWords";
@@ -12,6 +18,8 @@ export type State = "start" | "run" | "finish";
 const COUNTDOWN_SECONDS = 1;
 
 const useEngine = (articles: Article[]) => {
+  const { setResults } = useContext(ResultsContext);
+  const navigate = useNavigate();
   const [state, setState] = useState<State>("start");
   const { timeLeft, startCountdown, resetCountdown } =
     useCountdown(COUNTDOWN_SECONDS);
@@ -55,7 +63,13 @@ const useEngine = (articles: Article[]) => {
     if (!timeLeft && state === "run") {
       debug("time is up...");
       setState("finish");
+      const accuracyPercentage = calculateAccuracyPercentage(
+        errors,
+        totalTyped
+      );
+      setResults({ errors, accuracyPercentage, total: totalTyped });
       sumErrors();
+      navigate("/results");
     }
   }, [timeLeft, state, sumErrors]);
 

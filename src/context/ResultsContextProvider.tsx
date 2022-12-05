@@ -14,3 +14,6 @@ function ResultsContextProvider({ children }: { children: ReactNode }) {
   );
 }
 export default ResultsContextProvider;
+
+//user is done with the typing challenge
+//Timer is up
