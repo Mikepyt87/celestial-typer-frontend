@@ -15,7 +15,7 @@ import useWords from "./useWords";
 export type State = "start" | "run" | "finish";
 
 // const NUMBER_OF_WORDS = 12;
-const COUNTDOWN_SECONDS = 1;
+const COUNTDOWN_SECONDS = 10;
 
 const useEngine = (articles: Article[]) => {
   const { setResults } = useContext(ResultsContext);
@@ -61,18 +61,15 @@ const useEngine = (articles: Article[]) => {
   // when the time is up, we've finished
   useEffect(() => {
     if (!timeLeft && state === "run") {
+      sumErrors();
       debug("time is up...");
       setState("finish");
-      const accuracyPercentage = calculateAccuracyPercentage(
-        errors,
-        totalTyped
-      );
+    }
+    if (state === "finish") {
       setResults({
         errors: errors,
-        accuracyPercentage: accuracyPercentage,
         total: totalTyped,
       });
-      sumErrors();
       navigate("/results");
     }
   }, [timeLeft, state, sumErrors]);
