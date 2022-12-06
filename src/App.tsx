@@ -17,7 +17,6 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/typing-page" element={<TypingMainPage />} />
           <Route path="/results" element={<ResultsPage />} />
-
           {/* wildcard */}
           <Route path="*" element={<Navigate to="/" />} />
         </Routes>

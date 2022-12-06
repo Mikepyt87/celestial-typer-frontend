@@ -4,6 +4,8 @@ import Article from "../models/Article";
 import { getAllArticles } from "../services/spaceFlightApiService";
 import "./Home.css";
 import replacementImg from "../assets/nasa_logo.jpg";
+import { getallUsers, getUserData } from "../services/AccountApiService";
+import Account from "../models/Account";
 
 // returns 10 random articles
 // input is the response from the Space Flight Api endpoint
@@ -38,6 +40,10 @@ const Home = () => {
       // sets articles to ten random objects
       setArticles(tenRandomArticles(res));
     });
+
+    // getUserData().then((res) => {
+    //   console.log(res);
+    // });
   }, []);
 
   // once articles load, page is rendered
