@@ -23,6 +23,11 @@ const ResultsPage = () => {
           )}
           total={results.total}
         />
+        <div>
+          {results.article.map((article) => (
+            <div>{article.title}</div>
+          ))}
+        </div>
         <Link to="/typing-page">
           <button>Im a button</button>
         </Link>

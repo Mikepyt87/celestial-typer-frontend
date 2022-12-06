@@ -2,12 +2,8 @@ import { useCallback, useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import ResultsContext from "../../../context/ResultsContext";
 import Article from "../../../models/Article";
-import { getAllArticles } from "../../../services/spaceFlightApiService";
-import {
-  calculateAccuracyPercentage,
-  countErrors,
-  debug,
-} from "../utils/helpers";
+
+import { countErrors, debug } from "../utils/helpers";
 import useCountdown from "./useCountdown";
 import useTypings from "./useTypings";
 import useWords from "./useWords";
@@ -24,7 +20,7 @@ const useEngine = (articles: Article[]) => {
   const { timeLeft, startCountdown, resetCountdown } =
     useCountdown(COUNTDOWN_SECONDS);
 
-  const { words, updateWords } = useWords(articles);
+  const { words, updateWords, attemptedArticles } = useWords(articles);
 
   const { cursor, typed, clearTyped, totalTyped, resetTotalTyped } = useTypings(
     state !== "finish"
@@ -69,6 +65,7 @@ const useEngine = (articles: Article[]) => {
       setResults({
         errors: errors,
         total: totalTyped,
+        article: attemptedArticles,
       });
       navigate("/results");
     }
