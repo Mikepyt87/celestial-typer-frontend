@@ -30,6 +30,7 @@ const tenRandomArticles = (articles: Article[]): Article[] => {
 const Home = () => {
   // useState that holds an array of ten randomized objects from Space Flight Api endpoint
   const [articles, setArticles] = useState<Article[]>();
+  console.log(articles);
 
   useEffect(() => {
     // calls Space Flight Api service function

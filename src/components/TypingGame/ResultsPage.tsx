@@ -25,7 +25,7 @@ const ResultsPage = () => {
         />
         <div>
           {results.article.map((article) => (
-            <div>{article.title}</div>
+            <div key={article.id}>{article.title}</div>
           ))}
         </div>
         <Link to="/typing-page">
