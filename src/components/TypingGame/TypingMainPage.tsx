@@ -4,26 +4,13 @@ import Article from "../../models/Article";
 import { getAllArticles } from "../../services/spaceFlightApiService";
 import GeneratedWords from "./GeneratedWords";
 import CountdownTimer from "./CountdownTimer";
-import RestartButton from "./RestartButton";
 import Results from "./Results";
 import UserTypings from "./UserTypings";
-import { faker } from "@faker-js/faker";
 import { motion } from "framer-motion";
 import useEngine from "./hooks/useEngine";
 import { calculateAccuracyPercentage } from "./utils/helpers";
 
-// const words = faker.random.words(10);
-
-// const randomArticle = (articles: Article[]): string => {
-//   // let article: Article[] = [];
-//   let randomIndex: number = Math.floor(Math.random() * articles.length);
-//   // article.push(articles[randomIndex]);
-
-//   return articles[randomIndex].summary;
-// };
-
-// TODO:
-// 1. create function that pulls 100 random articles from API Endpoint.✓
+// Pulls 100 random articles from API Endpoint.
 const randomArticles = (articles: Article[]): Article[] => {
   let numOfArticles: Article[] = [];
   for (let i = 0; i < 100; i++) {
@@ -85,14 +72,14 @@ const TypingMainPage = () => {
               onRestart={restart}
             /> */}
           </motion.div>
-          {/* <Results
+          <Results
             // class: "add margin to top"
             className="mt-10"
             state={state}
             errors={errors}
             accuracyPercentage={calculateAccuracyPercentage(errors, totalTyped)}
             total={totalTyped}
-          /> */}
+          />
         </div>
       </>
     );
