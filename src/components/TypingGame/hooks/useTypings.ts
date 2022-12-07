@@ -1,7 +1,8 @@
 import { useCallback, useEffect, useRef, useState } from "react";
+import Article from "../../../models/Article";
 import { isKeyboardCodeAllowed } from "../utils/helpers";
 
-const useTypings = (enabled: boolean) => {
+const useTypings = (enabled: boolean, articles: Article[]) => {
   const [cursor, setCursor] = useState(0);
   const [typed, setTyped] = useState<string>("");
   const totalTyped = useRef(0);
@@ -32,24 +33,22 @@ const useTypings = (enabled: boolean) => {
     setCursor(0);
   }, []);
 
-  const resetTotalTyped = useCallback(() => {
-    totalTyped.current = 0;
-  }, []);
-
   // attach the keydown event listener to record keystrokes
   useEffect(() => {
-    window.addEventListener("keydown", keydownHandler);
+    if (articles[0]) {
+      window.addEventListener("keydown", keydownHandler);
+    }
+
     // Remove event listeners on cleanup
-    return () => {
-      window.removeEventListener("keydown", keydownHandler);
-    };
-  }, [keydownHandler]);
+    // return () => {
+    //   window.removeEventListener("keydown", keydownHandler);
+    // };
+  }, [keydownHandler, articles]);
 
   return {
     typed,
     cursor,
     clearTyped,
-    resetTotalTyped,
     totalTyped: totalTyped.current,
   };
 };

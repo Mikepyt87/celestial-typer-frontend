@@ -14,12 +14,6 @@ const useCountdown = (seconds: number) => {
     }
   }, [setTimeLeft, hasTimerEnded, isRunning]);
 
-  const resetCountdown = useCallback(() => {
-    clearInterval(intervalRef.current!);
-    intervalRef.current = null;
-    setTimeLeft(seconds);
-  }, [seconds]);
-
   // when the countdown reaches 0, clear the countdown interval
   useEffect(() => {
     if (hasTimerEnded) {
@@ -33,7 +27,7 @@ const useCountdown = (seconds: number) => {
     return () => clearInterval(intervalRef.current!);
   }, []);
 
-  return { timeLeft, startCountdown, resetCountdown };
+  return { timeLeft, startCountdown };
 };
 
 export default useCountdown;

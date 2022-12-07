@@ -7,7 +7,11 @@ export const isKeyboardCodeAllowed = (code: string) => {
     code === "Space" ||
     code === "Comma" ||
     code === "Quote" ||
-    code === "Period"
+    code === "Period" ||
+    code === "Slash" ||
+    code === "Backquote" ||
+    code === "Minus" ||
+    code === "Equal"
   );
 };
 
@@ -16,7 +20,17 @@ export const countErrors = (actual: string, expected: string) => {
 
   return expectedCharacters.reduce((errors, expectedChar, i) => {
     const actualChar = actual[i];
-    if (actualChar !== expectedChar) {
+    if (
+      (actualChar === "-" && expectedChar === "—") ||
+      (actualChar === "n" && expectedChar === "ñ") ||
+      (actualChar === "u" && expectedChar === "ü") ||
+      (actualChar === "u" && expectedChar === "ú") ||
+      (actualChar === "o" && expectedChar === "ó") ||
+      (actualChar === "i" && expectedChar === "í") ||
+      (actualChar === "e" && expectedChar === "é") ||
+      (actualChar === "a" && expectedChar === "á")
+    ) {
+    } else if (actualChar !== expectedChar) {
       errors++;
     }
     return errors;
@@ -33,11 +47,11 @@ export const calculateAccuracyPercentage = (errors: number, total: number) => {
 };
 
 export const formatPercentage = (percentage: number) => {
-  return percentage.toFixed(0) + "%";
+  return `${percentage.toFixed(0)}%`;
 };
 
-export const debug = (str: string) => {
-  if (process.env.NODE_ENV === "development") {
-    console.debug(str);
-  }
-};
+// export const debug = (str: string) => {
+//   if (process.env.NODE_ENV === "development") {
+//     console.debug(str);
+//   }
+// };

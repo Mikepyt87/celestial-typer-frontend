@@ -2,46 +2,37 @@ import { useCallback, useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import ResultsContext from "../../../context/ResultsContext";
 import Article from "../../../models/Article";
-
-import { countErrors, debug } from "../utils/helpers";
+import {
+  countErrors,
+  // debug
+} from "../utils/helpers";
 import useCountdown from "./useCountdown";
 import useTypings from "./useTypings";
 import useWords from "./useWords";
 
 export type State = "start" | "run" | "finish";
 
-// const NUMBER_OF_WORDS = 12;
-const COUNTDOWN_SECONDS = 30;
+const COUNTDOWN_SECONDS = 20;
 
 const useEngine = (articles: Article[]) => {
   const { setResults } = useContext(ResultsContext);
   const navigate = useNavigate();
+
   const [state, setState] = useState<State>("start");
-  const { timeLeft, startCountdown, resetCountdown } =
-    useCountdown(COUNTDOWN_SECONDS);
-
-  const { words, updateWords, attemptedArticles } = useWords(articles);
-
-  const { cursor, typed, clearTyped, totalTyped, resetTotalTyped } = useTypings(
-    state !== "finish"
-  );
   const [errors, setErrors] = useState(0);
+
+  const { timeLeft, startCountdown } = useCountdown(COUNTDOWN_SECONDS);
+  const { words, updateWords, attemptedArticles } = useWords(articles);
+  const { cursor, typed, clearTyped, totalTyped } = useTypings(
+    state !== "finish",
+    articles
+  );
 
   const isStarting = state === "start" && cursor > 0;
   const areWordsFinished = cursor === words.length;
 
-  // const restart = useCallback(() => {
-  //   debug("restarting...");
-  //   resetCountdown();
-  //   resetTotalTyped();
-  //   setState("start");
-  //   setErrors(0);
-  //   updateWords();
-  //   clearTyped();
-  // }, [clearTyped, updateWords, resetCountdown, resetTotalTyped]);
-
   const sumErrors = useCallback(() => {
-    debug(`cursor: ${cursor} - words.length: ${words.length}`);
+    // debug(`cursor: ${cursor} - words.length: ${words.length}`);
     const wordsReached = words.substring(0, Math.min(cursor, words.length));
     setErrors((prevErrors) => prevErrors + countErrors(typed, wordsReached));
   }, [typed, words, cursor]);
@@ -58,7 +49,7 @@ const useEngine = (articles: Article[]) => {
   useEffect(() => {
     if (!timeLeft && state === "run") {
       sumErrors();
-      debug("time is up...");
+      // debug("time is up...");
       setState("finish");
     }
     if (state === "finish") {
@@ -77,7 +68,7 @@ const useEngine = (articles: Article[]) => {
    */
   useEffect(() => {
     if (areWordsFinished) {
-      debug("words are finished...");
+      // debug("words are finished...");
       sumErrors();
       updateWords();
       clearTyped();
@@ -89,7 +80,6 @@ const useEngine = (articles: Article[]) => {
     words,
     typed,
     errors,
-    // restart,
     timeLeft,
     totalTyped,
   };

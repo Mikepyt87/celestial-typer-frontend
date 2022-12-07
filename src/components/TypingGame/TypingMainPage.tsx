@@ -32,14 +32,14 @@ const TypingMainPage = () => {
 
   useEffect(() => {
     getAllArticles().then((res) => setArticles(randomArticles(res)));
-    console.log(articles);
+    // console.log(articles);
   }, []);
 
   const { words, typed, timeLeft, errors, state, totalTyped } =
     useEngine(articles);
 
   // once articles load, page is rendered
-  if (articles) {
+  if (articles[0]) {
     return (
       <>
         <div className="TypingMainPage">
@@ -47,11 +47,7 @@ const TypingMainPage = () => {
           <CountdownTimer timeLeft={timeLeft} />
           {/* <WordsContainer/> */}
 
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 1 }}
-          >
+          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
             <div
               // class: "position: relative, max-width: 576px;, add margin to top,
               // font-size: 30px; line-height: 36px;, line-height: 1.625;, adds line

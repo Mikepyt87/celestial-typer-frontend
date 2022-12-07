@@ -8,7 +8,7 @@ import { calculateAccuracyPercentage } from "./utils/helpers";
 
 const ResultsPage = () => {
   const { results } = useContext(ResultsContext);
-  console.log(results);
+  // console.log(results);
 
   if (results) {
     return (
@@ -25,7 +25,10 @@ const ResultsPage = () => {
         />
         <div>
           {results.article.map((article, index) => (
-            <div key={`${article.id} ${index}`}>{article.title}</div>
+            <div key={`${article.id} ${index}`}>
+              <div>{article.title}</div>
+              <img src={article.imageUrl} alt={article.title} />
+            </div>
           ))}
         </div>
         <Link to="/typing-page">
