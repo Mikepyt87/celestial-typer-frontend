@@ -30,7 +30,7 @@ const tenRandomArticles = (articles: Article[]): Article[] => {
 };
 
 const Home = () => {
-  const { user } = useContext(AuthContext);
+  const { user, account } = useContext(AuthContext);
 
   // useState that holds an array of ten randomized objects from Space Flight Api endpoint
   const [articles, setArticles] = useState<Article[]>();
@@ -47,7 +47,7 @@ const Home = () => {
     //   console.log(res);
     // });
   }, []);
-
+  console.log(user);
   // once articles load, page is rendered
   if (articles) {
     return (

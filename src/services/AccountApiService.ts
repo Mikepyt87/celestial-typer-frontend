@@ -5,7 +5,7 @@ const baseUrl: string = process.env.REACT_APP_API_BASE_URL || "";
 
 export const getallUsers = (): Promise<Account[]> => {
   return axios
-    .get(`${baseUrl}/typer/`)
+    .get(`${baseUrl}/typer`)
     .then((res) => res.data)
     .catch((err) => console.log(err));
 };
@@ -25,4 +25,11 @@ export const getUserData = (uid: string): Promise<Account> => {
       .then((res) => res.data)
       .catch((err) => console.log(err))
   );
+};
+
+export const createNewAccount = (account: Account): Promise<Account> => {
+  return axios
+    .post(`${baseUrl}/typer/addAccount`, account)
+    .then((res) => res.data)
+    .catch((err) => console.log(err));
 };
