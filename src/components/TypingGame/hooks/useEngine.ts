@@ -1,7 +1,10 @@
 import { useCallback, useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import AuthContext from "../../../context/AuthContext";
 import ResultsContext from "../../../context/ResultsContext";
+import Account from "../../../models/Account";
 import Article from "../../../models/Article";
+import { updateAccountDetails } from "../../../services/AccountApiService";
 import {
   countErrors,
   // debug
@@ -16,6 +19,7 @@ const COUNTDOWN_SECONDS = 20;
 
 const useEngine = (articles: Article[]) => {
   const { setResults } = useContext(ResultsContext);
+  const { account, setAccount } = useContext(AuthContext);
   const navigate = useNavigate();
 
   const [state, setState] = useState<State>("start");
@@ -45,6 +49,14 @@ const useEngine = (articles: Article[]) => {
     }
   }, [isStarting, startCountdown]);
 
+  const insertUserScore = (errors: number, totalTyped: number) => {
+    if (account) {
+      const copyOfAccount: Account = { ...account };
+      copyOfAccount.scores.push({ errors: errors, total: totalTyped });
+      updateAccountDetails(copyOfAccount).then((res) => setAccount(res));
+    }
+  };
+
   // when the time is up, we've finished
   useEffect(() => {
     if (!timeLeft && state === "run") {
@@ -58,6 +70,7 @@ const useEngine = (articles: Article[]) => {
         total: totalTyped,
         article: attemptedArticles,
       });
+      insertUserScore(errors, totalTyped);
       navigate("/results");
     }
   }, [timeLeft, state, sumErrors]);
