@@ -7,6 +7,11 @@ import replacementImg from "../assets/nasa_logo.jpg";
 import AuthContext from "../context/AuthContext";
 import { signInWithGoogle, signOut } from "../firebaseConfig";
 import UsernameForm from "./UsernameForm";
+import {
+  getUserData,
+  updateAccountDetails,
+} from "../services/AccountApiService";
+import Account from "../models/Account";
 
 // returns 10 random articles
 // input is the response from the Space Flight Api endpoint
@@ -31,11 +36,12 @@ const tenRandomArticles = (articles: Article[]): Article[] => {
 };
 
 const Home = () => {
-  const { user, account } = useContext(AuthContext);
+  const { user, account, setAccount } = useContext(AuthContext);
 
   // useState that holds an array of ten randomized objects from Space Flight Api endpoint
   const [articles, setArticles] = useState<Article[]>();
   // console.log(articles);
+  const [userData, setUserData] = useState<Account>();
 
   useEffect(() => {
     // calls Space Flight Api service function
@@ -43,14 +49,15 @@ const Home = () => {
       // sets articles to ten random objects
       setArticles(tenRandomArticles(res));
     });
-
-    // getUserData().then((res) => {
-    //   console.log(res);
-    // });
-  }, []);
+  }, [user]);
 
   const insertAccountname = (username: string) => {
-    console.log(username);
+    if (account) {
+      const copyOfAccount = { ...account };
+      copyOfAccount.userName = username;
+      copyOfAccount.initalSetUp = false;
+      updateAccountDetails(copyOfAccount).then((res) => setAccount(res));
+    }
   };
 
   // once articles load, page is rendered

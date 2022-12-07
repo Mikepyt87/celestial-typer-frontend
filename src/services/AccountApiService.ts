@@ -33,3 +33,10 @@ export const createNewAccount = (account: Account): Promise<Account> => {
     .then((res) => res.data)
     .catch((err) => console.log(err));
 };
+
+export const updateAccountDetails = (account: Account): Promise<Account> => {
+  return axios
+    .put(`${baseUrl}/typer/${account._id}`, account)
+    .then((res) => res.data)
+    .catch((err) => console.log(err));
+};
