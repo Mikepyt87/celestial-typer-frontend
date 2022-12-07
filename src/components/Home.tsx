@@ -1,11 +1,11 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Article from "../models/Article";
 import { getAllArticles } from "../services/spaceFlightApiService";
 import "./Home.css";
 import replacementImg from "../assets/nasa_logo.jpg";
-import { getallUsers, getUserData } from "../services/AccountApiService";
-import Account from "../models/Account";
+import AuthContext from "../context/AuthContext";
+import { signInWithGoogle, signOut } from "./firebaseConfig";
 
 // returns 10 random articles
 // input is the response from the Space Flight Api endpoint
@@ -30,6 +30,8 @@ const tenRandomArticles = (articles: Article[]): Article[] => {
 };
 
 const Home = () => {
+  const { user } = useContext(AuthContext);
+
   // useState that holds an array of ten randomized objects from Space Flight Api endpoint
   const [articles, setArticles] = useState<Article[]>();
   // console.log(articles);
@@ -50,9 +52,18 @@ const Home = () => {
   if (articles) {
     return (
       <div className="Home">
-        <Link to="/typing-page">
-          <button>Move to typing page</button>
-        </Link>
+        {user ? (
+          <div>
+            <p>{user.displayName}</p>
+            <button onClick={signOut}>Sign Out</button>
+            <Link to="/typing-page">
+              <button>Move to typing page</button>
+            </Link>
+          </div>
+        ) : (
+          <button onClick={signInWithGoogle}>Sign In</button>
+        )}
+
         <div>
           {/* if articles array is not empty, map the objects to the page */}
           {articles.length > 0 &&
