@@ -5,7 +5,7 @@ import { getAllArticles } from "../services/spaceFlightApiService";
 import "./Home.css";
 import replacementImg from "../assets/nasa_logo.jpg";
 import AuthContext from "../context/AuthContext";
-import { signInWithGoogle, signOut } from "./firebaseConfig";
+import { signInWithGoogle, signOut } from "../firebaseConfig";
 
 // returns 10 random articles
 // input is the response from the Space Flight Api endpoint

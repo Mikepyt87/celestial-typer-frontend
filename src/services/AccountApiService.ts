@@ -10,11 +10,18 @@ export const getallUsers = (): Promise<Account[]> => {
     .catch((err) => console.log(err));
 };
 
-export const getUserData = (id: string): Promise<Account> => {
+//make an account !! set up a function to make an accound
+
+//call getuser data
+
+//if not call this function getUSerdatae
+//It will hit out post method
+
+export const getUserData = (uid: string): Promise<Account> => {
   return (
     axios
       // TODO
-      .get(`${baseUrl}/typer/${id}`)
+      .get(`${baseUrl}/typer/${uid}`)
       .then((res) => res.data)
       .catch((err) => console.log(err))
   );
