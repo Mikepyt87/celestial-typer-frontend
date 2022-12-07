@@ -4,7 +4,11 @@ import AuthContext from "../../../context/AuthContext";
 import ResultsContext from "../../../context/ResultsContext";
 import Account from "../../../models/Account";
 import Article from "../../../models/Article";
-import { updateAccountDetails } from "../../../services/AccountApiService";
+import Score from "../../../models/Score";
+import {
+  getUserData,
+  updateAccountDetails,
+} from "../../../services/AccountApiService";
 import {
   countErrors,
   // debug
@@ -52,8 +56,14 @@ const useEngine = (articles: Article[]) => {
   const insertUserScore = (errors: number, totalTyped: number) => {
     if (account) {
       const copyOfAccount: Account = { ...account };
-      copyOfAccount.scores.push({ errors: errors, total: totalTyped });
-      updateAccountDetails(copyOfAccount).then((res) => setAccount(res));
+      const copyOfScores: Score[] = [...copyOfAccount.scores];
+      copyOfScores.push({ errors: errors, total: totalTyped });
+      copyOfAccount.scores = copyOfScores;
+      updateAccountDetails(copyOfAccount).then((res) => {
+        getUserData(account.uid).then((response) => {
+          setAccount(response);
+        });
+      });
     }
   };
 

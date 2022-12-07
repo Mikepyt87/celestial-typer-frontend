@@ -8,10 +8,12 @@ import AuthContext from "../context/AuthContext";
 import { signInWithGoogle, signOut } from "../firebaseConfig";
 import UsernameForm from "./UsernameForm";
 import {
+  getallUsers,
   getUserData,
   updateAccountDetails,
 } from "../services/AccountApiService";
 import Account from "../models/Account";
+import Leaderboard from "./Leaderboard";
 
 // returns 10 random articles
 // input is the response from the Space Flight Api endpoint
@@ -34,7 +36,6 @@ const tenRandomArticles = (articles: Article[]): Article[] => {
   }
   return randomArticles;
 };
-
 const Home = () => {
   const { user, account, setAccount } = useContext(AuthContext);
 
@@ -43,11 +44,36 @@ const Home = () => {
   // console.log(articles);
   const [userData, setUserData] = useState<Account>();
 
+  const [allUserScores, setAllUserScores] = useState<Account[]>([]);
+
+  const sortScores = (array: Account[]) => {
+    array.sort((a, b) => {
+      const scoreA = a.scores[0].total; // ignore upper and lowercase
+      const scoreB = b.scores[0].total; // ignore upper and lowercase
+      if (scoreA > scoreB) {
+        return -1;
+      }
+      if (scoreA < scoreB) {
+        return 1;
+      }
+
+      // names must be equal
+      return 0;
+    });
+  };
+
   useEffect(() => {
     // calls Space Flight Api service function
     getAllArticles().then((res) => {
       // sets articles to ten random objects
       setArticles(tenRandomArticles(res));
+    });
+    getallUsers().then((res) => {
+      setAllUserScores(() => {
+        sortScores(res);
+        console.log(res);
+        return res;
+      });
     });
   }, [user]);
 
@@ -78,6 +104,7 @@ const Home = () => {
         {account?.initalSetUp && (
           <UsernameForm newAccountName={insertAccountname} />
         )}
+        <Leaderboard />
         <div>
           {/* if articles array is not empty, map the objects to the page */}
           {articles.length > 0 &&
