@@ -23,7 +23,7 @@ function AuthContextProvider({ children }: { children: ReactNode }) {
               scores: [],
               favoritedArticles: [],
               uid: newUser.uid,
-              initalSetUp: false,
+              initalSetUp: true,
             }).then((response) => setAccount(response));
           }
 

@@ -6,6 +6,7 @@ import "./Home.css";
 import replacementImg from "../assets/nasa_logo.jpg";
 import AuthContext from "../context/AuthContext";
 import { signInWithGoogle, signOut } from "../firebaseConfig";
+import UsernameForm from "./UsernameForm";
 
 // returns 10 random articles
 // input is the response from the Space Flight Api endpoint
@@ -47,7 +48,11 @@ const Home = () => {
     //   console.log(res);
     // });
   }, []);
-  console.log(user);
+
+  const insertAccountname = (username: string) => {
+    console.log(username);
+  };
+
   // once articles load, page is rendered
   if (articles) {
     return (
@@ -63,7 +68,9 @@ const Home = () => {
         ) : (
           <button onClick={signInWithGoogle}>Sign In</button>
         )}
-
+        {account?.initalSetUp && (
+          <UsernameForm newAccountName={insertAccountname} />
+        )}
         <div>
           {/* if articles array is not empty, map the objects to the page */}
           {articles.length > 0 &&
