@@ -8,11 +8,16 @@ interface Props {
 const Leaderboard = ({ topScores }: Props) => {
   return (
     <div className="Leaderboard">
+      <h2>TOP SCORES:</h2>
       <ul>
         {topScores.map((account, index) => (
           <li key={index}>
             {index + 1}: {account.userName}{" "}
-            {account.scores[0].adjustedCharactersPerMinute}cpm
+            {
+              account.scores[account.scores.length - 1]
+                .adjustedCharactersPerMinute
+            }
+            cpm
           </li>
         ))}
       </ul>

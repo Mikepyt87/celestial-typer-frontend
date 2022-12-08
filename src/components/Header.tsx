@@ -9,11 +9,11 @@ const Header = () => {
 
   return (
     <div className="Header">
-      {user ? (
+      {user && account ? (
         <div>
-          {/* <Link to={`/account-details/${account!.uid}`}> */}
-          <img src={user.photoURL!} alt={user.displayName!} />
-          {/* </Link> */}
+          <Link to={`/account-details/${account!.uid}`}>
+            <img src={user.photoURL!} alt={user.displayName!} />
+          </Link>
           <button onClick={signOut}>Sign Out</button>
           <nav>
             <ul>

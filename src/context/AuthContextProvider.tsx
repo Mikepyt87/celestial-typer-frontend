@@ -29,6 +29,9 @@ function AuthContextProvider({ children }: { children: ReactNode }) {
 
           console.log(res);
         });
+      } else {
+        setUser(null);
+        setAccount(null);
       }
     });
   }, []);

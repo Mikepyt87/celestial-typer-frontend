@@ -3,7 +3,7 @@ import Account from "../models/Account";
 
 const baseUrl: string = process.env.REACT_APP_API_BASE_URL || "";
 
-export const getallUsers = (): Promise<Account[]> => {
+export const getallUsersScores = (): Promise<Account[]> => {
   return axios
     .get(`${baseUrl}/typer`)
     .then((res) => res.data)

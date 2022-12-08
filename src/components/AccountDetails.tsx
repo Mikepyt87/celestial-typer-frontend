@@ -13,7 +13,7 @@ const AccountDetails = () => {
     getUserData(uid!).then((res) => setAccount(res));
   }, []);
 
-  if (account!.uid! === uid) {
+  if (account?.uid! === uid) {
     return (
       <div className="AccountDetails">
         <Link to="/">

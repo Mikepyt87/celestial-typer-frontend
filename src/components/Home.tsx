@@ -6,7 +6,7 @@ import replacementImg from "../assets/nasa_logo.jpg";
 import AuthContext from "../context/AuthContext";
 import UsernameForm from "./UsernameForm";
 import {
-  getallUsers,
+  getallUsersScores,
   updateAccountDetails,
 } from "../services/AccountApiService";
 import Account from "../models/Account";
@@ -47,8 +47,10 @@ const Home = () => {
   const sortScores = (array: Account[]) => {
     if (array[0]) {
       array.sort((a, b) => {
-        const scoreA = a.scores[0].total;
-        const scoreB = b.scores[0].total;
+        const scoreA =
+          a.scores[a.scores.length - 1].adjustedCharactersPerMinute;
+        const scoreB =
+          b.scores[b.scores.length - 1].adjustedCharactersPerMinute;
         if (scoreA > scoreB) {
           return -1;
         }
@@ -62,25 +64,20 @@ const Home = () => {
     }
   };
 
-  useEffect(
-    () => {
-      // calls Space Flight Api service function
-      getAllArticles().then((res) => {
-        // sets articles to ten random objects
-        setArticles(tenRandomArticles(res));
+  useEffect(() => {
+    // calls Space Flight Api service function
+    getAllArticles().then((res) => {
+      // sets articles to ten random objects
+      setArticles(tenRandomArticles(res));
+    });
+    getallUsersScores().then((res) => {
+      setAllUserScores(() => {
+        sortScores(res);
+        console.log(res[4].scores);
+        return res;
       });
-      getallUsers().then((res) => {
-        setAllUserScores(() => {
-          sortScores(res);
-          console.log(res);
-          return res;
-        });
-      });
-    },
-    [
-      // removed (User) from here. Not sure if important
-    ]
-  );
+    });
+  }, [account]);
 
   const insertAccountname = (username: string) => {
     if (account) {
