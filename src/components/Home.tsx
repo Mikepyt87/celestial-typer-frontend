@@ -73,7 +73,7 @@ const Home = () => {
     getallUsersScores().then((res) => {
       setAllUserScores(() => {
         sortScores(res);
-        console.log(res[4].scores);
+
         return res;
       });
     });
