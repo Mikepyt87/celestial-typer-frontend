@@ -25,10 +25,10 @@ const tenRandomArticles = (articles: Article[]): Article[] => {
       return article.id === articles[randomIndex].id;
     });
     if (foundIndex === -1) {
-      // if the findIndex method does not return anything, add the object to tenRandomArticles array
+      //? if the findIndex method does not return anything, add the object to tenRandomArticles array
       randomArticles.push(articles[randomIndex]);
     } else {
-      // if there is a matching object in the array, then loop again
+      //? if there is a matching object in the array, then loop again
       i--;
     }
   }
@@ -37,11 +37,9 @@ const tenRandomArticles = (articles: Article[]): Article[] => {
 const Home = () => {
   const { account, setAccount } = useContext(AuthContext);
 
-  // useState that holds an array of ten randomized objects from Space Flight Api endpoint
-  const [articles, setArticles] = useState<Article[]>();
-  // console.log(articles);
-  const [userData, setUserData] = useState<Account>();
-
+  //? useState that holds an array of ten randomized objects from Space Flight Api endpoint
+  const [articles, setArticles] = useState<Article[]>([]);
+  //? console.log(articles);
   const [allUserScores, setAllUserScores] = useState<Account[]>([]);
 
   const sortScores = (array: Account[]) => {
@@ -58,7 +56,7 @@ const Home = () => {
           return 1;
         }
 
-        // names must be equal
+        //? names must be equal
         return 0;
       });
     }
@@ -88,7 +86,7 @@ const Home = () => {
     }
   };
 
-  // once articles load, page is rendered
+  //? once articles load, page is rendered
   if (articles) {
     return (
       <div className="Home">

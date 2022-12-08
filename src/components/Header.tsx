@@ -8,7 +8,7 @@ const Header = () => {
   const { user, account } = useContext(AuthContext);
 
   return (
-    <div className="Header">
+    <header className="Header">
       {user && account ? (
         <div>
           <Link to={`/account-details/${account!.uid}`}>
@@ -26,7 +26,7 @@ const Header = () => {
       ) : (
         <button onClick={signInWithGoogle}>Sign In</button>
       )}
-    </div>
+    </header>
   );
 };
 
