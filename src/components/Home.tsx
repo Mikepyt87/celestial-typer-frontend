@@ -44,21 +44,23 @@ const Home = () => {
 
   const [allUserScores, setAllUserScores] = useState<Account[]>([]);
 
-  // const sortScores = (array: Account[]) => {
-  //   array.sort((a, b) => {
-  //     const scoreA = a.scores[0].total;
-  //     const scoreB = b.scores[0].total;
-  //     if (scoreA > scoreB) {
-  //       return -1;
-  //     }
-  //     if (scoreA < scoreB) {
-  //       return 1;
-  //     }
+  const sortScores = (array: Account[]) => {
+    if (array[0]) {
+      array.sort((a, b) => {
+        const scoreA = a.scores[0].total;
+        const scoreB = b.scores[0].total;
+        if (scoreA > scoreB) {
+          return -1;
+        }
+        if (scoreA < scoreB) {
+          return 1;
+        }
 
-  //     // names must be equal
-  //     return 0;
-  //   });
-  // };
+        // names must be equal
+        return 0;
+      });
+    }
+  };
 
   useEffect(
     () => {
@@ -69,7 +71,7 @@ const Home = () => {
       });
       getallUsers().then((res) => {
         setAllUserScores(() => {
-          // sortScores(res);
+          sortScores(res);
           console.log(res);
           return res;
         });
