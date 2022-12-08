@@ -99,7 +99,7 @@ const Home = () => {
         {account?.initalSetUp && (
           <UsernameForm newAccountName={insertAccountname} />
         )}
-        <Leaderboard />
+        <Leaderboard topScores={allUserScores} />
         <div className="articles-container">
           {/* if articles array is not empty, map the objects to the page */}
           {articles.length > 0 &&
