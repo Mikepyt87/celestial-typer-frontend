@@ -28,7 +28,8 @@ export const countErrors = (actual: string, expected: string) => {
       (actualChar === "o" && expectedChar === "ó") ||
       (actualChar === "i" && expectedChar === "í") ||
       (actualChar === "e" && expectedChar === "é") ||
-      (actualChar === "a" && expectedChar === "á")
+      (actualChar === "a" && expectedChar === "á") ||
+      (actualChar === "'" && expectedChar === "’")
     ) {
     } else if (actualChar !== expectedChar) {
       errors++;

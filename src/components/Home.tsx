@@ -14,6 +14,7 @@ import {
 } from "../services/AccountApiService";
 import Account from "../models/Account";
 import Leaderboard from "./Leaderboard";
+import Header from "./Header";
 
 // returns 10 random articles
 // input is the response from the Space Flight Api endpoint
@@ -37,7 +38,7 @@ const tenRandomArticles = (articles: Article[]): Article[] => {
   return randomArticles;
 };
 const Home = () => {
-  const { user, account, setAccount } = useContext(AuthContext);
+  const { account, setAccount } = useContext(AuthContext);
 
   // useState that holds an array of ten randomized objects from Space Flight Api endpoint
   const [articles, setArticles] = useState<Article[]>();
@@ -48,8 +49,8 @@ const Home = () => {
 
   const sortScores = (array: Account[]) => {
     array.sort((a, b) => {
-      const scoreA = a.scores[0].total; // ignore upper and lowercase
-      const scoreB = b.scores[0].total; // ignore upper and lowercase
+      const scoreA = a.scores[0].total;
+      const scoreB = b.scores[0].total;
       if (scoreA > scoreB) {
         return -1;
       }
@@ -62,20 +63,25 @@ const Home = () => {
     });
   };
 
-  useEffect(() => {
-    // calls Space Flight Api service function
-    getAllArticles().then((res) => {
-      // sets articles to ten random objects
-      setArticles(tenRandomArticles(res));
-    });
-    getallUsers().then((res) => {
-      setAllUserScores(() => {
-        sortScores(res);
-        console.log(res);
-        return res;
+  useEffect(
+    () => {
+      // calls Space Flight Api service function
+      getAllArticles().then((res) => {
+        // sets articles to ten random objects
+        setArticles(tenRandomArticles(res));
       });
-    });
-  }, [user]);
+      getallUsers().then((res) => {
+        setAllUserScores(() => {
+          sortScores(res);
+          console.log(res);
+          return res;
+        });
+      });
+    },
+    [
+      // removed (User) from here. Not sure if important
+    ]
+  );
 
   const insertAccountname = (username: string) => {
     if (account) {
@@ -90,31 +96,25 @@ const Home = () => {
   if (articles) {
     return (
       <div className="Home">
-        {user ? (
-          <div>
-            <p>{user.displayName}</p>
-            <button onClick={signOut}>Sign Out</button>
-            <Link to="/typing-page">
-              <button>Move to typing page</button>
-            </Link>
-          </div>
-        ) : (
-          <button onClick={signInWithGoogle}>Sign In</button>
-        )}
+        <Header />
         {account?.initalSetUp && (
           <UsernameForm newAccountName={insertAccountname} />
         )}
         <Leaderboard />
-        <div>
+        <div className="articles-container">
           {/* if articles array is not empty, map the objects to the page */}
           {articles.length > 0 &&
             articles.map((article) => (
-              <div key={`${article.id}_${article.publishedAt}`}>
+              <div
+                key={`${article.id}_${article.publishedAt}`}
+                className="article"
+              >
                 {/* renders title and image from each object */}
-                <p>{article.title}</p>
+                <p className="article-title">{article.title}</p>
                 <img
                   src={article.imageUrl}
                   alt={article.title}
+                  className="article-image"
                   // if image is not found, then load replacementImg
                   onError={({ currentTarget }) => {
                     currentTarget.src = replacementImg;

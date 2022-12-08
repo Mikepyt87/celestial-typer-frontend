@@ -1,3 +1,4 @@
+import { time } from "console";
 import { useCallback, useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import AuthContext from "../../../context/AuthContext";
@@ -19,7 +20,7 @@ import useWords from "./useWords";
 
 export type State = "start" | "run" | "finish";
 
-const COUNTDOWN_SECONDS = 20;
+const COUNTDOWN_SECONDS = 1;
 
 const useEngine = (articles: Article[]) => {
   const { setResults } = useContext(ResultsContext);
@@ -53,11 +54,19 @@ const useEngine = (articles: Article[]) => {
     }
   }, [isStarting, startCountdown]);
 
-  const insertUserScore = (errors: number, totalTyped: number) => {
+  const insertUserScore = (
+    errors: number,
+    totalTyped: number,
+    acpm: number
+  ) => {
     if (account) {
       const copyOfAccount: Account = { ...account };
       const copyOfScores: Score[] = [...copyOfAccount.scores];
-      copyOfScores.push({ errors: errors, total: totalTyped });
+      copyOfScores.push({
+        errors: errors,
+        total: totalTyped,
+        adjustedCharactersPerMinute: acpm,
+      });
       copyOfAccount.scores = copyOfScores;
       updateAccountDetails(copyOfAccount).then((res) => {
         getUserData(account.uid).then((response) => {
@@ -75,12 +84,28 @@ const useEngine = (articles: Article[]) => {
       setState("finish");
     }
     if (state === "finish") {
+      const charactersPerMinute = (
+        errors: number,
+        totalTyped: number,
+        time: number
+      ): number => {
+        const charactersPerMinute = (time / 60) * totalTyped;
+        const accuracy = (totalTyped - errors) / totalTyped;
+        const adjustedCharactersPerMinute = Math.floor(
+          charactersPerMinute * accuracy
+        );
+        return adjustedCharactersPerMinute;
+      };
       setResults({
         errors: errors,
         total: totalTyped,
         article: attemptedArticles,
       });
-      insertUserScore(errors, totalTyped);
+      insertUserScore(
+        errors,
+        totalTyped,
+        charactersPerMinute(errors, totalTyped, COUNTDOWN_SECONDS)
+      );
       navigate("/results");
     }
   }, [timeLeft, state, sumErrors]);

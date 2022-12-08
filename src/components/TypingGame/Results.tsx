@@ -28,7 +28,6 @@ const Results = ({
 
   return (
     <div className="results-popup">
-      <button className="close-button">x</button>
       <motion.ul
         initial={initial}
         animate={animate}
