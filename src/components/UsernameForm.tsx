@@ -7,6 +7,7 @@ interface Props {
 
 const UsernameForm = ({ newAccountName }: Props) => {
   const [username, setUsername] = useState("");
+  const [error, setError] = useState("");
 
   const submitHandler = (e: FormEvent) => {
     e.preventDefault();
@@ -22,21 +23,40 @@ const UsernameForm = ({ newAccountName }: Props) => {
       !username.includes(",")
     ) {
       newAccountName(username);
+    } else if (username.length >= 5 && username.length <= 15) {
+      setError("Username cannot contain special characters");
+    } else if (
+      !username.includes(".") &&
+      !username.includes("&") &&
+      !username.includes("=") &&
+      !username.includes("_") &&
+      !username.includes("'") &&
+      !username.includes("+") &&
+      !username.includes(",")
+    ) {
+      setError("Username must be at least 5 characters and not more than 15");
+    } else {
+      setError(
+        "Username must be at least 5 characters and not more than 15 and cannot contain special characters"
+      );
     }
   };
 
   return (
     <form className="UsernameForm" onSubmit={submitHandler}>
-      <label htmlFor="username">Set Username</label>
-      <input
-        type="text"
-        id="username"
-        name="username"
-        value={username}
-        onChange={(e) => setUsername(e.target.value)}
-        placeholder="type Username Here"
-      />
-      <button>Submit</button>
+      <div className="input-button">
+        <label htmlFor="username">Set Username</label>
+        <input
+          type="text"
+          id="username"
+          name="username"
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
+          placeholder="type Username Here"
+        />
+        <div className="error-message">{error}</div>
+        <button>Submit</button>
+      </div>
     </form>
   );
 };

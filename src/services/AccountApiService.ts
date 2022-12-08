@@ -18,13 +18,10 @@ export const getallUsers = (): Promise<Account[]> => {
 //It will hit out post method
 
 export const getUserData = (uid: string): Promise<Account> => {
-  return (
-    axios
-      // TODO
-      .get(`${baseUrl}/typer/${uid}`)
-      .then((res) => res.data)
-      .catch((err) => console.log(err))
-  );
+  return axios
+    .get(`${baseUrl}/typer/${uid}`)
+    .then((res) => res.data)
+    .catch((err) => console.log(err));
 };
 
 export const createNewAccount = (account: Account): Promise<Account> => {

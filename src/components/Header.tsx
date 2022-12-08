@@ -5,15 +5,15 @@ import { signInWithGoogle, signOut } from "../firebaseConfig";
 import "./Header.css";
 
 const Header = () => {
-  const { user } = useContext(AuthContext);
+  const { user, account } = useContext(AuthContext);
 
   return (
     <div className="Header">
       {user ? (
         <div>
-          <Link to={`/account-details/${user.uid}`}>
-            <img src={user.photoURL!} alt={user.displayName!} />
-          </Link>
+          {/* <Link to={`/account-details/${account!.uid}`}> */}
+          <img src={user.photoURL!} alt={user.displayName!} />
+          {/* </Link> */}
           <button onClick={signOut}>Sign Out</button>
           <nav>
             <ul>

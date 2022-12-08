@@ -1,15 +1,12 @@
 import { useContext, useEffect, useState } from "react";
-import { Link } from "react-router-dom";
 import Article from "../models/Article";
 import { getAllArticles } from "../services/spaceFlightApiService";
 import "./Home.css";
 import replacementImg from "../assets/nasa_logo.jpg";
 import AuthContext from "../context/AuthContext";
-import { signInWithGoogle, signOut } from "../firebaseConfig";
 import UsernameForm from "./UsernameForm";
 import {
   getallUsers,
-  getUserData,
   updateAccountDetails,
 } from "../services/AccountApiService";
 import Account from "../models/Account";
@@ -47,21 +44,21 @@ const Home = () => {
 
   const [allUserScores, setAllUserScores] = useState<Account[]>([]);
 
-  const sortScores = (array: Account[]) => {
-    array.sort((a, b) => {
-      const scoreA = a.scores[0].total;
-      const scoreB = b.scores[0].total;
-      if (scoreA > scoreB) {
-        return -1;
-      }
-      if (scoreA < scoreB) {
-        return 1;
-      }
+  // const sortScores = (array: Account[]) => {
+  //   array.sort((a, b) => {
+  //     const scoreA = a.scores[0].total;
+  //     const scoreB = b.scores[0].total;
+  //     if (scoreA > scoreB) {
+  //       return -1;
+  //     }
+  //     if (scoreA < scoreB) {
+  //       return 1;
+  //     }
 
-      // names must be equal
-      return 0;
-    });
-  };
+  //     // names must be equal
+  //     return 0;
+  //   });
+  // };
 
   useEffect(
     () => {
@@ -72,7 +69,7 @@ const Home = () => {
       });
       getallUsers().then((res) => {
         setAllUserScores(() => {
-          sortScores(res);
+          // sortScores(res);
           console.log(res);
           return res;
         });
