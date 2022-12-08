@@ -66,6 +66,7 @@ const useEngine = (articles: Article[]) => {
         errors: errors,
         total: totalTyped,
         adjustedCharactersPerMinute: acpm,
+        userName: account.userName,
       });
       copyOfAccount.scores = copyOfScores;
       updateAccountDetails(copyOfAccount).then((res) => {

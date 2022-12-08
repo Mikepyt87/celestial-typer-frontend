@@ -12,12 +12,14 @@ const Leaderboard = ({ topScores }: Props) => {
       <ul>
         {topScores.map((account, index) => (
           <li key={index}>
-            {index + 1}: {account.userName}{" "}
-            {
-              account.scores[account.scores.length - 1]
-                .adjustedCharactersPerMinute
-            }
-            cpm
+            <p>
+              {index + 1}: {account.scores[account.scores.length - 1].userName}{" "}
+              {
+                account.scores[account.scores.length - 1]
+                  .adjustedCharactersPerMinute
+              }
+              cpm
+            </p>
           </li>
         ))}
       </ul>
