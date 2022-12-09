@@ -1,11 +1,8 @@
 import { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import AuthContext from "../context/AuthContext";
-import {
-  signInWithGoogle,
-  signInWithGoogleRedirect,
-  signOut,
-} from "../firebaseConfig";
+import Logo from "../assets/celestial-typer-logo.png";
+import { signInWithGoogle, signOut } from "../firebaseConfig";
 import "./Header.css";
 import { checkForMobile } from "./utils/functions";
 
@@ -17,20 +14,24 @@ const Header = () => {
 
   return (
     <header className="Header">
+      <img src={Logo} alt="Celstial Typer" width="250px" />
       {user && account ? (
         <div>
-          <img src="" alt="Celstial Typer" />
-          <Link to={`/account-details/${account!.uid}`}>
-            <img src={user.photoURL!} alt={user.displayName!} />
-          </Link>
-          <button onClick={signOut}>Sign Out</button>
           <nav>
             <ul>
               <Link to="/typing-page">
-                <li>Move to typing page</li>
+                <li>Typing Page</li>
               </Link>
             </ul>
           </nav>
+          <Link to={`/account-details/${account!.uid}`}>
+            <img
+              src={user.photoURL!}
+              alt={user.displayName!}
+              className="user-image"
+            />
+          </Link>
+          <button onClick={signOut}>Sign Out</button>
         </div>
       ) : (
         // ) : mobile ? (
