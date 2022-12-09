@@ -37,7 +37,7 @@ const LeaderboardPage = () => {
   return (
     <div className="LeaderboardPage">
       <div className="leaderboard-page-header">
-        <h2>Leaderboard</h2>
+        <h2 className="leaderboard-h2">Leaderboard</h2>
         <nav>
           <ul className="leaderboard-page-header-list">
             <Link to="/">

@@ -54,6 +54,18 @@ const ResultsPage = () => {
   if (results) {
     return (
       <div className="ResultsPage">
+        <div className="results-page-header">
+          <nav>
+            <ul className="results-page-header-list">
+              <Link to="/">
+                <li>Home</li>
+              </Link>
+              <Link to="/typing-page">
+                <li>Typing Page</li>
+              </Link>
+            </ul>
+          </nav>
+        </div>
         <Results
           state={"finish"}
           errors={results.errors}
@@ -63,23 +75,20 @@ const ResultsPage = () => {
           )}
           total={results.total}
         />
-        <Link to="/">
-          <button className="home-button">Home</button>
-        </Link>
-        <div>
+        <div className="results-article-container">
           {results.article.map((article, index) => (
-            <div key={`${article.id} ${index}`}>
-              <div>{article.title}</div>
+            <div key={`${article.id} ${index}`} className="results-article">
+              <div className="results-article-title">{article.title}</div>
               <img src={article.imageUrl} alt={article.title} />
-              <button onClick={() => checkForFavorite(article)}>
-                Favorite
+              <button
+                onClick={() => checkForFavorite(article)}
+                className="favorite-button"
+              >
+                Favorite Article
               </button>
             </div>
           ))}
         </div>
-        <Link to="/typing-page">
-          <button>Play again</button>
-        </Link>
       </div>
     );
   } else {

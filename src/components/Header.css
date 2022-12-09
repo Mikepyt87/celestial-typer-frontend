@@ -15,8 +15,12 @@
 .Header li {
   padding: 0 10px;
 }
+
 .Header .user-image {
   width: 50px;
   border-radius: 50%;
   margin: 0 20px;
+}
+.Header li:hover {
+  color: #7da184;
 }

@@ -6,6 +6,7 @@
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
+  margin: 0 30px 80px 30px;
 }
 
 .Home .article {

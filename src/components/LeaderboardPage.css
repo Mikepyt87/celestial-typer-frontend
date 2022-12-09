@@ -1,15 +1,22 @@
 .LeaderboardPage .leaderboard-page-header {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   height: 60px;
-  padding: 30px 40px 0px 40px;
+  padding: 30px 40px 20px 40px;
 }
-.LeaderboardPage h2 {
+.LeaderboardPage .leaderboard-h2 {
+  color: rgb(239 68 68);
+  font-size: 40px;
+  text-shadow: 2px 2px 0 rgba(254, 22, 22, 0.5);
 }
 .LeaderboardPage .leaderboard-page-header-list {
   display: flex;
 }
 
-.LeaderboardPage li {
-  padding: 0 10px 0 13px;
+.LeaderboardPage .leaderboard-page-header-list li {
+  padding: 30px 10px 20px 20px;
+}
+.LeaderboardPage .leaderboard-page-header-list li:hover {
+  color: #7da184;
 }

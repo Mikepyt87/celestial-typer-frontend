@@ -19,7 +19,7 @@ import useWords from "./useWords";
 
 export type State = "start" | "run" | "finish";
 
-const COUNTDOWN_SECONDS = 60;
+const COUNTDOWN_SECONDS = 40;
 
 const useEngine = (articles: Article[]) => {
   const { setResults } = useContext(ResultsContext);

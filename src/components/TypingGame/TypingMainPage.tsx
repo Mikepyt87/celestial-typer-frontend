@@ -62,7 +62,12 @@ const TypingMainPage = () => {
     // while waiting, page renders loading div
     // class can be altered in index.css
   } else {
-    return <div className="loading">loading...</div>;
+    return (
+      <div className="loading">
+        loading...
+        <div>{/* <RingLoader color="#36d7b7" /> */}</div>
+      </div>
+    );
   }
 };
 

@@ -53,6 +53,16 @@ const Results = ({ state, errors, accuracyPercentage, total }: Props) => {
       >
         Typed: {total}
       </motion.li>
+      <motion.li
+        initial={initial}
+        animate={animate}
+        transition={{ duration: 0.3, delay: 2 }}
+        className="typed"
+      >
+        <Link to="/typing-page">
+          <p className="play-again-link">Play again?</p>
+        </Link>
+      </motion.li>
     </motion.ul>
   );
 };

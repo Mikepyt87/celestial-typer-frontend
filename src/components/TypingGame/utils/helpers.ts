@@ -11,7 +11,8 @@ export const isKeyboardCodeAllowed = (code: string) => {
     code === "Slash" ||
     code === "Backquote" ||
     code === "Minus" ||
-    code === "Equal"
+    code === "Equal" ||
+    code === "Semicolon"
   );
 };
 
