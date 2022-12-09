@@ -14,7 +14,6 @@ const Header = () => {
 
   return (
     <header className="Header">
-    <header className="Header">
       <img src={Logo} alt="Celstial Typer" width="250px" />
       {user && account ? (
         <div>
