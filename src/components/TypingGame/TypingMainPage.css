@@ -1,10 +1,10 @@
-@tailwind base;
-@tailwind utilities;
-
-@layer base {
-  body .TypingMainPage {
-    @apply min-h-screen bg-slate-800 grid place-items-center font-mono tracking-wider px-4;
-  }
+.TypingMainPage {
+  min-height: 100vh;
+  background-color: rgb(30 41 59);
+  display: grid;
+  place-items: center;
+  letter-spacing: 0.05em;
+  padding: 0 16px;
 }
 
 .TypingMainPage .words-container {

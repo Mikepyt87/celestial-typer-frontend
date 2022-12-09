@@ -19,6 +19,7 @@ const Header = () => {
     <header className="Header">
       {user && account ? (
         <div>
+          <img src="" alt="Celstial Typer" />
           <Link to={`/account-details/${account!.uid}`}>
             <img src={user.photoURL!} alt={user.displayName!} />
           </Link>
