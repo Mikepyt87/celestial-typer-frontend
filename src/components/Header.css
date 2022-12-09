@@ -3,11 +3,17 @@
   justify-content: space-between;
   align-items: center;
   border-bottom: solid 3px rgb(239 68 68);
-  margin-bottom: 20px;
+  margin-bottom: 30px;
 }
 .Header div {
   display: flex;
   align-items: center;
+}
+.Header ul {
+  display: flex;
+}
+.Header li {
+  padding: 0 10px;
 }
 .Header .user-image {
   width: 50px;

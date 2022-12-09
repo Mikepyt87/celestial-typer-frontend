@@ -13,6 +13,10 @@ import Account from "../models/Account";
 import Leaderboard from "./Leaderboard";
 import Header from "./Header";
 
+const topFive = (allUserScores: Account[]): Account[] => {
+  return allUserScores.slice(0, 5);
+};
+
 // returns 10 random articles
 // input is the response from the Space Flight Api endpoint
 const tenRandomArticles = (articles: Article[]): Article[] => {
@@ -34,13 +38,6 @@ const tenRandomArticles = (articles: Article[]): Article[] => {
   }
   return randomArticles;
 };
-
-declare global {
-  interface Window {
-    mobileAndTabletcheck: any;
-    opera: any;
-  }
-}
 
 const Home = () => {
   const { account, setAccount } = useContext(AuthContext);
@@ -95,43 +92,33 @@ const Home = () => {
   };
 
   //? once articles load, page is rendered
-  if (articles) {
-    return (
-      <div className="Home">
-        <Header />
-        {account?.initalSetUp && (
-          <UsernameForm newAccountName={insertAccountname} />
-        )}
-        <Leaderboard topScores={allUserScores} />
-        <div className="articles-container">
-          {/* if articles array is not empty, map the objects to the page */}
-          {articles.length > 0 &&
-            articles.map((article) => (
-              <div
-                key={`${article.id}_${article.publishedAt}`}
-                className="article"
-              >
-                {/* renders title and image from each object */}
-                <p className="article-title">{article.title}</p>
-                <img
-                  src={article.imageUrl}
-                  alt={article.title}
-                  className="article-image"
-                  // if image is not found, then load replacementImg
-                  onError={({ currentTarget }) => {
-                    currentTarget.src = replacementImg;
-                  }}
-                />
-              </div>
-            ))}
-        </div>
+  return (
+    <div className="Home">
+      <Header />
+      {account?.initalSetUp && (
+        <UsernameForm newAccountName={insertAccountname} />
+      )}
+      <Leaderboard topScores={topFive(allUserScores)} />
+      <div className="articles-container">
+        {/* if articles array is not empty, map the objects to the page */}
+        {articles.map((article) => (
+          <div key={`${article.id}_${article.publishedAt}`} className="article">
+            {/* renders title and image from each object */}
+            <p className="article-title">{article.title}</p>
+            <img
+              src={article.imageUrl}
+              alt={article.title}
+              className="article-image"
+              // if image is not found, then load replacementImg
+              onError={({ currentTarget }) => {
+                currentTarget.src = replacementImg;
+              }}
+            />
+          </div>
+        ))}
       </div>
-    );
-    // while waiting, page renders loading div
-    // class can be altered in index.css
-  } else {
-    return <div className="loading">loading...</div>;
-  }
+    </div>
+  );
 };
 
 export default Home;

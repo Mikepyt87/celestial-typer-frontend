@@ -22,6 +22,9 @@ const Header = () => {
               <Link to="/typing-page">
                 <li>Typing Page</li>
               </Link>
+              <Link to="/leaderboard">
+                <li>Leaderboard</li>
+              </Link>
             </ul>
           </nav>
           <Link to={`/account-details/${account!.uid}`}>

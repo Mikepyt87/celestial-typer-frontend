@@ -1,0 +1,15 @@
+.LeaderboardPage .leaderboard-page-header {
+  display: flex;
+  justify-content: space-between;
+  height: 60px;
+  padding: 30px 40px 0px 40px;
+}
+.LeaderboardPage h2 {
+}
+.LeaderboardPage .leaderboard-page-header-list {
+  display: flex;
+}
+
+.LeaderboardPage li {
+  padding: 0 10px 0 13px;
+}

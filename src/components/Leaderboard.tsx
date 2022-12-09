@@ -11,6 +11,7 @@ const Leaderboard = ({ topScores }: Props) => {
     <Link to="/leaderboard">
       <div className="Leaderboard">
         <h2>TOP SCORES:</h2>
+
         <ul>
           {topScores.map((account, index) => (
             <li key={index}>

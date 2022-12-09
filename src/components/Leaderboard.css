@@ -1,3 +1,13 @@
 .Leaderboard {
-  border: 1px solid black;
+  background-color: rgb(250 204 21);
+  color: rgb(30 41 59);
+  font-size: 18px;
+  border-radius: 10px;
+  /* border: 1px solid black; */
+  padding: 10px;
+  margin: 10px 30px;
+}
+.Leaderboard li {
+  color: rgb(100 116 139);
+  font-size: 16px;
 }

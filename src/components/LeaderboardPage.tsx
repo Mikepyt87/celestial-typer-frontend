@@ -1,4 +1,5 @@
 import { useContext, useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import AuthContext from "../context/AuthContext";
 import Account from "../models/Account";
 import { getallUsersScores } from "../services/AccountApiService";
@@ -35,6 +36,19 @@ const LeaderboardPage = () => {
   }, [account]);
   return (
     <div className="LeaderboardPage">
+      <div className="leaderboard-page-header">
+        <h2>Leaderboard</h2>
+        <nav>
+          <ul className="leaderboard-page-header-list">
+            <Link to="/">
+              <li>Home</li>
+            </Link>
+            <Link to="/typing-page">
+              <li>Typing Page</li>
+            </Link>
+          </ul>
+        </nav>
+      </div>
       <Leaderboard topScores={allUserScores} />
     </div>
   );
