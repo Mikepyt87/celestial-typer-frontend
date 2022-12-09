@@ -1,14 +1,22 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import AuthContext from "../context/AuthContext";
-import { signInWithGoogle, signOut } from "../firebaseConfig";
+import {
+  signInWithGoogle,
+  signInWithGoogleRedirect,
+  signOut,
+} from "../firebaseConfig";
 import "./Header.css";
+import { checkForMobile } from "./utils/functions";
 
+const mobile: boolean = checkForMobile();
+
+console.log(mobile);
 const Header = () => {
   const { user, account } = useContext(AuthContext);
 
   return (
-    <div className="Header">
+    <header className="Header">
       {user && account ? (
         <div>
           <Link to={`/account-details/${account!.uid}`}>
@@ -24,9 +32,11 @@ const Header = () => {
           </nav>
         </div>
       ) : (
+        // ) : mobile ? (
+        // <button onClick={() => signInWithGoogleRedirect}>Sign In</button>
         <button onClick={signInWithGoogle}>Sign In</button>
       )}
-    </div>
+    </header>
   );
 };
 

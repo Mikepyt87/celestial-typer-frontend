@@ -9,16 +9,9 @@ interface Props {
   errors: number;
   accuracyPercentage: number;
   total: number;
-  className?: string;
 }
 
-const Results = ({
-  state,
-  errors,
-  accuracyPercentage,
-  total,
-  className,
-}: Props) => {
+const Results = ({ state, errors, accuracyPercentage, total }: Props) => {
   if (state !== "finish") {
     return null;
   }
@@ -27,47 +20,40 @@ const Results = ({
   const animate = { opacity: 1 };
 
   return (
-    <div className="results-popup">
-      <motion.ul
+    <motion.ul initial={initial} animate={animate} className="Results">
+      <motion.li
         initial={initial}
         animate={animate}
-        className={`flex flex-col items-center text-primary-400 space-y-3 ${className}`}
+        transition={{ duration: 0.3 }}
+        className="text-xl font-semibold"
       >
-        <motion.li
-          initial={initial}
-          animate={animate}
-          transition={{ duration: 0.3 }}
-          className="text-xl font-semibold"
-        >
-          Results
-        </motion.li>
-        <motion.li
-          initial={initial}
-          animate={animate}
-          transition={{ duration: 0.3, delay: 0.5 }}
-        >
-          Accuracy: {formatPercentage(accuracyPercentage)}
-        </motion.li>
-        <motion.li
-          initial={initial}
-          animate={animate}
-          transition={{ duration: 0.3, delay: 1 }}
-          className="text-red-500"
-        >
-          Errors: {errors}
-        </motion.li>
-        <motion.li
-          initial={initial}
-          animate={animate}
-          transition={{ duration: 0.3, delay: 1.4 }}
-        >
-          Typed: {total}
-        </motion.li>
-      </motion.ul>
-      <Link to="/">
-        <button className="home-button">Home</button>
-      </Link>
-    </div>
+        Results
+      </motion.li>
+      <motion.li
+        initial={initial}
+        animate={animate}
+        transition={{ duration: 0.3, delay: 0.5 }}
+        className="accuracy"
+      >
+        Accuracy: {formatPercentage(accuracyPercentage)}
+      </motion.li>
+      <motion.li
+        initial={initial}
+        animate={animate}
+        transition={{ duration: 0.3, delay: 1 }}
+        className="errors"
+      >
+        Errors: {errors}
+      </motion.li>
+      <motion.li
+        initial={initial}
+        animate={animate}
+        transition={{ duration: 0.3, delay: 1.4 }}
+        className="typed"
+      >
+        Typed: {total}
+      </motion.li>
+    </motion.ul>
   );
 };
 

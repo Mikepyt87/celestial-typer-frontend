@@ -1,4 +1,5 @@
 import cn from "classnames";
+import "./Character.css";
 interface Props {
   actual: string;
   expected: string;
@@ -23,11 +24,10 @@ const Character = ({ actual, expected }: Props) => {
   return (
     <span
       className={cn({
-        "text-red-500": !isCorrect && !isWhiteSpace,
-        // class: "Font color (primary comes from tailwind.config)"
-        "text-primary-400":
+        CharacterError: !isCorrect && !isWhiteSpace,
+        CharacterCorrect:
           specialCharactersAllowed || (isCorrect && !isWhiteSpace),
-        "bg-red-500/50": !isCorrect && isWhiteSpace,
+        CharacterErrorSpace: !isCorrect && isWhiteSpace,
       })}
     >
       {expected}
