@@ -1,11 +1,11 @@
 import { motion } from "framer-motion";
+import "./Caret.css";
 
 const Caret = () => {
   return (
     <motion.div
       aria-hidden={true}
-      // class: "display, backgroundSize-(primary comes from tailwind.config)-brightness, width, height"
-      className="inline-block bg-primary-500 w-0.5 h-7"
+      className="Caret"
       initial={{ opacity: 1 }}
       animate={{ opacity: 0 }}
       exit={{ opacity: 1 }}

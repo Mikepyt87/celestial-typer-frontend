@@ -1,9 +1,29 @@
+body,
+ul,
+li,
+h2 {
+  padding: 0;
+  margin: 0;
+}
 body {
-  background-color: #eeeeee;
+  background-color: rgb(30 41 59);
+  color: #bcd8c1;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+    "Liberation Mono", "Courier New", monospace;
 }
 
 .loading {
   height: 100vh;
   width: 100vw;
   background-color: blue;
+}
+
+a {
+  text-decoration: none;
+  color: #bcd8c1;
+}
+
+ul {
+  list-style: none;
+  color: #bcd8c1;
 }

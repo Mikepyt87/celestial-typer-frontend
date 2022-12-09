@@ -1,0 +1,6 @@
+.Caret {
+  height: 1.75rem;
+  width: 0.125rem;
+  background-color: rgb(234 179 8);
+  display: inline-block;
+}

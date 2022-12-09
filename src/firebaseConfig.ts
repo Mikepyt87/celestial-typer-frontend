@@ -1,5 +1,10 @@
 import { initializeApp } from "firebase/app";
-import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
+import {
+  getAuth,
+  signInWithPopup,
+  GoogleAuthProvider,
+  signInWithRedirect,
+} from "firebase/auth";
 
 const firebaseConfig = {
   apiKey: "AIzaSyD4tZf6JoAkok9oLQOP5E0DbnAYG84KHrk",
@@ -17,6 +22,11 @@ const authProvider = new GoogleAuthProvider();
 export function signInWithGoogle(): void {
   signInWithPopup(auth, authProvider);
 }
+
+export function signInWithGoogleRedirect(): void {
+  signInWithRedirect(auth, authProvider);
+}
+
 export function signOut(): void {
   auth.signOut();
 }

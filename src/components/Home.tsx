@@ -34,6 +34,14 @@ const tenRandomArticles = (articles: Article[]): Article[] => {
   }
   return randomArticles;
 };
+
+declare global {
+  interface Window {
+    mobileAndTabletcheck: any;
+    opera: any;
+  }
+}
+
 const Home = () => {
   const { account, setAccount } = useContext(AuthContext);
 

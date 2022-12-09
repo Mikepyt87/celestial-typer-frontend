@@ -1,9 +1,40 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+.TypingMainPage {
+  min-height: 100vh;
+  background-color: rgb(30 41 59);
+  display: grid;
+  place-items: center;
+  letter-spacing: 0.05em;
+  padding: 0 16px;
+}
 
-@layer base {
-  body .TypingMainPage {
-    @apply min-h-screen bg-slate-800 grid place-items-center font-mono tracking-wider px-4;
-  }
+.TypingMainPage .words-container {
+  position: relative;
+  max-width: 576px;
+  margin-top: 12px;
+  font-size: 1.875rem;
+  /* line-height: 2.25rem; */
+  line-height: 1.625;
+  word-break: break-all;
+}
+
+.TypingMainPage .CountdownTimer {
+  color: rgb(250 204 21);
+  font-weight: 500;
+}
+
+.TypingMainPage .GeneratedWords {
+  color: rgb(100 116 139);
+}
+
+.TypingMainPage .mobile-keyboard {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  height: 100vh;
+  width: 100vw;
+  color: transparent;
+  background-color: transparent;
+  border: none;
+  transform: translate(-50%, -50%);
+  caret-color: transparent;
 }

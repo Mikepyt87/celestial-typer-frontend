@@ -16,7 +16,7 @@ const ResultsPage = () => {
   const { results } = useContext(ResultsContext);
   const { account, setAccount } = useContext(AuthContext);
 
-  // console.log(account);
+  console.log(results);
 
   const addFavoriteToAccount = (article: Article) => {
     if (account) {
@@ -63,6 +63,9 @@ const ResultsPage = () => {
           )}
           total={results.total}
         />
+        <Link to="/">
+          <button className="home-button">Home</button>
+        </Link>
         <div>
           {results.article.map((article, index) => (
             <div key={`${article.id} ${index}`}>
@@ -75,7 +78,7 @@ const ResultsPage = () => {
           ))}
         </div>
         <Link to="/typing-page">
-          <button>Im a button</button>
+          <button>Play again</button>
         </Link>
       </div>
     );

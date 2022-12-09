@@ -1,0 +1,11 @@
+.CharacterError {
+  color: rgb(239 68 68);
+}
+
+.CharacterErrorSpace {
+  background-color: rgb(239 68 68 / 0.5);
+}
+
+.CharacterCorrect {
+  color: rgb(250 204 21);
+}
