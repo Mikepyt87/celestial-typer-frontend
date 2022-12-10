@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { State } from "./hooks/useEngine";
+import { State } from "./custom typingGame hooks/useEngine";
 import { formatPercentage } from "./utils/helpers";
 import "./Results.css";
 import { Link } from "react-router-dom";

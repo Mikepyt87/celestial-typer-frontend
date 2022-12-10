@@ -4,7 +4,7 @@ import Article from "../../models/Article";
 import { getAllArticles } from "../../services/spaceFlightApiService";
 import UserTypings from "./UserTypings";
 import { motion } from "framer-motion";
-import useEngine from "./hooks/useEngine";
+import useEngine from "./custom typingGame hooks/useEngine";
 import { checkForMobile } from "../utils/functions";
 
 // Pulls 100 random articles from API Endpoint.
@@ -24,12 +24,10 @@ const randomArticles = (articles: Article[]): Article[] => {
   return numOfArticles;
 };
 
-const isAppRunningOnMobile = checkForMobile();
+const mobileChecker = checkForMobile();
 
 const TypingMainPage = () => {
   const [articles, setArticles] = useState<Article[]>([]);
-
-  // const [sound] = useSound(audio);
 
   useEffect(() => {
     getAllArticles().then((res) => setArticles(randomArticles(res)));
@@ -50,7 +48,7 @@ const TypingMainPage = () => {
             <UserTypings words={words} userInput={typed} />
           </div>
         </motion.div>
-        {isAppRunningOnMobile && (
+        {mobileChecker && (
           <input
             type="text"
             className="mobile-keyboard"
