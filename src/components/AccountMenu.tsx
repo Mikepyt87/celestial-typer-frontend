@@ -2,7 +2,7 @@ import "./AccountMenu.css";
 import { motion } from "framer-motion";
 import { signOut } from "../firebaseConfig";
 import { Link } from "react-router-dom";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import AuthContext from "../context/AuthContext";
 import useWindowDimensions from "./custom hooks/useWindowDimensions";
 
@@ -15,6 +15,10 @@ const AccountMenu = ({ toggleMenu, setToggleMenu }: Props) => {
   const { account } = useContext(AuthContext);
   const { width } = useWindowDimensions();
 
+  useEffect(() => {
+    window.addEventListener("scroll", () => setToggleMenu(false));
+  });
+
   return (
     <motion.nav
       className="AccountMenu"
@@ -24,25 +28,23 @@ const AccountMenu = ({ toggleMenu, setToggleMenu }: Props) => {
       transition={{ duration: 0.25, ease: "easeOut" }}
     >
       <ul>
-        <li>
-          <button
-            className="sign-out-button"
-            onClick={() => {
-              signOut();
-              setToggleMenu(!toggleMenu);
-            }}
-          >
-            Sign Out
-          </button>
-        </li>
-        <li>
-          <Link to={`/account-details/${account!.uid}`}>Account Details</Link>
-        </li>
         {width < 600 && (
           <li className="leaderboard">
             <Link to="/leaderboard">Leaderboard</Link>
           </li>
         )}
+        <li>
+          <Link to={`/account-details/${account!.uid}`}>Account Details</Link>
+        </li>
+        <button
+          className="sign-out-button"
+          onClick={() => {
+            signOut();
+            setToggleMenu(!toggleMenu);
+          }}
+        >
+          Sign Out
+        </button>
       </ul>
     </motion.nav>
   );

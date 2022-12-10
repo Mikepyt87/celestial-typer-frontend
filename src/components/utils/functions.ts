@@ -1,3 +1,9 @@
+declare global {
+  interface Window {
+    opera: any;
+  }
+}
+
 export const checkForMobile = () => {
   var check = false;
   (function (a) {

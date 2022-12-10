@@ -13,9 +13,20 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 0px;
   z-index: 2;
 }
 
+.AccountMenu ul {
+  display: flex;
+  justify-content: space-between;
+  width: 80%;
+}
+
+.AccountMenu li {
+  padding: 0;
+}
+
 .AccountMenu .sign-out-button {
+  /* background-color: transparent;
+  border: none; */
 }

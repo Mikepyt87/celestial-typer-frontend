@@ -20,7 +20,6 @@ const Header = () => {
     <header className={`Header logged-out-${!user && !account}`}>
       {/* <img src={LogoImg} alt="Celstial Typer" width="250px" /> */}
       <Logo className={"logo"} />
-      {/* {`width: ${width}`} */}
       {user && account ? (
         <div>
           <nav>
@@ -35,7 +34,6 @@ const Header = () => {
               )}
             </ul>
           </nav>
-          {/* <Link to={`/account-details/${account!.uid}`}> */}
           <img
             src={user.photoURL!}
             alt={user.displayName!}
@@ -44,7 +42,6 @@ const Header = () => {
               setToggleMenu(!toggleMenu);
             }}
           />
-          {/* </Link> */}
           <AccountMenu toggleMenu={toggleMenu} setToggleMenu={setToggleMenu} />
           {toggleMenu && (
             <motion.div
