@@ -21,7 +21,7 @@ const AccountMenu = ({ toggleMenu, setToggleMenu }: Props) => {
       animate={{
         height: toggleMenu ? "100px" : "0px",
       }}
-      transition={{ duration: 0.5 }}
+      transition={{ duration: 0.25, ease: "easeOut" }}
     >
       <ul>
         <li>

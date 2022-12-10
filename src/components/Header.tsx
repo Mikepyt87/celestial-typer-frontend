@@ -19,7 +19,8 @@ const Header = () => {
   return (
     <header className={`Header logged-out-${!user && !account}`}>
       {/* <img src={LogoImg} alt="Celstial Typer" width="250px" /> */}
-      <Logo />
+      <Logo className={"logo"} />
+      {/* {`width: ${width}`} */}
       {user && account ? (
         <div>
           <nav>
@@ -48,7 +49,7 @@ const Header = () => {
           {toggleMenu && (
             <motion.div
               animate={{ backgroundColor: "rgb(26 35 61)", opacity: 0.5 }}
-              transition={{ duration: 0.5 }}
+              transition={{ duration: 0.25 }}
               className="invisible-wall"
               onClick={() => {
                 setToggleMenu(false);
