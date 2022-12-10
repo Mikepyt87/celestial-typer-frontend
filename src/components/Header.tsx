@@ -8,6 +8,7 @@ import { checkForMobile } from "./utils/functions";
 import Logo from "./Logo";
 import AccountMenu from "./AccountMenu";
 import useWindowDimensions from "./custom hooks/useWindowDimensions";
+import { motion } from "framer-motion";
 
 const Header = () => {
   const { user, account } = useContext(AuthContext);
@@ -43,14 +44,18 @@ const Header = () => {
             }}
           />
           {/* </Link> */}
-          <AccountMenu toggleMenu={toggleMenu} />
+          <AccountMenu toggleMenu={toggleMenu} setToggleMenu={setToggleMenu} />
           {toggleMenu && (
-            <div
+            <motion.div
+              animate={{ backgroundColor: "rgb(26 35 61)", opacity: 0.5 }}
+              transition={{ duration: 0.5 }}
               className="invisible-wall"
               onClick={() => {
                 setToggleMenu(false);
               }}
-            ></div>
+            >
+              {/* <input type="color" /> */}
+            </motion.div>
           )}
         </div>
       ) : (

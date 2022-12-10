@@ -8,9 +8,10 @@ import useWindowDimensions from "./custom hooks/useWindowDimensions";
 
 interface Props {
   toggleMenu: boolean;
+  setToggleMenu: (toggle: boolean) => void;
 }
 
-const AccountMenu = ({ toggleMenu }: Props) => {
+const AccountMenu = ({ toggleMenu, setToggleMenu }: Props) => {
   const { account } = useContext(AuthContext);
   const { width } = useWindowDimensions();
 
@@ -24,7 +25,13 @@ const AccountMenu = ({ toggleMenu }: Props) => {
     >
       <ul>
         <li>
-          <button className="sign-out-button" onClick={signOut}>
+          <button
+            className="sign-out-button"
+            onClick={() => {
+              signOut();
+              setToggleMenu(!toggleMenu);
+            }}
+          >
             Sign Out
           </button>
         </li>

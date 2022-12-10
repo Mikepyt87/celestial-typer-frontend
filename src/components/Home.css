@@ -18,15 +18,54 @@
 
 .Home .article-title {
   display: flex;
-  align-items: center;
-  height: 60px;
-  width: 350px;
   text-align: center;
   align-items: center;
+  height: 155px;
+  width: 160px;
+  font-size: 20px;
 }
 
 .Home .article-image {
-  width: 25em;
-  height: 12em;
+  width: 10em;
+  height: 10em;
   object-fit: cover;
+}
+
+@media only screen and (min-width: 586px) and (max-width: 621px) {
+  .Home .article-title {
+    height: 85px;
+    width: 245px;
+    font-size: 19px;
+  }
+
+  .Home .article-image {
+    width: 245px;
+    height: 13em;
+  }
+}
+
+@media only screen and (min-width: 621px) and (max-width: 898px) {
+  .Home .article-title {
+    height: 80px;
+    width: 235px;
+    font-size: 18px;
+  }
+
+  .Home .article-image {
+    width: 262px;
+    height: 10em;
+  }
+}
+
+@media only screen and (min-width: 898px) {
+  .Home .article-title {
+    height: 65px;
+    width: 235px;
+    font-size: 17px;
+  }
+
+  .Home .article-image {
+    width: 25em;
+    height: 13em;
+  }
 }

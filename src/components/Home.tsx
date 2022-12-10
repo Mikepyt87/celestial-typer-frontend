@@ -12,6 +12,7 @@ import {
 import Account from "../models/Account";
 import Leaderboard from "./Leaderboard";
 import Header from "./Header";
+import useWindowDimensions from "./custom hooks/useWindowDimensions";
 
 const topFive = (allUserScores: Account[]): Account[] => {
   return allUserScores.slice(0, 5);
@@ -91,10 +92,13 @@ const Home = () => {
     }
   };
 
+  const { width } = useWindowDimensions();
+
   //? once articles load, page is rendered
   return (
     <div className="Home">
       <Header />
+      {/* {`width: ${width}`} */}
       {account?.initalSetUp && (
         <UsernameForm newAccountName={insertAccountname} />
       )}
