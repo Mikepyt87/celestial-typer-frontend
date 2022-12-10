@@ -1,6 +1,7 @@
 .AccountMenu {
+  height: 0;
   position: absolute;
-  top: 109.5px;
+  top: 110px;
   left: 50%;
   transform: translate(-50%, 0);
   width: 90%;
@@ -9,11 +10,11 @@
   border-radius: 0 0 40% 40%;
   border-left: solid 2px rgb(239 68 68);
   border-right: solid 2px rgb(239 68 68);
-  border-bottom: solid 4px rgb(239 68 68);
+  border-bottom: solid 2px rgb(239 68 68);
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 2;
+  z-index: 1;
 }
 
 .AccountMenu ul {
@@ -29,4 +30,13 @@
 .AccountMenu .sign-out-button {
   /* background-color: transparent;
   border: none; */
+}
+
+.invisible-wall {
+  z-index: -1;
+  position: absolute;
+  top: 112px;
+  left: 0;
+  height: 91vh;
+  width: 100%;
 }

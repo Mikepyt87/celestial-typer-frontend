@@ -6,6 +6,7 @@
   position: relative;
   border-bottom: solid 2px rgb(239 68 68);
   height: 110px;
+  z-index: 1;
 }
 
 .Header div {
@@ -32,24 +33,15 @@
 
 /* When user logs out. Header border doubles to account for loss of AccountMenu component's border */
 .logged-out-true {
-  border-bottom: solid 5px rgb(239 68 68);
+  border-bottom: solid 2px rgb(239 68 68);
 }
 
-.Header .invisible-wall {
-  z-index: 1;
-  position: absolute;
-  top: 112px;
-  left: 0;
-  height: 100vh;
-  width: 100%;
-}
-
-.logo {
+.Header .header-logo {
   inline-size: 225px;
 }
 
 @media only screen and (max-width: 438px) {
-  .Header .logo {
+  .Header .header-logo {
     inline-size: 160px;
   }
 }

@@ -5,27 +5,12 @@ import Account from "../models/Account";
 import { getallUsersScores } from "../services/AccountApiService";
 import Leaderboard from "./Leaderboard";
 import "./LeaderboardPage.css";
+import { sortScores } from "./utils/functions";
 
 const LeaderboardPage = () => {
   const { account } = useContext(AuthContext);
   const [allUserScores, setAllUserScores] = useState<Account[]>([]);
-  const sortScores = (array: Account[]) => {
-    if (array[0]) {
-      array.sort((a, b) => {
-        const scoreA =
-          a.scores[a.scores.length - 1].adjustedCharactersPerMinute;
-        const scoreB =
-          b.scores[b.scores.length - 1].adjustedCharactersPerMinute;
-        if (scoreA > scoreB) {
-          return -1;
-        }
-        if (scoreA < scoreB) {
-          return 1;
-        }
-        return 0;
-      });
-    }
-  };
+
   useEffect(() => {
     getallUsersScores().then((res) => {
       setAllUserScores(() => {
@@ -34,6 +19,7 @@ const LeaderboardPage = () => {
       });
     });
   }, [account]);
+
   return (
     <div className="LeaderboardPage">
       <div className="leaderboard-page-header">

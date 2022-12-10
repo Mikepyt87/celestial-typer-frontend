@@ -5,24 +5,7 @@ import { getAllArticles } from "../../services/spaceFlightApiService";
 import UserTypings from "./UserTypings";
 import { motion } from "framer-motion";
 import useEngine from "./custom typingGame hooks/useEngine";
-import { checkForMobile } from "../utils/functions";
-
-// Pulls 100 random articles from API Endpoint.
-const randomArticles = (articles: Article[]): Article[] => {
-  let numOfArticles: Article[] = [];
-  for (let i = 0; i < 100; i++) {
-    let randomIndex: number = Math.floor(Math.random() * articles.length);
-    let foundIndex: number = numOfArticles.findIndex((article) => {
-      return article.id === articles[randomIndex].id;
-    });
-    if (foundIndex === -1) {
-      numOfArticles.push(articles[randomIndex]);
-    } else {
-      i--;
-    }
-  }
-  return numOfArticles;
-};
+import { checkForMobile, randomArticles } from "../utils/functions";
 
 const mobileChecker = checkForMobile();
 
@@ -30,7 +13,7 @@ const TypingMainPage = () => {
   const [articles, setArticles] = useState<Article[]>([]);
 
   useEffect(() => {
-    getAllArticles().then((res) => setArticles(randomArticles(res)));
+    getAllArticles().then((res) => setArticles(randomArticles(res, 100)));
     // console.log(articles);
   }, []);
 

@@ -20,52 +20,39 @@
   display: flex;
   text-align: center;
   align-items: center;
-  height: 155px;
-  width: 160px;
+  height: 130px;
+  width: 139px;
   font-size: 20px;
 }
 
 .Home .article-image {
-  width: 10em;
+  width: 139px;
   height: 10em;
   object-fit: cover;
 }
 
-@media only screen and (min-width: 586px) and (max-width: 621px) {
-  .Home .article-title {
-    height: 85px;
-    width: 245px;
-    font-size: 19px;
-  }
-
-  .Home .article-image {
-    width: 245px;
-    height: 13em;
-  }
-}
-
-@media only screen and (min-width: 621px) and (max-width: 898px) {
+@media only screen and (min-width: 524px) and (max-width: 969px) {
   .Home .article-title {
     height: 80px;
-    width: 235px;
-    font-size: 18px;
+    width: 210px;
+    font-size: 20px;
   }
 
   .Home .article-image {
-    width: 262px;
+    width: 213px;
     height: 10em;
   }
 }
 
-@media only screen and (min-width: 898px) {
+@media only screen and (min-width: 969px) {
   .Home .article-title {
-    height: 65px;
-    width: 235px;
-    font-size: 17px;
+    height: 80px;
+    width: 285px;
+    font-size: 20px;
   }
 
   .Home .article-image {
-    width: 25em;
-    height: 13em;
+    width: 285px;
+    height: 10em;
   }
 }

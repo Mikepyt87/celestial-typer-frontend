@@ -13,31 +13,15 @@ import Account from "../models/Account";
 import Leaderboard from "./Leaderboard";
 import Header from "./Header";
 import useWindowDimensions from "./custom hooks/useWindowDimensions";
+import {
+  checkForMobile,
+  randomArticles,
+  shortenTitles,
+  sortScores,
+} from "./utils/functions";
 
 const topFive = (allUserScores: Account[]): Account[] => {
   return allUserScores.slice(0, 5);
-};
-
-// returns 10 random articles
-// input is the response from the Space Flight Api endpoint
-const tenRandomArticles = (articles: Article[]): Article[] => {
-  let randomArticles: Article[] = [];
-  // loops 10 times
-  for (let i = 0; i < 10; i++) {
-    let randomIndex: number = Math.floor(Math.random() * articles.length);
-    // check to see if tenRandomArticles array already contains the next selected object
-    let foundIndex: number = randomArticles.findIndex((article) => {
-      return article.id === articles[randomIndex].id;
-    });
-    if (foundIndex === -1) {
-      //? if the findIndex method does not return anything, add the object to tenRandomArticles array
-      randomArticles.push(articles[randomIndex]);
-    } else {
-      //? if there is a matching object in the array, then loop again
-      i--;
-    }
-  }
-  return randomArticles;
 };
 
 const Home = () => {
@@ -48,31 +32,11 @@ const Home = () => {
   //? console.log(articles);
   const [allUserScores, setAllUserScores] = useState<Account[]>([]);
 
-  const sortScores = (array: Account[]) => {
-    if (array[0]) {
-      array.sort((a, b) => {
-        const scoreA =
-          a.scores[a.scores.length - 1].adjustedCharactersPerMinute;
-        const scoreB =
-          b.scores[b.scores.length - 1].adjustedCharactersPerMinute;
-        if (scoreA > scoreB) {
-          return -1;
-        }
-        if (scoreA < scoreB) {
-          return 1;
-        }
-
-        //? names must be equal
-        return 0;
-      });
-    }
-  };
-
   useEffect(() => {
     // calls Space Flight Api service function
     getAllArticles().then((res) => {
-      // sets articles to ten random objects
-      setArticles(tenRandomArticles(res));
+      // sets articles to ten random objects from endpoint (if app is running in mobile, titles will be cut off after 45 characters)
+      setArticles(shortenTitles(randomArticles(res, 10), checkForMobile()));
     });
     getallUsersScores().then((res) => {
       setAllUserScores(() => {
@@ -93,7 +57,7 @@ const Home = () => {
   };
 
   const { width } = useWindowDimensions();
-
+  console.log(width);
   //? once articles load, page is rendered
   return (
     <div className="Home">
