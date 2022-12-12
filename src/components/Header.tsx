@@ -44,7 +44,9 @@ const Header = () => {
           <AccountMenu toggleMenu={toggleMenu} setToggleMenu={setToggleMenu} />
         </div>
       ) : (
-        <button onClick={signInWithGoogle}>Sign In</button>
+        <button onClick={signInWithGoogle} className="sign-in-button">
+          Sign In
+        </button>
       )}
     </header>
   );
