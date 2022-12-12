@@ -40,3 +40,14 @@
   height: 91vh;
   width: 100%;
 }
+.AccountMenu .sign-out-button {
+  background-color: rgb(30 41 59);
+  color: #bcd8c1;
+  font-size: 16px;
+  padding-right: 40px;
+  border: none;
+  margin: 10px;
+}
+.AccountMenu .sign-out-button:hover {
+  color: #7da184;
+}
