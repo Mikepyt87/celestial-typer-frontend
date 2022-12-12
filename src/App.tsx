@@ -6,6 +6,7 @@ import {
 } from "react-router-dom";
 import "./App.css";
 import AccountDetails from "./components/AccountDetails";
+import ArticlesPage from "./components/articlesPage";
 import Home from "./components/Home";
 import Leaderboard from "./components/Leaderboard";
 import LeaderboardPage from "./components/LeaderboardPage";
@@ -24,6 +25,7 @@ function App() {
           <Route path="/results" element={<ResultsPage />} />
           <Route path="/account-details/:uid" element={<AccountDetails />} />
           <Route path="/leaderboard" element={<LeaderboardPage />} />
+          <Route path="/articlesPage" element={<ArticlesPage />}></Route>
           {/* wildcard */}
           <Route path="*" element={<Navigate to="/" />} />
         </Routes>

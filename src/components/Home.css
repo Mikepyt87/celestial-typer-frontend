@@ -31,6 +31,7 @@
   object-fit: cover;
 }
 
+/* * media query. Styles only applied if screen size is between 524 and 969 px */
 @media only screen and (min-width: 524px) and (max-width: 969px) {
   .Home .article-title {
     height: 125px;
@@ -44,6 +45,7 @@
   }
 }
 
+/* * media query. Styles only applied if screen size is less than or equal to 969px */
 @media only screen and (min-width: 969px) {
   .Home .article-title {
     height: 80px;
