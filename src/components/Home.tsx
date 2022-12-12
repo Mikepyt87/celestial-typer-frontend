@@ -19,6 +19,7 @@ import {
   sortScores,
 } from "./utils/functions";
 import Canvas from "./Canvas";
+import useWindowDimensions from "./custom hooks/useWindowDimensions";
 
 //* slices the top 5 from the 'allUserScores' array.
 const topFive = (allUserScores: Account[]): Account[] => {
@@ -27,10 +28,10 @@ const topFive = (allUserScores: Account[]): Account[] => {
 
 //* React component used to display the home page
 const Home = () => {
+  // will be used for canvas element
+  const { width } = useWindowDimensions();
   //* useContext hook to access the 'account' object from 'AuthContext'
   const { account, setAccount } = useContext(AuthContext);
-  //* stores the height of the users window
-  const [height, setHeight] = useState(0);
 
   //* useState that holds an array of ten randomized objects from Space Flight Api endpoint
   const [articles, setArticles] = useState<Article[]>([]);
@@ -38,11 +39,14 @@ const Home = () => {
   const [allUserScores, setAllUserScores] = useState<Account[]>([]);
 
   useEffect(() => {
+    setTimeout(() => {
+      getAllArticles().then((res) => {
+        //* sets articles to ten random 'Article' objects from endpoint (if app is running in mobile, titles will be cut off after 45 characters)
+        setArticles(shortenTitles(randomArticles(res, 10), isTouchDevice()));
+      });
+    }, 800);
     //* calls Space Flight Api service function
-    getAllArticles().then((res) => {
-      //* sets articles to ten random 'Article' objects from endpoint (if app is running in mobile, titles will be cut off after 45 characters)
-      setArticles(shortenTitles(randomArticles(res, 10), isTouchDevice()));
-    });
+
     //* array of 'Account' objects sorted by score
     getallUsersScores().then((res) => {
       setAllUserScores(() => {
@@ -65,8 +69,8 @@ const Home = () => {
 
   //* once articles load, page is rendered
 
-  //* displays only the top 5 users from 'allUserScores'
-  const topFiveScores: Account[] = topFive(allUserScores);
+  //* displays only the top 5 users from 'allUserScores' (for canvas element)
+  // const topFiveScores: Account[] = topFive(allUserScores);
 
   //* renders a 'Header' and 'Leaderboard' component.
   return (
@@ -77,7 +81,20 @@ const Home = () => {
       {account?.initalSetUp && (
         <UsernameForm newAccountName={insertAccountname} />
       )}
-      {/* <Canvas topFiveScores={topFiveScores} /> */}
+      {/* {width > 600 ? (
+        <Canvas
+          topFiveScores={topFiveScores}
+          canvasHeight={400}
+          barWidth={92}
+        />
+      ) : (
+        <Canvas
+          topFiveScores={topFiveScores}
+          canvasHeight={200}
+          barWidth={47}
+        />
+      )} */}
+
       <Leaderboard topScores={topFive(allUserScores)} />
       <div className="articles-container">
         {/* if articles array is not empty, map the objects to the page */}
