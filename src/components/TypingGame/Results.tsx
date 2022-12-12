@@ -11,7 +11,9 @@ interface Props {
   total: number;
 }
 
+//* displays the typing test results when test is finished. Determines whether test is finished or not
 const Results = ({ state, errors, accuracyPercentage, total }: Props) => {
+  //* if the state is finished, results will render null (nothing)
   if (state !== "finish") {
     return null;
   }
@@ -19,12 +21,13 @@ const Results = ({ state, errors, accuracyPercentage, total }: Props) => {
   const initial = { opacity: 0 };
   const animate = { opacity: 1 };
 
+  //* ...otherwise it will animate and display the number of errors, accuracy percentage, and total number or chars typed.
   return (
     <motion.ul initial={initial} animate={animate} className="Results">
       <motion.li
         initial={initial}
         animate={animate}
-        transition={{ duration: 0.3 }}
+        transition={{ duration: 0.3 }} //! controls the duration and delay of each animation
         className="text-xl font-semibold"
       >
         Results

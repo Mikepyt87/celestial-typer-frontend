@@ -4,15 +4,18 @@ import AuthContext from "../context/AuthContext";
 import { getUserData } from "../services/AccountApiService";
 import "./AccountDetails.css";
 
+//* shows the details of a users account.
 const AccountDetails = () => {
+  //* AuthContext to get the userser account info
   const { account, setAccount } = useContext(AuthContext);
-
+  //* useParams hook to get 'uid'
   const uid: string | undefined = useParams().uid;
 
   useEffect(() => {
     getUserData(uid!).then((res) => setAccount(res));
   }, []);
 
+  //* will only display account details if the 'uid' matches the 'uid' of the user signed in.
   if (account?.uid! === uid) {
     return (
       <div className="AccountDetails">
@@ -42,7 +45,9 @@ const AccountDetails = () => {
         </ul>
       </div>
     );
-  } else {
+  }
+  //* if the 'uid' does not match or if there is no user signed in, it redirects the user to the home page
+  else {
     return <Navigate to="/" />;
   }
 };

@@ -6,6 +6,7 @@ interface Props {
   topScores: Account[];
 }
 
+//* a functional React component. Takes in topScores as a Prop
 const Leaderboard = ({ topScores }: Props) => {
   return (
     <Link to="/leaderboard">
@@ -13,7 +14,9 @@ const Leaderboard = ({ topScores }: Props) => {
         <h2>TOP SCORES:</h2>
 
         <ul>
+          {/* //* maps over 'topScores' array */}
           {topScores.map((account, index) => (
+            // * renders a list of li elements with a p element containing the users name and acpm score
             <li key={index}>
               <p>
                 {index + 1}.{" "}

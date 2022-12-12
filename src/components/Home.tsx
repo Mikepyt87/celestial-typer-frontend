@@ -20,25 +20,30 @@ import {
 } from "./utils/functions";
 import Canvas from "./Canvas";
 
+//* slices the top 5 from the 'allUserScores' array.
 const topFive = (allUserScores: Account[]): Account[] => {
   return allUserScores.slice(0, 5);
 };
 
+//* React component used to display the home page
 const Home = () => {
+  //* useContext hook to access the 'account' object from 'AuthContext'
   const { account, setAccount } = useContext(AuthContext);
+  //* stores the height of the users window
   const [height, setHeight] = useState(0);
 
-  //? useState that holds an array of ten randomized objects from Space Flight Api endpoint
+  //* useState that holds an array of ten randomized objects from Space Flight Api endpoint
   const [articles, setArticles] = useState<Article[]>([]);
-  //? console.log(articles);
+  //* console.log(articles);
   const [allUserScores, setAllUserScores] = useState<Account[]>([]);
 
   useEffect(() => {
-    // calls Space Flight Api service function
+    //* calls Space Flight Api service function
     getAllArticles().then((res) => {
-      // sets articles to ten random objects from endpoint (if app is running in mobile, titles will be cut off after 45 characters)
+      //* sets articles to ten random 'Article' objects from endpoint (if app is running in mobile, titles will be cut off after 45 characters)
       setArticles(shortenTitles(randomArticles(res, 10), isTouchDevice()));
     });
+    //* array of 'Account' objects sorted by score
     getallUsersScores().then((res) => {
       setAllUserScores(() => {
         sortScores(res);
@@ -48,6 +53,7 @@ const Home = () => {
     });
   }, [account]);
 
+  //* updates the users account with a username when 'UsernameForm' is submitted
   const insertAccountname = (username: string) => {
     if (account) {
       const copyOfAccount = { ...account };
@@ -57,14 +63,17 @@ const Home = () => {
     }
   };
 
-  //? once articles load, page is rendered
+  //* once articles load, page is rendered
 
+  //* displays only the top 5 users from 'allUserScores'
   const topFiveScores: Account[] = topFive(allUserScores);
 
+  //* renders a 'Header' and 'Leaderboard' component.
   return (
     <div className="Home">
       <Header />
       {/* {`mobile: ${isTouchDevice()}`} */}
+      {/* //* if the users 'account' object has an 'initialSetup' property that is set to true, the 'Home' component also renders a 'UsernameForm' for the user to set */}
       {account?.initalSetUp && (
         <UsernameForm newAccountName={insertAccountname} />
       )}
@@ -73,6 +82,7 @@ const Home = () => {
       <div className="articles-container">
         {/* if articles array is not empty, map the objects to the page */}
 
+        {/* //* maps over the 'articles' array, rendering a title and image */}
         {articles.map((article) => (
           <div key={`${article.id}_${article.publishedAt}`} className="article">
             {/* renders title and image from each object */}

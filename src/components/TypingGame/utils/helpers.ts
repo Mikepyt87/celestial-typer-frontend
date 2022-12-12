@@ -1,4 +1,4 @@
-// accept only letters and whitespaces
+//* determins whether the key being pressed should be handled by the program
 export const isKeyboardCodeAllowed = (code: string) => {
   return (
     code.startsWith("Key") ||
@@ -16,6 +16,7 @@ export const isKeyboardCodeAllowed = (code: string) => {
   );
 };
 
+//* 'actual' and 'expected' as arguments. Compares the characters typed vs ones in the string (.summary) and returns # of mismatches ('errors')
 export const countErrors = (actual: string, expected: string) => {
   const expectedCharacters = expected.split("");
 
@@ -39,6 +40,7 @@ export const countErrors = (actual: string, expected: string) => {
   }, 0);
 };
 
+//* takes 'errors' and 'total' as arguments, does math to calculate the total % of accurate characters typed.
 export const calculateAccuracyPercentage = (errors: number, total: number) => {
   if (total > 0) {
     const corrects = total - errors;
@@ -48,6 +50,7 @@ export const calculateAccuracyPercentage = (errors: number, total: number) => {
   return 0;
 };
 
+//* formats %. Takes number with decimals turns to a string with no decimals
 export const formatPercentage = (percentage: number) => {
   return `${percentage.toFixed(0)}%`;
 };

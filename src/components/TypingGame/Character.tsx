@@ -5,6 +5,7 @@ interface Props {
   expected: string;
 }
 
+//* allows special characters by setting them to be interporated differently behind scenes.
 const Character = ({ actual, expected }: Props) => {
   const isCorrect = actual === expected;
   const isWhiteSpace = expected === " ";

@@ -5,12 +5,16 @@ interface Props {
   newAccountName: (username: string) => void;
 }
 
+//* React component which is used to create a new user account
 const UsernameForm = ({ newAccountName }: Props) => {
   const [username, setUsername] = useState("");
   const [error, setError] = useState("");
 
+  //* when user submits the UsernameForm, this function is called to check if the username is valid (through character params)
   const submitHandler = (e: FormEvent) => {
     e.preventDefault();
+    //* between 5-15 characters, no special characters
+    //* good
     if (
       username.length >= 5 &&
       username.length <= 15 &&
@@ -23,7 +27,8 @@ const UsernameForm = ({ newAccountName }: Props) => {
       !username.includes(",")
     ) {
       newAccountName(username);
-    } else if (username.length >= 5 && username.length <= 15) {
+    } //! NOT good
+    else if (username.length >= 5 && username.length <= 15) {
       setError("Username cannot contain special characters");
     } else if (
       !username.includes(".") &&

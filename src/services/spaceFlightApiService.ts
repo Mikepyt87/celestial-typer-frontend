@@ -1,6 +1,7 @@
 import axios from "axios";
 import Article from "../models/Article";
 
+//* retrieves all articles from a remote database
 export const getAllArticles = (): Promise<Article[]> => {
   return (
     axios

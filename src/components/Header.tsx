@@ -9,6 +9,7 @@ import AccountMenu from "./AccountMenu";
 import useWindowDimensions from "./custom hooks/useWindowDimensions";
 
 const Header = () => {
+  //* access info about current user: photo URL and display name
   const { user, account } = useContext(AuthContext);
   const [toggleMenu, setToggleMenu] = useState(false);
 

@@ -21,15 +21,20 @@ export type State = "start" | "run" | "finish";
 
 const COUNTDOWN_SECONDS = 40;
 
+//* takes an array of 'Article' as input
 const useEngine = (articles: Article[]) => {
   const { setResults } = useContext(ResultsContext);
   const { account, setAccount } = useContext(AuthContext);
   const navigate = useNavigate();
 
+  //* 'state' used to keep track of the current state of the game
   const [state, setState] = useState<State>("start");
+  //* 'errors used to keep track of number of errors made by the user while typing
   const [errors, setErrors] = useState(0);
 
+  //* 'useCountdown()' hook to create a 'timeLeft' state variable to keep track of time remaining. 'startCountdown' function to start timer.
   const { timeLeft, startCountdown } = useCountdown(COUNTDOWN_SECONDS);
+  //* 'useWords' and 'useTypings' hooks to create content to be used in the 'words', 'updateWords', 'attemptedArticles', 'cursor', 'typed, 'clearTyped' and 'totalTyped' state variables that are used to provide the text for the user to type, keep track of the users progress, and manage user input.
   const { words, updateWords, attemptedArticles } = useWords(articles);
   const { cursor, typed, clearTyped, totalTyped } = useTypings(
     state !== "finish",
@@ -39,13 +44,15 @@ const useEngine = (articles: Article[]) => {
   const isStarting = state === "start" && cursor > 0;
   const areWordsFinished = cursor === words.length;
 
+  //* keeps track and provides a total of errors the user typed by comparing 'typed' text to the text they're supposed to type 'wordsReached'
   const sumErrors = useCallback(() => {
     // debug(`cursor: ${cursor} - words.length: ${words.length}`);
     const wordsReached = words.substring(0, Math.min(cursor, words.length));
+    //* 'countErrors()' returns the number of errors and adds it to the current value of 'errors' state varaiable using 'setErrors()' function which updates the 'errors' state variable with the total number of errors made by the user.
     setErrors((prevErrors) => prevErrors + countErrors(typed, wordsReached));
   }, [typed, words, cursor]);
 
-  // as soon the user starts typing the first letter, we start
+  //* as soon the user starts typing the first letter, we start
   useEffect(() => {
     if (isStarting) {
       setState("run");
@@ -53,11 +60,13 @@ const useEngine = (articles: Article[]) => {
     }
   }, [isStarting, startCountdown]);
 
+  //* a function that pushes the users score (errors, totalTyped, acpm) into their account details.
   const insertUserScore = (
     errors: number,
     totalTyped: number,
     acpm: number
   ) => {
+    //* First checks to verify account exists. if(account exists) then the function creates a copy of the 'account' object and 'scores' array and appends the results to the end of the 'scores' array within the account object.
     if (account) {
       const copyOfAccount: Account = { ...account };
       const copyOfScores: Score[] = [...copyOfAccount.scores];
@@ -77,13 +86,15 @@ const useEngine = (articles: Article[]) => {
     }
   };
 
-  // when the time is up, we've finished
+  //* when the time is up, we've finished
   useEffect(() => {
+    //* if no time is left, game is set to "finish", and 'sumErrors' function is called to updated the total number of errors.
     if (!timeLeft && state === "run") {
       sumErrors();
       // debug("time is up...");
       setState("finish");
     }
+    //* if the state is set to "finish" charactersPerMinute, accuracy, and adjustedCharactersPerMinute are calclulated. YAY MATH!
     if (state === "finish") {
       const charactersPerMinute = (
         errors: number,
@@ -97,16 +108,19 @@ const useEngine = (articles: Article[]) => {
         );
         return adjustedCharactersPerMinute;
       };
+      //* 'setResults' is called to update 'results'
       setResults({
         errors: errors,
         total: totalTyped,
         article: attemptedArticles,
       });
+      //* 'insertUserScore' is called to save the users score to their account in the database
       insertUserScore(
         errors,
         totalTyped,
         charactersPerMinute(errors, totalTyped, COUNTDOWN_SECONDS)
       );
+      //* 'navigate' is called to automatically navigate the user to the "/results" route
       navigate("/results");
     }
   }, [timeLeft, state, sumErrors]);
@@ -115,6 +129,7 @@ const useEngine = (articles: Article[]) => {
    * when the current words are all filled up,
    * we generate and show another set of words
    */
+  //* effect is only triggered when one of these values change
   useEffect(() => {
     if (areWordsFinished) {
       // debug("words are finished...");

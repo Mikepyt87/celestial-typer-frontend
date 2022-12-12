@@ -9,6 +9,7 @@ import { isTouchDevice, randomArticles } from "../utils/functions";
 
 const mobileChecker = isTouchDevice();
 
+//* React component that displays the game.
 const TypingMainPage = () => {
   const [articles, setArticles] = useState<Article[]>([]);
 
@@ -17,10 +18,11 @@ const TypingMainPage = () => {
     // console.log(articles);
   }, []);
 
+  //* hook to manage the state of the game
   const { words, typed, timeLeft, errors, state, totalTyped } =
     useEngine(articles);
 
-  // once articles load, page is rendered
+  //* once articles load, page is rendered
   if (articles[0]) {
     return (
       <div className="TypingMainPage">
@@ -40,8 +42,8 @@ const TypingMainPage = () => {
         )}
       </div>
     );
-    // while waiting, page renders loading div
-    // class can be altered in index.css
+    //* while waiting, page renders loading div
+    //* class can be altered in index.css
   } else {
     return (
       <div className="loading">

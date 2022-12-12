@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import "./Caret.css";
 
+//* function to fade cursor in and out while waiting for text input
 const Caret = () => {
   return (
     <motion.div

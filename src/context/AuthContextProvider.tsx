@@ -5,18 +5,22 @@ import { auth } from "../firebaseConfig";
 import Account from "../models/Account";
 import { createNewAccount, getUserData } from "../services/AccountApiService";
 
+//* functional React component used to provide data about a users auth stat TO child components.
 function AuthContextProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
   const [account, setAccount] = useState<Account | null>(null);
+  //* useEffect to only register once at start
   useEffect(() => {
-    // useEffect to only register once at start
+    //* listens for changes to the auth state
     return auth.onAuthStateChanged((newUser) => {
+      //* if changed 'user' is set to the newUser obj || null if no user logged in
       if (newUser) {
         setUser(newUser);
         getUserData(newUser.uid).then((res) => {
           if (res) {
             setAccount(res);
-          } else {
+          } //* if it's a new is logged in, listener retrieves the users account data
+          else {
             createNewAccount({
               profilePic: newUser.photoURL || "",
               userName: newUser.displayName || "",
@@ -36,6 +40,7 @@ function AuthContextProvider({ children }: { children: ReactNode }) {
     });
   }, []);
   return (
+    //* provides account data to child components so the child components can access and update the auth state.
     <AuthContext.Provider value={{ user, account, setAccount }}>
       {children}
     </AuthContext.Provider>

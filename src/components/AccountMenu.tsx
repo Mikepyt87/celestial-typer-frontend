@@ -11,16 +11,21 @@ interface Props {
   setToggleMenu: (toggle: boolean) => void;
 }
 
+//* functional React component used to display a menu for the logged in user
 const AccountMenu = ({ toggleMenu, setToggleMenu }: Props) => {
+  //* access 'account' object from the 'AuthContext' object
   const { account } = useContext(AuthContext);
+  //* reads the users window width
   const { width } = useWindowDimensions();
 
+  //* hook to add an event listener to set toggleMenu state to false when the user scrolls. (hides menu when scrolling)
   useEffect(() => {
     window.addEventListener("scroll", () => setToggleMenu(false));
   });
 
   return (
     <>
+      {/* //* animates menu height based off the 'toggleMenu' prop */}
       <motion.nav
         className="AccountMenu"
         animate={{

@@ -12,6 +12,7 @@ import LeaderboardPage from "./components/LeaderboardPage";
 import ResultsPage from "./components/TypingGame/ResultsPage";
 import TypingMainPage from "./components/TypingGame/TypingMainPage";
 
+//* this is our Celestial Typer app!!!
 function App() {
   return (
     <div className="App">

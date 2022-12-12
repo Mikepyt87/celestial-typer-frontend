@@ -24,29 +24,29 @@ declare global {
 //   return check;
 // };
 
-// returns a boolean based on if device has a touch screen or not (if there is a touchscreen, return true. If it does not, return false).
+//* returns a boolean based on if device has a touch screen or not (if there is a touchscreen, return true. If it does not, return false).
 export const isTouchDevice = () => {
   return "ontouchstart" in window || navigator.maxTouchPoints > 1;
 };
 
-// Pulls a quantity of random articles from API Endpoint.
+//* Pulls a quantity of random articles from API Endpoint.
 export const randomArticles = (
   articles: Article[],
   quantity: number
 ): Article[] => {
   let numOfArticles: Article[] = [];
-  // loops a number of times equal to the quantity provided
+  //* loops a number of times equal to the quantity provided
   for (let i = 0; i < quantity; i++) {
     let randomIndex: number = Math.floor(Math.random() * articles.length);
-    // checks to see if random article already exists in the array to prevent duplicates
+    //* checks to see if random article already exists in the array to prevent duplicates
     let foundIndex: number = numOfArticles.findIndex((article) => {
       return article.id === articles[randomIndex].id;
     });
     if (foundIndex === -1) {
-      //? if the findIndex method finds no matches, push the article to the array
+      //* if the findIndex method finds no matches, push the article to the array
       numOfArticles.push(articles[randomIndex]);
     } else {
-      //? if there is a matching article in the array, then loop again
+      //* if there is a matching article in the array, then loop again
       i--;
     }
   }
