@@ -31,6 +31,36 @@
   object-fit: cover;
 }
 
+.Home .canvas-container {
+  display: flex;
+  justify-content: center;
+}
+
+.Home canvas {
+  height: 240px;
+}
+
+@media only screen and (min-width: 600px) {
+  .Home canvas {
+    height: 400px;
+  }
+}
+
+.Home .canvas-container {
+  display: flex;
+  justify-content: center;
+}
+
+.Home canvas {
+  height: 240px;
+}
+
+@media only screen and (min-width: 600px) {
+  .Home canvas {
+    height: 400px;
+  }
+}
+
 /* * media query. Styles only applied if screen size is between 524 and 969 px */
 @media only screen and (min-width: 524px) and (max-width: 969px) {
   .Home .article-title {

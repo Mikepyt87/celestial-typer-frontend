@@ -71,7 +71,7 @@ const Home = () => {
   //* once articles load, page is rendered
 
   //* displays only the top 5 users from 'allUserScores' (for canvas element)
-  // const topFiveScores: Account[] = topFive(allUserScores);
+  const topFiveScores: Account[] = topFive(allUserScores);
 
   //* renders a 'Header' and 'Leaderboard' component.
   return (
@@ -82,20 +82,13 @@ const Home = () => {
       {account?.initalSetUp && (
         <UsernameForm newAccountName={insertAccountname} />
       )}
-      {/* {width > 600 ? (
+      <div className="canvas-container">
         <Canvas
           topFiveScores={topFiveScores}
           canvasHeight={400}
           barWidth={92}
         />
-      ) : (
-        <Canvas
-          topFiveScores={topFiveScores}
-          canvasHeight={200}
-          barWidth={47}
-        />
-      )} */}
-      //* Props from Leaderboard.tsx used here
+      </div>
       <Leaderboard topScores={topFive(allUserScores)} />
       <div className="articles-container">
         {/* if articles array is not empty, map the objects to the page */}
