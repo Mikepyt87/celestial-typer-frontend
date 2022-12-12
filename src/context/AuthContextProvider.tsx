@@ -27,7 +27,7 @@ function AuthContextProvider({ children }: { children: ReactNode }) {
             }).then((response) => setAccount(response));
           }
 
-          console.log(res);
+          // console.log(res);
         });
       } else {
         setUser(null);

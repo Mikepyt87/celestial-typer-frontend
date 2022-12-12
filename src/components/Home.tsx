@@ -12,13 +12,13 @@ import {
 import Account from "../models/Account";
 import Leaderboard from "./Leaderboard";
 import Header from "./Header";
-import useWindowDimensions from "./custom hooks/useWindowDimensions";
 import {
-  checkForMobile,
+  isTouchDevice,
   randomArticles,
   shortenTitles,
   sortScores,
 } from "./utils/functions";
+import Canvas from "./Canvas";
 
 const topFive = (allUserScores: Account[]): Account[] => {
   return allUserScores.slice(0, 5);
@@ -26,6 +26,7 @@ const topFive = (allUserScores: Account[]): Account[] => {
 
 const Home = () => {
   const { account, setAccount } = useContext(AuthContext);
+  const [height, setHeight] = useState(0);
 
   //? useState that holds an array of ten randomized objects from Space Flight Api endpoint
   const [articles, setArticles] = useState<Article[]>([]);
@@ -36,7 +37,7 @@ const Home = () => {
     // calls Space Flight Api service function
     getAllArticles().then((res) => {
       // sets articles to ten random objects from endpoint (if app is running in mobile, titles will be cut off after 45 characters)
-      setArticles(shortenTitles(randomArticles(res, 10), checkForMobile()));
+      setArticles(shortenTitles(randomArticles(res, 10), isTouchDevice()));
     });
     getallUsersScores().then((res) => {
       setAllUserScores(() => {
@@ -56,19 +57,22 @@ const Home = () => {
     }
   };
 
-  const { width } = useWindowDimensions();
-  console.log(width);
   //? once articles load, page is rendered
+
+  const topFiveScores: Account[] = topFive(allUserScores);
+
   return (
     <div className="Home">
       <Header />
-      {/* {`width: ${width}`} */}
+      {/* {`mobile: ${isTouchDevice()}`} */}
       {account?.initalSetUp && (
         <UsernameForm newAccountName={insertAccountname} />
       )}
+      {/* <Canvas topFiveScores={topFiveScores} /> */}
       <Leaderboard topScores={topFive(allUserScores)} />
       <div className="articles-container">
         {/* if articles array is not empty, map the objects to the page */}
+
         {articles.map((article) => (
           <div key={`${article.id}_${article.publishedAt}`} className="article">
             {/* renders title and image from each object */}

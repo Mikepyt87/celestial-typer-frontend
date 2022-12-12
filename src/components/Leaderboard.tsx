@@ -17,6 +17,12 @@ const Leaderboard = ({ topScores }: Props) => {
             <li key={index}>
               <p>
                 {index + 1}.{" "}
+                {/* <img
+                  src={account.scores[account.scores.length - 1].profilePic}
+                  alt={`${
+                    account.scores[account.scores.length - 1].userName
+                  }'s icon`}
+                /> */}
                 {account.scores[account.scores.length - 1].userName}{" "}
                 {
                   account.scores[account.scores.length - 1]

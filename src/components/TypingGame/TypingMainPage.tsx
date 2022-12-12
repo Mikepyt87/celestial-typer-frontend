@@ -5,9 +5,9 @@ import { getAllArticles } from "../../services/spaceFlightApiService";
 import UserTypings from "./UserTypings";
 import { motion } from "framer-motion";
 import useEngine from "./custom typingGame hooks/useEngine";
-import { checkForMobile, randomArticles } from "../utils/functions";
+import { isTouchDevice, randomArticles } from "../utils/functions";
 
-const mobileChecker = checkForMobile();
+const mobileChecker = isTouchDevice();
 
 const TypingMainPage = () => {
   const [articles, setArticles] = useState<Article[]>([]);
