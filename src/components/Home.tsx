@@ -20,6 +20,7 @@ import {
 } from "./utils/functions";
 import Canvas from "./Canvas";
 import useWindowDimensions from "./custom hooks/useWindowDimensions";
+import { Link } from "react-router-dom";
 
 //* slices the top 5 from the 'allUserScores' array.
 const topFive = (allUserScores: Account[]): Account[] => {
@@ -94,19 +95,24 @@ const Home = () => {
 
         {/* //* maps over the 'articles' array, rendering a title and image */}
         {articles.map((article) => (
-          <div key={`${article.id}_${article.publishedAt}`} className="article">
-            {/* renders title and image from each object */}
-            <p className="article-title">{article.title}</p>
-            <img
-              src={article.imageUrl}
-              alt={article.title}
-              className="article-image"
-              // if image is not found, then load replacementImg
-              onError={({ currentTarget }) => {
-                currentTarget.src = replacementImg;
-              }}
-            />
-          </div>
+          <Link
+            to={`/articlesPage/${article.id}`}
+            key={`${article.id}_${article.publishedAt}`}
+          >
+            <div className="article">
+              {/* renders title and image from each object */}
+              <p className="article-title">{article.title}</p>
+              <img
+                src={article.imageUrl}
+                alt={article.title}
+                className="article-image"
+                // if image is not found, then load replacementImg
+                onError={({ currentTarget }) => {
+                  currentTarget.src = replacementImg;
+                }}
+              />
+            </div>
+          </Link>
         ))}
       </div>
     </div>

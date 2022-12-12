@@ -13,3 +13,15 @@ export const getAllArticles = (): Promise<Article[]> => {
       .catch((err) => console.log(err))
   );
 };
+
+export const getSpecificArticle = (id: number): Promise<Article[]> => {
+  return (
+    axios
+      //? Space Flight Api endpoint
+      .get(
+        `https://api.spaceflightnewsapi.net/v3/articles?id_contains=${id}&_limit=1`
+      )
+      .then((res) => res.data)
+      .catch((err) => console.log(err))
+  );
+};

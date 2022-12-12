@@ -2,6 +2,7 @@ import { Link, Navigate } from "react-router-dom";
 import Account from "../models/Account";
 import "./Leaderboard.css";
 
+//* USED ON LINE 98 of Home.tsx
 interface Props {
   topScores: Account[];
 }
