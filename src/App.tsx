@@ -14,6 +14,7 @@ import TypingMainPage from "./components/TypingGame/TypingMainPage";
 
 //* this is our Celestial Typer app!!!
 function App() {
+  //* don't forget about the Routes!!!
   return (
     <div className="App">
       <Router>
