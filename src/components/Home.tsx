@@ -95,11 +95,11 @@ const Home = () => {
 
         {/* //* maps over the 'articles' array, rendering a title and image */}
         {articles.map((article) => (
-          <Link to="/articlesPage">
-            <div
-              key={`${article.id}_${article.publishedAt}`}
-              className="article"
-            >
+          <Link
+            to={`/articlesPage/${article.id}`}
+            key={`${article.id}_${article.publishedAt}`}
+          >
+            <div className="article">
               {/* renders title and image from each object */}
               <p className="article-title">{article.title}</p>
               <img
