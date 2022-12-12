@@ -14,6 +14,7 @@ const useTypings = (enabled: boolean, articles: Article[]) => {
       if (!enabled || !isKeyboardCodeAllowed(code)) {
         return;
       }
+
       switch (key) {
         case "Backspace":
           setTyped((prev) => prev.slice(0, -1));

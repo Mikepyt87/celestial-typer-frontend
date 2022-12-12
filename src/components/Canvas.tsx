@@ -42,6 +42,7 @@ const Canvas = ({ topFiveScores, canvasHeight, barWidth }: Props) => {
 
     context.lineWidth = 5;
 
+    // context.globalCompositeOperation = "destination-over";
     context.strokeStyle = outlineColor;
     context.fillStyle = barColor;
     context.beginPath();
@@ -60,6 +61,11 @@ const Canvas = ({ topFiveScores, canvasHeight, barWidth }: Props) => {
     context.fill();
 
     x += sideMargin + barWidth;
+
+    const img = new Image();
+    img.src =
+      topFiveScores[0]?.scores[topFiveScores[0].scores.length - 1].profilePic;
+    context.drawImage(img, sideMargin, canvasHeight - 96);
 
     context.strokeStyle = outlineColor;
     context.fillStyle = barColor;
@@ -136,12 +142,6 @@ const Canvas = ({ topFiveScores, canvasHeight, barWidth }: Props) => {
     }
     context.stroke();
     context.fill();
-
-    // const img = new Image();
-    // img.src =
-    //   topFiveScores[0]?.scores[topFiveScores[0].scores.length - 1].profilePic;
-
-    // context.drawImage(img, sideMargin, canvasHeight - 96);
 
     if (height >= maxBarHeight) {
       setTimeout(() => {
