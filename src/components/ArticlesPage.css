@@ -1,0 +1,14 @@
+.ArticlesPage .articles-page-articles-container {
+  margin: 20px 50px 100px 50px;
+}
+.ArticlesPage .article-details {
+  display: flex;
+}
+.ArticlesPage .article-image {
+  /* display: inline-block; */
+  /* float: right; */
+  width: 400px;
+  border: 2px solid rgb(239 68 68);
+  border-radius: 3px;
+  margin: 10px;
+}

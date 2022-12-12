@@ -38,3 +38,11 @@
   transform: translate(-50%, -50%);
   caret-color: transparent;
 }
+.TypingMainPage .loader {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: 200px;
+  width: 200px;
+}

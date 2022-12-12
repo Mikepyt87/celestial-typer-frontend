@@ -1,5 +1,6 @@
 import { FormEvent, useState } from "react";
 import "./UsernameForm.css";
+import Logo from "./Logo";
 
 interface Props {
   newAccountName: (username: string) => void;
@@ -50,6 +51,7 @@ const UsernameForm = ({ newAccountName }: Props) => {
   return (
     <form className="UsernameForm" onSubmit={submitHandler}>
       <div className="input-button">
+        <Logo className={"submit"} />
         <label htmlFor="username">Set Username</label>
         <input
           type="text"
@@ -57,10 +59,12 @@ const UsernameForm = ({ newAccountName }: Props) => {
           name="username"
           value={username}
           onChange={(e) => setUsername(e.target.value)}
-          placeholder="type Username Here"
+          placeholder="Type Username Here"
         />
         <div className="error-message">{error}</div>
-        <button>Submit</button>
+        <button className="submit-button">
+          <strong>Submit</strong>
+        </button>
       </div>
     </form>
   );
