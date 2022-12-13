@@ -48,6 +48,7 @@
 
 .Home .canvas-container {
   display: flex;
+  flex-direction: column;
   justify-content: space-around;
   align-items: center;
 }
@@ -68,25 +69,54 @@
 }
 
 .Home .words-container {
-  font-size: 30px;
-  max-width: 584px;
-  min-width: 584px;
-  width: 100px;
+  position: relative;
   line-height: 1.625;
+  min-width: 305px;
+  height: 200px;
+  user-select: none;
+}
+
+.Home .words,
+.UserTypings {
+  position: absolute;
+  font-size: 22.5px;
 }
 
 .Home .words {
   color: rgb(100 116 139);
 }
 
+.Home .Caret {
+  height: 1.3125rem;
+  width: 0.09375rem;
+}
+
 @media only screen and (min-width: 600px) {
   .Home canvas {
     height: 400px;
   }
+
+  .Home .canvas-container {
+    flex-direction: column;
+  }
+
+  .Home .words-container {
+    min-width: 600px;
+  }
+
+  .Home .Caret {
+    height: 1.75rem;
+    width: 0.125rem;
+  }
+
+  .Home .words,
+  .UserTypings {
+    font-size: 30px;
+  }
 }
 
 /* * media query. Styles only applied if screen size is between 524 and 969 px */
-@media only screen and (min-width: 524px) and (max-width: 969px) {
+@media only screen and (min-width: 524px) and (max-width: 1222px) {
   .Home .article-title {
     height: 125px;
     width: 210px;
@@ -97,10 +127,22 @@
     width: 213px;
     height: 10em;
   }
+
+  .Home .canvas-container {
+    flex-direction: column;
+  }
+
+  .Home .words-container {
+    font-size: 30px;
+  }
+
+  .Home .words-container {
+    height: 165px;
+  }
 }
 
 /* * media query. Styles only applied if screen size is less than or equal to 969px */
-@media only screen and (min-width: 969px) {
+@media only screen and (min-width: 1222px) {
   .Home .article-title {
     height: 80px;
     width: 285px;
@@ -110,5 +152,9 @@
   .Home .article-image {
     width: 285px;
     height: 10em;
+  }
+
+  .Home .canvas-container {
+    flex-direction: row-reverse;
   }
 }

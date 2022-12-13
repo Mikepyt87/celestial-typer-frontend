@@ -67,20 +67,48 @@ const Home = () => {
   };
 
   const expectedTxt =
-    "Sign in to improve your proformance and maybe one day you will type at the speed of light!"; /* The text */
+    "Sign in to improve your performance and maybe one day you will type at the speed of light!"; /* The text */
 
-  const typedTxt =
-    "Sign in to improve your proformance and maybe one day you will type at the speed of light!";
+  const typedTxtArray = [
+    "Sign in to improve uypr performance and maybe one day you will typreat the speed of light!",
+    // "Sign in to improve ypur performance and maybefone day you will type at the speed of light!",
+    // "tign in to improve ypur performance and maybefone day you will type at the speed of light!",
+  ];
 
   useEffect(() => {
     let i = 0;
     const speed = 150; /* The speed/duration of the effect in milliseconds */
 
+    const getRandomIndex = () =>
+      Math.floor(Math.random() * typedTxtArray.length);
+
+    let typedTxt = typedTxtArray[getRandomIndex()];
+
     const typeWriter = () => {
-      if (i < typedTxt.length) {
-        setTxtOnScreen(typedTxt.slice(0, i + 1));
-        i++;
-        setTimeout(typeWriter, speed);
+      // first conditional is for testing purposes
+      if (typedTxt.length === expectedTxt.length) {
+        if (expectedTxt[i - 3] !== typedTxt[i - 3]) {
+          setTimeout(() => {
+            setTxtOnScreen(typedTxt.slice(0, i - 2));
+            typedTxt = expectedTxt.slice(0, i) + typedTxt.slice(i);
+            i = i - 3;
+          }, 0);
+          setTimeout(typeWriter, speed);
+        } else {
+          if (i <= typedTxt.length) {
+            setTxtOnScreen(typedTxt.slice(0, i));
+            i++;
+            if (i > typedTxt.length) {
+              setTimeout(() => {
+                i = 0;
+                setTxtOnScreen("");
+                setTimeout(typeWriter, speed);
+                typedTxt = typedTxtArray[getRandomIndex()];
+              }, 1000);
+            }
+            setTimeout(typeWriter, speed);
+          }
+        }
       }
     };
     typeWriter();
@@ -97,15 +125,15 @@ const Home = () => {
       <div className="canvas-container">
         {allUserScores[0] && (
           <>
+            <div className="words-container">
+              <div className="words">{expectedTxt}</div>
+              <UserTypings words={expectedTxt} userInput={txtOnScreen} />
+            </div>
             <Canvas
               allUserScores={allUserScores}
               canvasHeight={400}
               canvasWidth={600}
             />
-            <div className="words-container">
-              <div className="words">{expectedTxt}</div>
-              <UserTypings words={expectedTxt} userInput={txtOnScreen} />
-            </div>
           </>
         )}
       </div>

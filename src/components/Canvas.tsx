@@ -2,6 +2,14 @@ import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import Account from "../models/Account";
 
+var myFont = new FontFace("myFont", "url(assets/fonts/myFont/myFont.otf)");
+
+myFont.load().then(function (font) {
+  // with canvas, if this is ommited won't work
+  document.fonts.add(font);
+  console.log("Font loaded");
+});
+
 interface Props {
   allUserScores: Account[];
   canvasHeight: number;
