@@ -48,7 +48,8 @@
 
 .Home .canvas-container {
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
+  align-items: center;
 }
 
 .Home canvas {
@@ -64,6 +65,12 @@
 .Home .articles-header {
   font-size: 25px;
   text-transform: uppercase;
+}
+
+.Home .inspirational-catch-phrase {
+  text-align: center;
+  font-size: 30px;
+  width: 450px;
 }
 
 @media only screen and (min-width: 600px) {

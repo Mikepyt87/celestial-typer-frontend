@@ -49,6 +49,7 @@
 }
 .Header .sign-in-button:hover {
   color: #7da184;
+  cursor: pointer;
 }
 
 /* * media query. Styles only applied if screen size is less than or equal to 438px */

@@ -5,20 +5,18 @@ import Account from "../models/Account";
 interface Props {
   fiveScores: Account[];
   canvasHeight: number;
-  barWidth: number;
+  canvasWidth: number;
 }
 
-const sideMargin = 20;
-const barColor = "rgb(255, 0, 0)";
-const outlineColor = "black";
-const barWidth = 92;
-const canvasHeight = 400;
-const canvasWidth = barWidth * 5 + sideMargin * 6; // do not change
-const maxBarHeight = -canvasHeight * 0.85; // do not change
-
-const Canvas = ({ fiveScores, canvasHeight, barWidth }: Props) => {
+const Canvas = ({ fiveScores, canvasHeight, canvasWidth }: Props) => {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const [height, setHeight] = useState(-20);
+
+  const barColor = "rgb(255, 0, 0)";
+  const outlineColor = "black";
+  const maxBarHeight = -canvasHeight * 0.85;
+  const barWidth = (canvasWidth * 23) / 145;
+  const sideMargin = canvasWidth / 29;
 
   useEffect(() => {
     if (height >= maxBarHeight) {
@@ -60,8 +58,6 @@ const Canvas = ({ fiveScores, canvasHeight, barWidth }: Props) => {
     context: CanvasRenderingContext2D,
     placement: number
   ): void => {
-    let sideMargin = 20;
-
     const x = sideMargin * placement + (placement - 1) * barWidth;
 
     const firstPlaceScore =

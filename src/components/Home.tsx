@@ -84,7 +84,18 @@ const Home = () => {
       )}
       <div className="canvas-container">
         {topFiveScores[0] && (
-          <Canvas fiveScores={topFiveScores} canvasHeight={400} barWidth={92} />
+          <>
+            <Canvas
+              fiveScores={topFiveScores}
+              canvasHeight={400}
+              canvasWidth={600}
+            />
+
+            <p className="inspirational-catch-phrase">
+              Sign in to improve your proformance and maybe one day you will
+              type at the speed of light!
+            </p>
+          </>
         )}
       </div>
       {/* <Leaderboard topScores={topFive(allUserScores)} /> */}
