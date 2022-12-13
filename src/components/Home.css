@@ -55,6 +55,17 @@
   height: 240px;
 }
 
+.Home section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.Home .articles-header {
+  font-size: 25px;
+  text-transform: uppercase;
+}
+
 @media only screen and (min-width: 600px) {
   .Home canvas {
     height: 400px;

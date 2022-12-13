@@ -83,38 +83,39 @@ const Home = () => {
         <UsernameForm newAccountName={insertAccountname} />
       )}
       <div className="canvas-container">
-        <Canvas
-          topFiveScores={topFiveScores}
-          canvasHeight={400}
-          barWidth={92}
-        />
+        {topFiveScores[0] && (
+          <Canvas fiveScores={topFiveScores} canvasHeight={400} barWidth={92} />
+        )}
       </div>
-      <Leaderboard topScores={topFive(allUserScores)} />
-      <div className="articles-container">
-        {/* if articles array is not empty, map the objects to the page */}
+      {/* <Leaderboard topScores={topFive(allUserScores)} /> */}
+      <section>
+        <p className="articles-header">↓Browse Articles↓</p>
+        <div className="articles-container">
+          {/* if articles array is not empty, map the objects to the page */}
 
-        {/* //* maps over the 'articles' array, rendering a title and image */}
-        {articles.map((article) => (
-          <Link
-            to={`/articlesPage/${article.id}`}
-            key={`${article.id}_${article.publishedAt}`}
-          >
-            <div className="article">
-              {/* renders title and image from each object */}
-              <p className="article-title">{article.title}</p>
-              <img
-                src={article.imageUrl}
-                alt={article.title}
-                className="article-image"
-                // if image is not found, then load replacementImg
-                onError={({ currentTarget }) => {
-                  currentTarget.src = replacementImg;
-                }}
-              />
-            </div>
-          </Link>
-        ))}
-      </div>
+          {/* //* maps over the 'articles' array, rendering a title and image */}
+          {articles.map((article) => (
+            <Link
+              to={`/articlesPage/${article.id}`}
+              key={`${article.id}_${article.publishedAt}`}
+            >
+              <div className="article">
+                {/* renders title and image from each object */}
+                <p className="article-title">{article.title}</p>
+                <img
+                  src={article.imageUrl}
+                  alt={article.title}
+                  className="article-image"
+                  // if image is not found, then load replacementImg
+                  onError={({ currentTarget }) => {
+                    currentTarget.src = replacementImg;
+                  }}
+                />
+              </div>
+            </Link>
+          ))}
+        </div>
+      </section>
     </div>
   );
 };

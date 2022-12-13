@@ -18,7 +18,7 @@ const UsernameForm = ({ newAccountName }: Props) => {
     //* good
     if (
       username.length >= 5 &&
-      username.length <= 15 &&
+      username.length <= 12 &&
       !username.includes(".") &&
       !username.includes("&") &&
       !username.includes("=") &&
@@ -29,7 +29,7 @@ const UsernameForm = ({ newAccountName }: Props) => {
     ) {
       newAccountName(username);
     } //! NOT good
-    else if (username.length >= 5 && username.length <= 15) {
+    else if (username.length >= 5 && username.length <= 12) {
       setError("Username cannot contain special characters");
     } else if (
       !username.includes(".") &&
@@ -40,10 +40,10 @@ const UsernameForm = ({ newAccountName }: Props) => {
       !username.includes("+") &&
       !username.includes(",")
     ) {
-      setError("Username must be at least 5 characters and not more than 15");
+      setError("Username must be at least 5 characters and not more than 12");
     } else {
       setError(
-        "Username must be at least 5 characters and not more than 15 and cannot contain special characters"
+        "Username must be at least 5 characters and not more than 12 and cannot contain special characters"
       );
     }
   };
