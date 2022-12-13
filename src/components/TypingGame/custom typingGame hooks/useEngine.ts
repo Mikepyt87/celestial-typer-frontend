@@ -19,7 +19,7 @@ import useWords from "./useWords";
 
 export type State = "start" | "run" | "finish";
 
-const COUNTDOWN_SECONDS = 60;
+const COUNTDOWN_SECONDS = 10;
 
 //* takes an array of 'Article' as input
 const useEngine = (articles: Article[]) => {
@@ -120,6 +120,7 @@ const useEngine = (articles: Article[]) => {
         totalTyped,
         charactersPerMinute(errors, totalTyped, COUNTDOWN_SECONDS)
       );
+      console.log(errors, totalTyped);
       //* 'navigate' is called to automatically navigate the user to the "/results" route
       navigate("/results");
     }

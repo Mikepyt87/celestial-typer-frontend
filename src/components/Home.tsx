@@ -21,11 +21,8 @@ import {
 import Canvas from "./Canvas";
 import useWindowDimensions from "./custom hooks/useWindowDimensions";
 import { Link } from "react-router-dom";
-
-//* slices the top 5 from the 'allUserScores' array.
-const topFive = (allUserScores: Account[]): Account[] => {
-  return allUserScores.slice(0, 5);
-};
+import { all } from "q";
+import UserTypings from "./TypingGame/UserTypings";
 
 //* React component used to display the home page
 const Home = () => {
@@ -33,6 +30,7 @@ const Home = () => {
   const { width } = useWindowDimensions();
   //* useContext hook to access the 'account' object from 'AuthContext'
   const { account, setAccount } = useContext(AuthContext);
+  const [txtOnScreen, setTxtOnScreen] = useState("");
 
   //* useState that holds an array of ten randomized objects from Space Flight Api endpoint
   const [articles, setArticles] = useState<Article[]>([]);
@@ -68,33 +66,46 @@ const Home = () => {
     }
   };
 
-  //* once articles load, page is rendered
+  const expectedTxt =
+    "Sign in to improve your proformance and maybe one day you will type at the speed of light!"; /* The text */
 
-  //* displays only the top 5 users from 'allUserScores' (for canvas element)
-  const topFiveScores: Account[] = topFive(allUserScores);
+  const typedTxt =
+    "Sign in to improve your proformance and maybe one day you will type at the speed of light!";
+
+  useEffect(() => {
+    let i = 0;
+    const speed = 150; /* The speed/duration of the effect in milliseconds */
+
+    const typeWriter = () => {
+      if (i < typedTxt.length) {
+        setTxtOnScreen(typedTxt.slice(0, i + 1));
+        i++;
+        setTimeout(typeWriter, speed);
+      }
+    };
+    typeWriter();
+  }, []);
 
   //* renders a 'Header' and 'Leaderboard' component.
   return (
     <div className="Home">
       <Header />
-      {/* {`mobile: ${isTouchDevice()}`} */}
       {/* //* if the users 'account' object has an 'initialSetup' property that is set to true, the 'Home' component also renders a 'UsernameForm' for the user to set */}
       {account?.initalSetUp && (
         <UsernameForm newAccountName={insertAccountname} />
       )}
       <div className="canvas-container">
-        {topFiveScores[0] && (
+        {allUserScores[0] && (
           <>
             <Canvas
-              fiveScores={topFiveScores}
+              allUserScores={allUserScores}
               canvasHeight={400}
               canvasWidth={600}
             />
-
-            <p className="inspirational-catch-phrase">
-              Sign in to improve your proformance and maybe one day you will
-              type at the speed of light!
-            </p>
+            <div className="words-container">
+              <div className="words">{expectedTxt}</div>
+              <UserTypings words={expectedTxt} userInput={txtOnScreen} />
+            </div>
           </>
         )}
       </div>

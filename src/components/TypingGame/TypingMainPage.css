@@ -26,6 +26,12 @@
   color: rgb(100 116 139);
 }
 
+.TypingMainPage .UserTypings {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+}
+
 .TypingMainPage .mobile-keyboard {
   position: absolute;
   top: 50%;

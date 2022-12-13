@@ -22,7 +22,7 @@ export const getallUsersScores = (): Promise<Account[]> => {
 //* retrieves a specific users account data from the database
 export const getUserData = (uid: string): Promise<Account> => {
   return axios
-    .get(`${baseUrl}/typer/${uid}`)
+    .get(`${baseUrl}/typer/user/${uid}`)
     .then((res) => res.data)
     .catch((err) => console.log(err));
 };

@@ -3,14 +3,26 @@ import { Link } from "react-router-dom";
 import Account from "../models/Account";
 
 interface Props {
-  fiveScores: Account[];
+  allUserScores: Account[];
   canvasHeight: number;
   canvasWidth: number;
 }
 
-const Canvas = ({ fiveScores, canvasHeight, canvasWidth }: Props) => {
+//* slices the top 5 from the 'allUserScores' array.
+const topFive = (allUserScores: Account[]): Account[] => {
+  return allUserScores.slice(0, 5);
+};
+
+const Canvas = ({
+  allUserScores: allUsersScores,
+  canvasHeight,
+  canvasWidth,
+}: Props) => {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const [height, setHeight] = useState(-20);
+
+  //* displays only the top 5 users from 'allUserScores' (for canvas element)
+  const fiveScores: Account[] = topFive(allUsersScores);
 
   const barColor = "rgb(255, 0, 0)";
   const outlineColor = "black";

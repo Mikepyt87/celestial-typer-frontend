@@ -67,10 +67,16 @@
   text-transform: uppercase;
 }
 
-.Home .inspirational-catch-phrase {
-  text-align: center;
+.Home .words-container {
   font-size: 30px;
-  width: 450px;
+  max-width: 584px;
+  min-width: 584px;
+  width: 100px;
+  line-height: 1.625;
+}
+
+.Home .words {
+  color: rgb(100 116 139);
 }
 
 @media only screen and (min-width: 600px) {

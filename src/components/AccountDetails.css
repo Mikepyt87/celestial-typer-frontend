@@ -1,23 +1,29 @@
 .AccountDetails .account-details {
   margin: 30px;
 }
+
 h3 {
   color: #7da184;
   font-size: 22px;
 }
+
 span {
   color: #bcd8c1;
 }
+
 .AccountDetails .scores-ul {
   padding-left: 40px;
 }
+
 .AccountDetails ul {
   display: flex;
   flex-wrap: wrap;
 }
+
 .AccountDetails .account-favorited-articles li p {
   width: 400px;
 }
+
 .AccountDetails .account-favorited-articles li img {
   width: 350px;
 }
