@@ -42,3 +42,6 @@
   border: none;
   margin: 10px;
 }
+.Re li:hover {
+  color: #7da184;
+}

@@ -19,6 +19,7 @@ import {
   sortScores,
 } from "./utils/functions";
 import useWindowDimensions from "./custom hooks/useWindowDimensions";
+import { Link } from "react-router-dom";
 import Canvas from "./Canvas";
 
 //* slices the top 5 from the 'allUserScores' array.
@@ -94,22 +95,24 @@ const Home = () => {
 
           {/* //* maps over the 'articles' array, rendering a title and image */}
           {articles.map((article) => (
-            <div
+            <Link
+              to={`/articlesPage/${article.id}`}
               key={`${article.id}_${article.publishedAt}`}
-              className="article"
             >
-              {/* renders title and image from each object */}
-              <p className="article-title">{article.title}</p>
-              <img
-                src={article.imageUrl}
-                alt={article.title}
-                className="article-image"
-                // if image is not found, then load replacementImg
-                onError={({ currentTarget }) => {
-                  currentTarget.src = replacementImg;
-                }}
-              />
-            </div>
+              <div className="article">
+                {/* renders title and image from each object */}
+                <p className="article-title">{article.title}</p>
+                <img
+                  src={article.imageUrl}
+                  alt={article.title}
+                  className="article-image"
+                  // if image is not found, then load replacementImg
+                  onError={({ currentTarget }) => {
+                    currentTarget.src = replacementImg;
+                  }}
+                />
+              </div>
+            </Link>
           ))}
         </div>
       </section>

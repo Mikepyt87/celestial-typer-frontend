@@ -6,6 +6,7 @@ import UserTypings from "./UserTypings";
 import { motion } from "framer-motion";
 import useEngine from "./custom typingGame hooks/useEngine";
 import { isTouchDevice, randomArticles } from "../utils/functions";
+import { RingLoader } from "react-spinners";
 
 const mobileChecker = isTouchDevice();
 
@@ -47,8 +48,8 @@ const TypingMainPage = () => {
   } else {
     return (
       <div className="loading">
-        loading...
-        <div>{/* <RingLoader color="#36d7b7" /> */}</div>
+        <p>loading...</p>
+        <RingLoader className="loader" color="#f8c62c" />
       </div>
     );
   }

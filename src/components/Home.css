@@ -22,7 +22,7 @@
   align-items: center;
   height: 130px;
   width: 139px;
-  font-size: 20px;
+  font-size: 18px;
 }
 
 .Home .article-image {
@@ -57,11 +57,27 @@
   }
 }
 
+.Home .canvas-container {
+  display: flex;
+  justify-content: center;
+}
+
+.Home canvas {
+  height: 240px;
+}
+
+@media only screen and (min-width: 600px) {
+  .Home canvas {
+    height: 400px;
+  }
+}
+
+/* * media query. Styles only applied if screen size is between 524 and 969 px */
 @media only screen and (min-width: 524px) and (max-width: 969px) {
   .Home .article-title {
     height: 125px;
     width: 210px;
-    font-size: 20px;
+    font-size: 18px;
   }
 
   .Home .article-image {
@@ -70,6 +86,7 @@
   }
 }
 
+/* * media query. Styles only applied if screen size is less than or equal to 969px */
 @media only screen and (min-width: 969px) {
   .Home .article-title {
     height: 80px;
