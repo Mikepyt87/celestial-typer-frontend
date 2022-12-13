@@ -18,8 +18,8 @@ import {
   shortenTitles,
   sortScores,
 } from "./utils/functions";
-import Canvas from "./Canvas";
 import useWindowDimensions from "./custom hooks/useWindowDimensions";
+import Canvas from "./Canvas";
 
 //* slices the top 5 from the 'allUserScores' array.
 const topFive = (allUserScores: Account[]): Account[] => {
@@ -44,7 +44,7 @@ const Home = () => {
         //* sets articles to ten random 'Article' objects from endpoint (if app is running in mobile, titles will be cut off after 45 characters)
         setArticles(shortenTitles(randomArticles(res, 10), isTouchDevice()));
       });
-    }, 800);
+    }, 350);
     //* calls Space Flight Api service function
 
     //* array of 'Account' objects sorted by score
@@ -82,33 +82,37 @@ const Home = () => {
         <UsernameForm newAccountName={insertAccountname} />
       )}
       <div className="canvas-container">
-        <Canvas
-          topFiveScores={topFiveScores}
-          canvasHeight={400}
-          barWidth={92}
-        />
+        {topFiveScores[0] && (
+          <Canvas fiveScores={topFiveScores} canvasHeight={400} barWidth={92} />
+        )}
       </div>
-      <Leaderboard topScores={topFive(allUserScores)} />
-      <div className="articles-container">
-        {/* if articles array is not empty, map the objects to the page */}
+      {/* <Leaderboard topScores={topFive(allUserScores)} /> */}
+      <section>
+        <p className="articles-header">↓Browse Articles↓</p>
+        <div className="articles-container">
+          {/* if articles array is not empty, map the objects to the page */}
 
-        {/* //* maps over the 'articles' array, rendering a title and image */}
-        {articles.map((article) => (
-          <div key={`${article.id}_${article.publishedAt}`} className="article">
-            {/* renders title and image from each object */}
-            <p className="article-title">{article.title}</p>
-            <img
-              src={article.imageUrl}
-              alt={article.title}
-              className="article-image"
-              // if image is not found, then load replacementImg
-              onError={({ currentTarget }) => {
-                currentTarget.src = replacementImg;
-              }}
-            />
-          </div>
-        ))}
-      </div>
+          {/* //* maps over the 'articles' array, rendering a title and image */}
+          {articles.map((article) => (
+            <div
+              key={`${article.id}_${article.publishedAt}`}
+              className="article"
+            >
+              {/* renders title and image from each object */}
+              <p className="article-title">{article.title}</p>
+              <img
+                src={article.imageUrl}
+                alt={article.title}
+                className="article-image"
+                // if image is not found, then load replacementImg
+                onError={({ currentTarget }) => {
+                  currentTarget.src = replacementImg;
+                }}
+              />
+            </div>
+          ))}
+        </div>
+      </section>
     </div>
   );
 };
