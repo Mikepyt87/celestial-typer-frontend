@@ -3,22 +3,32 @@ import { Link } from "react-router-dom";
 import Account from "../models/Account";
 
 interface Props {
-  fiveScores: Account[];
+  allUserScores: Account[];
   canvasHeight: number;
-  barWidth: number;
+  canvasWidth: number;
 }
 
-const sideMargin = 20;
-const barColor = "rgb(255, 0, 0)";
-const outlineColor = "black";
-const barWidth = 92;
-const canvasHeight = 400;
-const canvasWidth = barWidth * 5 + sideMargin * 6; // do not change
-const maxBarHeight = -canvasHeight * 0.85; // do not change
+//* slices the top 5 from the 'allUserScores' array.
+const topFive = (allUserScores: Account[]): Account[] => {
+  return allUserScores.slice(0, 5);
+};
 
-const Canvas = ({ fiveScores, canvasHeight, barWidth }: Props) => {
+const Canvas = ({
+  allUserScores: allUsersScores,
+  canvasHeight,
+  canvasWidth,
+}: Props) => {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const [height, setHeight] = useState(-20);
+
+  //* displays only the top 5 users from 'allUserScores' (for canvas element)
+  const fiveScores: Account[] = topFive(allUsersScores);
+
+  const barColor = "rgb(255, 0, 0)";
+  const outlineColor = "black";
+  const maxBarHeight = -canvasHeight * 0.85;
+  const barWidth = (canvasWidth * 23) / 145;
+  const sideMargin = canvasWidth / 29;
 
   useEffect(() => {
     if (height >= maxBarHeight) {
@@ -60,8 +70,6 @@ const Canvas = ({ fiveScores, canvasHeight, barWidth }: Props) => {
     context: CanvasRenderingContext2D,
     placement: number
   ): void => {
-    let sideMargin = 20;
-
     const x = sideMargin * placement + (placement - 1) * barWidth;
 
     const firstPlaceScore =

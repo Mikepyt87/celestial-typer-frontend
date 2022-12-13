@@ -1,6 +1,5 @@
 import Caret from "./Caret";
 import Character from "./Character";
-import "./UserTypings.css";
 
 interface Props {
   userInput: string;
