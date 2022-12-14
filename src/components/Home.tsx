@@ -67,10 +67,10 @@ const Home = () => {
   };
 
   const expectedTxt =
-    "Sign in to improve your performance and maybe one day you will type at the speed of light!"; /* The text */
+    "Click here to improve your performance and maybe one day you will type at the speed of light!"; /* The text */
 
   const typedTxtArray = [
-    "Sign in to improve uypr performance and maybe one day you will typreat the speed of light!",
+    "Click here to improve uypr proformance and mabye one day you will typreat the speed of light!",
     // "Sign in to improve ypur performance and maybefone day you will type at the speed of light!",
     // "tign in to improve ypur performance and maybefone day you will type at the speed of light!",
   ];

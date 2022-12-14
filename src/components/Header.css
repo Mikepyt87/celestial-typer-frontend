@@ -53,8 +53,11 @@
 }
 
 /* * media query. Styles only applied if screen size is less than or equal to 438px */
-@media only screen and (max-width: 438px) {
+@media only screen and (max-width: 520px) {
   .Header .header-logo {
     inline-size: 160px;
+  }
+  .keepTrack {
+    display: none;
   }
 }
