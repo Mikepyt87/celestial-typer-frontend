@@ -3,12 +3,18 @@ import { User } from "firebase/auth";
 import AuthContext from "./AuthContext";
 import { auth } from "../firebaseConfig";
 import Account from "../models/Account";
-import { createNewAccount, getUserData } from "../services/AccountApiService";
+import {
+  createNewAccount,
+  getUserData,
+  updateAccountDetails,
+} from "../services/AccountApiService";
+import Article from "../models/Article";
 
 //* functional React component used to provide data about a users auth stat TO child components.
 function AuthContextProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
   const [account, setAccount] = useState<Account | null>(null);
+
   //* useEffect to only register once at start
   useEffect(() => {
     //* listens for changes to the auth state
@@ -39,9 +45,46 @@ function AuthContextProvider({ children }: { children: ReactNode }) {
       }
     });
   }, []);
+
+  const addFavorite = (article: Article): void => {
+    const copyOfAccount = { ...account! };
+    const copyOfFavoriteArticles = copyOfAccount.favoritedArticles;
+    copyOfFavoriteArticles?.push(article);
+    copyOfAccount.favoritedArticles = copyOfFavoriteArticles;
+    updateAccountDetails(copyOfAccount).then((res) => {
+      getUserData(account!.uid).then((response) => {
+        setAccount(res);
+      });
+    });
+  };
+
+  const deleteFavorite = (id: number): void => {
+    const index: number = account!.favoritedArticles.findIndex(
+      (fav) => fav.id === id
+    );
+
+    if (index !== -1) {
+      const copyOfAccount = { ...account! };
+      const copyOfFavoriteArticles = copyOfAccount.favoritedArticles;
+      copyOfFavoriteArticles?.splice(index, 1);
+      copyOfAccount.favoritedArticles = copyOfFavoriteArticles;
+      updateAccountDetails(copyOfAccount).then((res) => {
+        getUserData(account!.uid).then((response) => {
+          setAccount(res);
+        });
+      });
+    }
+  };
+
+  const isFav = (idToCheck: number): boolean => {
+    return account!.favoritedArticles.some((fav) => fav.id === idToCheck);
+  };
+
   return (
     //* provides account data to child components so the child components can access and update the auth state.
-    <AuthContext.Provider value={{ user, account, setAccount }}>
+    <AuthContext.Provider
+      value={{ user, account, setAccount, addFavorite, deleteFavorite, isFav }}
+    >
       {children}
     </AuthContext.Provider>
   );

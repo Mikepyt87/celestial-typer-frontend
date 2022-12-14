@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Link, Navigate } from "react-router-dom";
 import AuthContext from "../../context/AuthContext";
 import ResultsContext from "../../context/ResultsContext";
@@ -16,45 +16,14 @@ import { calculateAccuracyPercentage } from "./utils/helpers";
 const ResultsPage = () => {
   //* accesses data from 'ResultsContext' and 'AuthContext'
   const { results } = useContext(ResultsContext);
-  const { account, setAccount } = useContext(AuthContext);
+  const { account, setAccount, isFav, addFavorite, deleteFavorite } =
+    useContext(AuthContext);
 
-  console.log(results);
+  const [accountDetails, setAccountDetails] = useState<Account>();
 
-  //* updates user account by adding the 'Article' to the 'favoritedArticles' array in the 'Account' object
-  const addFavoriteToAccount = (article: Article) => {
-    if (account) {
-      const copyOfAccount: Account = { ...account };
-      const copyOfFavorites: Article[] = [...copyOfAccount.favoritedArticles];
-      copyOfFavorites.push(article);
-      copyOfAccount.favoritedArticles = copyOfFavorites;
-      updateAccountDetails(copyOfAccount).then((res) => {
-        getUserData(account.uid).then((response) => {
-          setAccount(response);
-        });
-      });
-    }
-  };
-
-  //* Checks if the 'Article' has been added to the 'favoritedArticles' array. If not, the 'addFavoriteToAccount' method is called to add 'Article' to the users account.
-  const checkForFavorite = (article: Article) => {
-    let foundMatch = false;
-    for (let i = 0; i < account!.favoritedArticles.length; i++) {
-      if (account?.favoritedArticles[i].id === article.id) {
-        foundMatch = true;
-        console.log(account.favoritedArticles[i]);
-      }
-    }
-    //* if the 'Article' has been found, do not add it
-    if (foundMatch) {
-      console.log("already have");
-      //*if not, add it
-    } else {
-      addFavoriteToAccount(article);
-      console.log(article);
-      console.log(account?.favoritedArticles);
-      console.log("added");
-    }
-  };
+  useEffect(() => {
+    getUserData(account!.uid).then((res) => setAccountDetails(res));
+  }, [accountDetails]);
 
   //* if results has been altered, display results page
   if (results) {
@@ -86,12 +55,21 @@ const ResultsPage = () => {
             <div key={`${article.id} ${index}`} className="results-article">
               <div className="results-article-title">{article.title}</div>
               <img src={article.imageUrl} alt={article.title} />
-              <button
-                onClick={() => checkForFavorite(article)}
-                className="favorite-button"
-              >
-                Favorite Article
-              </button>
+              {!isFav(article.id) ? (
+                <button
+                  onClick={() => addFavorite(article)}
+                  className="favorite-button"
+                >
+                  Favorite Article
+                </button>
+              ) : (
+                <button
+                  onClick={() => deleteFavorite(article.id)}
+                  className="favorite-button"
+                >
+                  Unfavorite Article
+                </button>
+              )}
             </div>
           ))}
         </div>
