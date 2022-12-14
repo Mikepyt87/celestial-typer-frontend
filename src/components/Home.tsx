@@ -67,8 +67,6 @@ const Home = () => {
   // let arrayOfTypedTxt: string[] = [];
 
   // if (account) {
-  let typedTxt =
-    "Start game to improve uypr typing performance and maybedone day you will typreat the speed of light!";
   // } else {
   //   arrayOfTypedTxt = [
   //     "Start game to improve uypr typing performance and maybedone day you will typreat the speed of light!",
@@ -85,6 +83,8 @@ const Home = () => {
     //   Math.floor(Math.random() * arrayOfTypedTxt.length);
 
     // let typedTxt = arrayOfTypedTxt[getRandomIndex()];
+    let typedTxt =
+      "Start game to improve uypr typing performance and maybedone day you will typreat the speed of light!";
 
     const typeWriter = () => {
       // first conditional is for testing purposes
