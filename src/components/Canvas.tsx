@@ -39,6 +39,89 @@ const Canvas = ({
   const sideMargin = canvasWidth / 29;
 
   useEffect(() => {
+    const drawRectangle = (
+      context: CanvasRenderingContext2D,
+      placement: number
+    ): void => {
+      const x = sideMargin * placement + (placement - 1) * barWidth;
+
+      const firstPlaceScore =
+        fiveScores[0].scores[fiveScores[0].scores.length - 1]
+          .adjustedCharactersPerMinute;
+      const placementScore =
+        fiveScores[placement - 1].scores[
+          fiveScores[placement - 1].scores.length - 1
+        ].adjustedCharactersPerMinute;
+
+      context.lineWidth = 5;
+
+      context.strokeStyle = outlineColor;
+      context.fillStyle = barColor;
+      context.beginPath();
+
+      if (height > maxBarHeight * (placementScore / firstPlaceScore)) {
+        //     .roundRect(x,       y         ,    width,    height   , border-radius);
+        context.roundRect(x, canvasHeight + 5, barWidth, height, 5);
+        context.stroke();
+        context.fill();
+
+        // userName & score
+        context.font = "20px Arial";
+        context.textAlign = "center";
+        context.fillStyle = "black";
+        context.fillText(
+          `${
+            fiveScores[placement - 1].scores[
+              fiveScores[placement - 1].scores.length - 1
+            ].userName
+          }`,
+          x + barWidth / 2,
+          height + 395
+        );
+        context.fillText(
+          `${
+            fiveScores[placement - 1].scores[
+              fiveScores[placement - 1].scores.length - 1
+            ].adjustedCharactersPerMinute
+          }cpm`,
+          x + barWidth / 2,
+          height + 405 - (maxBarHeight * (placementScore / firstPlaceScore)) / 2
+        );
+      } else {
+        context.roundRect(
+          x,
+          canvasHeight + 5,
+          barWidth,
+          maxBarHeight * (placementScore / firstPlaceScore),
+          5
+        );
+        context.stroke();
+        context.fill();
+
+        // userName & score
+        context.font = "20px Arial";
+        context.textAlign = "center";
+        context.fillStyle = "black";
+        context.fillText(
+          `${
+            fiveScores[placement - 1].scores[
+              fiveScores[placement - 1].scores.length - 1
+            ].userName
+          }`,
+          x + barWidth / 2,
+          maxBarHeight * (placementScore / firstPlaceScore) + 395
+        );
+        context.fillText(
+          `${
+            fiveScores[placement - 1].scores[
+              fiveScores[placement - 1].scores.length - 1
+            ].adjustedCharactersPerMinute
+          }cpm`,
+          x + barWidth / 2,
+          405 + (maxBarHeight * (placementScore / firstPlaceScore)) / 2
+        );
+      }
+    };
     const renderFrame = (): void => {
       const context = canvasRef.current?.getContext("2d");
       if (context != null) {
@@ -63,7 +146,15 @@ const Canvas = ({
     if (height >= maxBarHeight) {
       requestAnimationFrame(renderFrame);
     }
-  }, [height, maxBarHeight]);
+  }, [
+    height,
+    maxBarHeight,
+    canvasWidth,
+    barWidth,
+    canvasHeight,
+    fiveScores,
+    sideMargin,
+  ]);
 
   const clearBackground = (context: CanvasRenderingContext2D): void => {
     const { width, height } = context.canvas;
@@ -73,89 +164,6 @@ const Canvas = ({
   };
 
   // function draws rectangles
-  const drawRectangle = (
-    context: CanvasRenderingContext2D,
-    placement: number
-  ): void => {
-    const x = sideMargin * placement + (placement - 1) * barWidth;
-
-    const firstPlaceScore =
-      fiveScores[0].scores[fiveScores[0].scores.length - 1]
-        .adjustedCharactersPerMinute;
-    const placementScore =
-      fiveScores[placement - 1].scores[
-        fiveScores[placement - 1].scores.length - 1
-      ].adjustedCharactersPerMinute;
-
-    context.lineWidth = 5;
-
-    context.strokeStyle = outlineColor;
-    context.fillStyle = barColor;
-    context.beginPath();
-
-    if (height > maxBarHeight * (placementScore / firstPlaceScore)) {
-      //     .roundRect(x,       y         ,    width,    height   , border-radius);
-      context.roundRect(x, canvasHeight + 5, barWidth, height, 5);
-      context.stroke();
-      context.fill();
-
-      // userName & score
-      context.font = "20px Arial";
-      context.textAlign = "center";
-      context.fillStyle = "black";
-      context.fillText(
-        `${
-          fiveScores[placement - 1].scores[
-            fiveScores[placement - 1].scores.length - 1
-          ].userName
-        }`,
-        x + barWidth / 2,
-        height + 395
-      );
-      context.fillText(
-        `${
-          fiveScores[placement - 1].scores[
-            fiveScores[placement - 1].scores.length - 1
-          ].adjustedCharactersPerMinute
-        }cpm`,
-        x + barWidth / 2,
-        height + 405 - (maxBarHeight * (placementScore / firstPlaceScore)) / 2
-      );
-    } else {
-      context.roundRect(
-        x,
-        canvasHeight + 5,
-        barWidth,
-        maxBarHeight * (placementScore / firstPlaceScore),
-        5
-      );
-      context.stroke();
-      context.fill();
-
-      // userName & score
-      context.font = "20px Arial";
-      context.textAlign = "center";
-      context.fillStyle = "black";
-      context.fillText(
-        `${
-          fiveScores[placement - 1].scores[
-            fiveScores[placement - 1].scores.length - 1
-          ].userName
-        }`,
-        x + barWidth / 2,
-        maxBarHeight * (placementScore / firstPlaceScore) + 395
-      );
-      context.fillText(
-        `${
-          fiveScores[placement - 1].scores[
-            fiveScores[placement - 1].scores.length - 1
-          ].adjustedCharactersPerMinute
-        }cpm`,
-        x + barWidth / 2,
-        405 + (maxBarHeight * (placementScore / firstPlaceScore)) / 2
-      );
-    }
-  };
 
   return (
     <Link to="/leaderboard">
