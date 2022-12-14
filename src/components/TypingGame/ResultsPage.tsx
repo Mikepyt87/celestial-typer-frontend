@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import { Link, Navigate } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 import AuthContext from "../../context/AuthContext";
 import ResultsContext from "../../context/ResultsContext";
 import Account from "../../models/Account";

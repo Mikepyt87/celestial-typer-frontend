@@ -10,8 +10,7 @@ interface Props {
 }
 
 const SingleArticle = ({ article }: Props) => {
-  const { account, isFav, addFavorite, deleteFavorite } =
-    useContext(AuthContext);
+  const { isFav, addFavorite, deleteFavorite } = useContext(AuthContext);
 
   return (
     <>
