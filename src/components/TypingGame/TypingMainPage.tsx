@@ -53,7 +53,7 @@ const TypingMainPage = () => {
     return (
       <div className="loading">
         <p>loading...</p>
-        <RingLoader className="loader" color="#f8c62c" />
+        <RingLoader className="loader" />
       </div>
     );
   }

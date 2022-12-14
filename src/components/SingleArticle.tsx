@@ -38,9 +38,10 @@ const SingleArticle = ({ article }: Props) => {
         ) : (
           <button
             onClick={() => deleteFavorite(article.id)}
-            className="favorite-button"
+            className="favorite-button-unfavorite"
           >
-            Unfavorite Article
+            <span className="star">★</span> Favorite{" "}
+            <span className="star">★</span>
           </button>
         )}
       </li>
