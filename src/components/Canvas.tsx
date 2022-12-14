@@ -38,33 +38,32 @@ const Canvas = ({
   const barWidth = (canvasWidth * 23) / 145;
   const sideMargin = canvasWidth / 29;
 
-  const renderFrame = (): void => {
-    const context = canvasRef.current?.getContext("2d");
-    if (context != null) {
-      // Header of canvas
-      clearBackground(context);
-      context.font = "30px Arial";
-      context.textAlign = "center";
-      context.fillStyle = "black";
-      context.fillText("TOP SCORES", canvasWidth / 2, 35);
-
-      // user Scores
-      drawRectangle(context, 1);
-      drawRectangle(context, 2);
-      drawRectangle(context, 3);
-      drawRectangle(context, 4);
-      drawRectangle(context, 5);
-
-      // bar animation speed
-      setHeight(height - 4);
-    }
-  };
-
   useEffect(() => {
+    const renderFrame = (): void => {
+      const context = canvasRef.current?.getContext("2d");
+      if (context != null) {
+        // Header of canvas
+        clearBackground(context);
+        context.font = "30px Arial";
+        context.textAlign = "center";
+        context.fillStyle = "black";
+        context.fillText("TOP SCORES", canvasWidth / 2, 35);
+
+        // user Scores
+        drawRectangle(context, 1);
+        drawRectangle(context, 2);
+        drawRectangle(context, 3);
+        drawRectangle(context, 4);
+        drawRectangle(context, 5);
+
+        // bar animation speed
+        setHeight(height - 4);
+      }
+    };
     if (height >= maxBarHeight) {
       requestAnimationFrame(renderFrame);
     }
-  }, [height, maxBarHeight, renderFrame]);
+  }, [height, maxBarHeight]);
 
   const clearBackground = (context: CanvasRenderingContext2D): void => {
     const { width, height } = context.canvas;
