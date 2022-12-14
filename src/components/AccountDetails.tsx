@@ -1,8 +1,6 @@
-import { directive } from "@babel/types";
 import { signOut } from "../firebaseConfig";
 import { useContext, useEffect, useState } from "react";
-import { Doughnut } from "react-chartjs-2";
-import { Link, Navigate, useParams } from "react-router-dom";
+import { Navigate, useParams } from "react-router-dom";
 import AuthContext from "../context/AuthContext";
 import {
   deleteAccount as eraseAccountData,
@@ -25,7 +23,7 @@ const AccountDetails = () => {
 
   useEffect(() => {
     getUserData(uid!).then((res) => setAccount(res));
-  }, []);
+  }, [setAccount, uid]);
 
   const deleteAccount = () => {
     eraseAccountData(account!._id!).then((res) => console.log(res));

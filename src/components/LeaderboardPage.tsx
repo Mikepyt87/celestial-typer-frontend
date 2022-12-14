@@ -1,5 +1,4 @@
 import { useContext, useEffect, useState } from "react";
-import { Link } from "react-router-dom";
 import AuthContext from "../context/AuthContext";
 import Account from "../models/Account";
 import { getallUsersScores } from "../services/AccountApiService";

@@ -1,6 +1,5 @@
 import "./Home.css";
 import { useContext, useEffect, useState } from "react";
-import { Link } from "react-router-dom";
 import AuthContext from "../context/AuthContext";
 import Account from "../models/Account";
 import Article from "../models/Article";
@@ -118,7 +117,7 @@ const Home = () => {
       }
     };
     typeWriter();
-  }, []);
+  }, [arrayOfTypedTxt]);
 
   //* renders a 'Header' and 'Leaderboard' component.
   return (

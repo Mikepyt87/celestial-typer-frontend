@@ -38,12 +38,6 @@ const Canvas = ({
   const barWidth = (canvasWidth * 23) / 145;
   const sideMargin = canvasWidth / 29;
 
-  useEffect(() => {
-    if (height >= maxBarHeight) {
-      requestAnimationFrame(renderFrame);
-    }
-  }, [height]);
-
   const renderFrame = (): void => {
     const context = canvasRef.current?.getContext("2d");
     if (context != null) {
@@ -65,6 +59,12 @@ const Canvas = ({
       setHeight(height - 4);
     }
   };
+
+  useEffect(() => {
+    if (height >= maxBarHeight) {
+      requestAnimationFrame(renderFrame);
+    }
+  }, [height, maxBarHeight, renderFrame]);
 
   const clearBackground = (context: CanvasRenderingContext2D): void => {
     const { width, height } = context.canvas;

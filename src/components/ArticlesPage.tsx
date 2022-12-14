@@ -1,7 +1,7 @@
 import "./ArticlesPage.css";
 import { useEffect, useState } from "react";
 import replacementImg from "../assets/nasa_logo.jpg";
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import Article from "../models/Article";
 import { getSpecificArticle } from "../services/spaceFlightApiService";
 import Header from "./Header";
@@ -13,7 +13,7 @@ const ArticlesPage = () => {
 
   useEffect(() => {
     getSpecificArticle(+articleId!).then((res) => setArticle(res));
-  }, []);
+  }, [articleId]);
 
   return (
     <>
@@ -27,7 +27,7 @@ const ArticlesPage = () => {
             <h3 className="article-title">{article.title}</h3>
             <div className="article-details">
               <p className="article-summary">{article.summary}</p>
-              <a href={article.url} target="_blank">
+              <a href={article.url} target="_blank" rel="noreferrer">
                 <img
                   src={article.imageUrl}
                   alt={article.title}

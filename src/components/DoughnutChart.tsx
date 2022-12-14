@@ -38,7 +38,7 @@ const DoughnutChart = () => {
 
   useEffect(() => {
     getUserData(uid!).then((res) => setAccountData(res));
-  }, []);
+  }, [uid]);
   const totalErrors = getErrors();
   const totalAttempted = getTotal();
   const doughnutData: Data = {

@@ -21,8 +21,7 @@ const TypingMainPage = () => {
   }, []);
 
   //* hook to manage the state of the game
-  const { words, typed, timeLeft, errors, state, totalTyped } =
-    useEngine(articles);
+  const { words, typed, timeLeft } = useEngine(articles);
 
   //* once articles load, page is rendered
   if (articles[0]) {

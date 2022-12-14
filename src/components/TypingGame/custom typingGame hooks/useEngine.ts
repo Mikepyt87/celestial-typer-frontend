@@ -15,7 +15,7 @@ const COUNTDOWN_SECONDS = 60;
 //* takes an array of 'Article' as input
 const useEngine = (articles: Article[]) => {
   const { setResults } = useContext(ResultsContext);
-  const { account, setAccount, addGameResults } = useContext(AuthContext);
+  const { addGameResults } = useContext(AuthContext);
   const navigate = useNavigate();
 
   //* 'state' used to keep track of the current state of the game
@@ -87,7 +87,17 @@ const useEngine = (articles: Article[]) => {
       //* 'navigate' is called to automatically navigate the user to the "/results" route
       navigate("/results");
     }
-  }, [timeLeft, state, sumErrors]);
+  }, [
+    timeLeft,
+    state,
+    sumErrors,
+    addGameResults,
+    attemptedArticles,
+    errors,
+    navigate,
+    setResults,
+    totalTyped,
+  ]);
 
   /**
    * when the current words are all filled up,

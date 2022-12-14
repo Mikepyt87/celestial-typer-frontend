@@ -19,7 +19,7 @@ const ResultsPage = () => {
 
   useEffect(() => {
     getUserData(account!.uid).then((res) => setAccountDetails(res));
-  }, [accountDetails]);
+  }, [accountDetails, account]);
 
   //* if results has been altered, display results page
   if (results) {
