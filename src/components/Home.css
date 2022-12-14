@@ -22,7 +22,7 @@
   align-items: center;
   height: 130px;
   width: 139px;
-  font-size: 1px;
+  font-size: 18px;
 }
 
 .Home .article-image {
@@ -79,7 +79,7 @@
 .UserTypings {
   position: absolute;
   font-size: 22.5px;
-  word-break: break-all;
+  /* word-break: break-all; */
 }
 
 .Home .words {
@@ -102,7 +102,7 @@
   }
 
   .Home .words-container {
-    min-width: 600px;
+    min-width: 550px;
   }
 
   .Home .Caret {

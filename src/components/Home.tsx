@@ -62,33 +62,29 @@ const Home = () => {
   };
 
   const typeWriterExpectedTxt =
-    "Sign in to improve your performance and maybe one day you will type at the speed of light!"; /* The text */
+    "Start game to improve your typing performance and maybe one day you will type at the speed of light!"; /* The text */
 
   // let arrayOfTypedTxt: string[] = [];
 
   // if (account) {
-
+  let typedTxt =
+    "Start game to improve uypr typing performance and maybedone day you will typreat the speed of light!";
   // } else {
   //   arrayOfTypedTxt = [
-  //     "Sign in to improve uypr proformance and maybedone day you will typreat the spead of light!",
+  //     "Start game to improve uypr typing performance and maybedone day you will typreat the speed of light!",
   //     // "Sign in to improve ypur performance and maybefone day you will type at the speed of light!",
   //     // "tign in to improve ypur performance and maybefone day you will type at the speed of light!",
   //   ];
   // }
 
   useEffect(() => {
-    let arrayOfTypedTxt = [
-      "Sign in to improve uypr performance and maybedone day you will typreat the speed of light!",
-      // "Sign in to improve ypur performance and maybefone day you will type at the speed of light!",
-      // "tign in to improve ypur performance and maybefone day you will type at the speed of light!",
-    ];
     let i = 0;
     const speed = 150; /* The speed/duration of the effect in milliseconds */
 
-    const getRandomIndex = () =>
-      Math.floor(Math.random() * arrayOfTypedTxt.length);
+    // const getRandomIndex = () =>
+    //   Math.floor(Math.random() * arrayOfTypedTxt.length);
 
-    let typedTxt = arrayOfTypedTxt[getRandomIndex()];
+    // let typedTxt = arrayOfTypedTxt[getRandomIndex()];
 
     const typeWriter = () => {
       // first conditional is for testing purposes
@@ -109,7 +105,7 @@ const Home = () => {
                 i = 0;
                 setTxtOnScreen("");
                 setTimeout(typeWriter, speed);
-                typedTxt = arrayOfTypedTxt[getRandomIndex()];
+                // typedTxt = arrayOfTypedTxt[getRandomIndex()];
               }, 1000);
             }
             setTimeout(typeWriter, speed);
