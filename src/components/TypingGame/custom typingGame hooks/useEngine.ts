@@ -2,29 +2,20 @@ import { useCallback, useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import AuthContext from "../../../context/AuthContext";
 import ResultsContext from "../../../context/ResultsContext";
-import Account from "../../../models/Account";
 import Article from "../../../models/Article";
-import Score from "../../../models/Score";
-import {
-  getUserData,
-  updateAccountDetails,
-} from "../../../services/AccountApiService";
-import {
-  countErrors,
-  // debug
-} from "../utils/helpers";
+import { countErrors } from "../utils/helpers";
 import useCountdown from "./useCountdown";
 import useTypings from "./useTypings";
 import useWords from "./useWords";
 
 export type State = "start" | "run" | "finish";
 
-const COUNTDOWN_SECONDS = 6;
+const COUNTDOWN_SECONDS = 60;
 
 //* takes an array of 'Article' as input
 const useEngine = (articles: Article[]) => {
   const { setResults } = useContext(ResultsContext);
-  const { account, setAccount } = useContext(AuthContext);
+  const { account, setAccount, addGameResults } = useContext(AuthContext);
   const navigate = useNavigate();
 
   //* 'state' used to keep track of the current state of the game
@@ -46,7 +37,6 @@ const useEngine = (articles: Article[]) => {
 
   //* keeps track and provides a total of errors the user typed by comparing 'typed' text to the text they're supposed to type 'wordsReached'
   const sumErrors = useCallback(() => {
-    // debug(`cursor: ${cursor} - words.length: ${words.length}`);
     const wordsReached = words.substring(0, Math.min(cursor, words.length));
     //* 'countErrors()' returns the number of errors and adds it to the current value of 'errors' state varaiable using 'setErrors()' function which updates the 'errors' state variable with the total number of errors made by the user.
     setErrors((prevErrors) => prevErrors + countErrors(typed, wordsReached));
@@ -60,38 +50,11 @@ const useEngine = (articles: Article[]) => {
     }
   }, [isStarting, startCountdown]);
 
-  //* a function that pushes the users score (errors, totalTyped, acpm) into their account details.
-  const insertUserScore = (
-    errors: number,
-    totalTyped: number,
-    acpm: number
-  ) => {
-    //* First checks to verify account exists. if(account exists) then the function creates a copy of the 'account' object and 'scores' array and appends the results to the end of the 'scores' array within the account object.
-    if (account) {
-      const copyOfAccount: Account = { ...account };
-      const copyOfScores: Score[] = [...copyOfAccount.scores];
-      copyOfScores.push({
-        errors: errors,
-        total: totalTyped,
-        adjustedCharactersPerMinute: acpm,
-        userName: account.userName,
-        profilePic: account.profilePic,
-      });
-      copyOfAccount.scores = copyOfScores;
-      updateAccountDetails(copyOfAccount).then((res) => {
-        getUserData(account.uid).then((response) => {
-          setAccount(response);
-        });
-      });
-    }
-  };
-
   //* when the time is up, we've finished
   useEffect(() => {
     //* if no time is left, game is set to "finish", and 'sumErrors' function is called to updated the total number of errors.
     if (!timeLeft && state === "run") {
       sumErrors();
-      // debug("time is up...");
       setState("finish");
     }
     //* if the state is set to "finish" charactersPerMinute, accuracy, and adjustedCharactersPerMinute are calclulated. YAY MATH!
@@ -115,7 +78,7 @@ const useEngine = (articles: Article[]) => {
         article: attemptedArticles,
       });
       //* 'insertUserScore' is called to save the users score to their account in the database
-      insertUserScore(
+      addGameResults(
         errors,
         totalTyped,
         charactersPerMinute(errors, totalTyped, COUNTDOWN_SECONDS)
@@ -133,7 +96,6 @@ const useEngine = (articles: Article[]) => {
   //* effect is only triggered when one of these values change
   useEffect(() => {
     if (areWordsFinished) {
-      // debug("words are finished...");
       sumErrors();
       updateWords();
       clearTyped();

@@ -156,12 +156,6 @@ const Canvas = ({
         405 + (maxBarHeight * (placementScore / firstPlaceScore)) / 2
       );
     }
-    // const img = new Image();
-    // img.src =
-    //   FiveScores[placement - 1].scores[
-    //     FiveScores[placement - 1].scores.length - 1
-    //   ].profilePic;
-    // context.drawImage(img, x - 2, 50);
   };
 
   return (

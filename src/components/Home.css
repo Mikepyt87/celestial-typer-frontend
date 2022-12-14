@@ -80,6 +80,7 @@
 .UserTypings {
   position: absolute;
   font-size: 22.5px;
+  word-break: break-all;
 }
 
 .Home .words {

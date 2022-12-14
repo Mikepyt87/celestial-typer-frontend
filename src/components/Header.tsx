@@ -1,4 +1,3 @@
-import LogoImg from "../assets/celestial-typer-logo.png";
 import { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import AuthContext from "../context/AuthContext";
@@ -11,6 +10,7 @@ import useWindowDimensions from "./custom hooks/useWindowDimensions";
 const Header = () => {
   //* access info about current user: photo URL and display name
   const { user, account } = useContext(AuthContext);
+
   const [toggleMenu, setToggleMenu] = useState(false);
 
   const { width } = useWindowDimensions();

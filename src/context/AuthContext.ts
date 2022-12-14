@@ -8,8 +8,9 @@ export interface AuthContextModel {
   user: User | null; //* null when not logged in. Stores info about current user
   account: Account | null; //* store info about the users account
   setAccount: (account: Account) => void; //* update value of the 'account' property with a default of an empty function
-  addFavorite: (article: Article) => void;
+  addGameResults: (errors: number, totalTyped: number, acpm: number) => void;
   isFav: (id: number) => boolean;
+  addFavorite: (article: Article) => void;
   deleteFavorite: (id: number) => void;
 }
 
@@ -18,8 +19,9 @@ const defaultValue: AuthContextModel = {
   user: null,
   account: null,
   setAccount: () => {},
-  addFavorite: () => {},
+  addGameResults: () => {},
   isFav: () => false,
+  addFavorite: () => {},
   deleteFavorite: () => {},
 };
 

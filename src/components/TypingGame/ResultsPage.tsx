@@ -3,11 +3,8 @@ import { Link, Navigate } from "react-router-dom";
 import AuthContext from "../../context/AuthContext";
 import ResultsContext from "../../context/ResultsContext";
 import Account from "../../models/Account";
-import Article from "../../models/Article";
-import {
-  getUserData,
-  updateAccountDetails,
-} from "../../services/AccountApiService";
+import { getUserData } from "../../services/AccountApiService";
+import SingleArticle from "../SingleArticle";
 import Results from "./Results";
 import "./ResultsPage.css";
 import { calculateAccuracyPercentage } from "./utils/helpers";
@@ -16,8 +13,7 @@ import { calculateAccuracyPercentage } from "./utils/helpers";
 const ResultsPage = () => {
   //* accesses data from 'ResultsContext' and 'AuthContext'
   const { results } = useContext(ResultsContext);
-  const { account, setAccount, isFav, addFavorite, deleteFavorite } =
-    useContext(AuthContext);
+  const { account } = useContext(AuthContext);
 
   const [accountDetails, setAccountDetails] = useState<Account>();
 
@@ -50,29 +46,11 @@ const ResultsPage = () => {
           )}
           total={results.total}
         />
-        <div className="results-article-container">
+        <ul className="results-article-container">
           {results.article.map((article, index) => (
-            <div key={`${article.id} ${index}`} className="results-article">
-              <div className="results-article-title">{article.title}</div>
-              <img src={article.imageUrl} alt={article.title} />
-              {!isFav(article.id) ? (
-                <button
-                  onClick={() => addFavorite(article)}
-                  className="favorite-button"
-                >
-                  Favorite Article
-                </button>
-              ) : (
-                <button
-                  onClick={() => deleteFavorite(article.id)}
-                  className="favorite-button"
-                >
-                  Unfavorite Article
-                </button>
-              )}
-            </div>
+            <SingleArticle key={`${article.id} ${index}`} article={article} />
           ))}
-        </div>
+        </ul>
       </div>
     );
   } else {

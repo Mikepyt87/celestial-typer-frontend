@@ -1,9 +1,9 @@
+import "./ArticlesPage.css";
 import { useEffect, useState } from "react";
 import replacementImg from "../assets/nasa_logo.jpg";
 import { Link, useParams } from "react-router-dom";
 import Article from "../models/Article";
 import { getSpecificArticle } from "../services/spaceFlightApiService";
-import "./ArticlesPage.css";
 import Header from "./Header";
 
 const ArticlesPage = () => {
@@ -27,16 +27,18 @@ const ArticlesPage = () => {
             <h3 className="article-title">{article.title}</h3>
             <div className="article-details">
               <p className="article-summary">{article.summary}</p>
-              <img
-                src={article.imageUrl}
-                alt={article.title}
-                className="article-image"
-                // if image is not found, then load replacementImg
-                onError={({ currentTarget }) => {
-                  currentTarget.src = replacementImg;
-                }}
-                title="Click image to visit article site"
-              />
+              <a href={article.url} target="_blank">
+                <img
+                  src={article.imageUrl}
+                  alt={article.title}
+                  className="article-image"
+                  // if image is not found, then load replacementImg
+                  onError={({ currentTarget }) => {
+                    currentTarget.src = replacementImg;
+                  }}
+                  title="Click image to visit article site"
+                />
+              </a>
             </div>
           </section>
         ))}

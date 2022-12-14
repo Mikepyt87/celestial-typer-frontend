@@ -9,6 +9,7 @@ import {
   updateAccountDetails,
 } from "../services/AccountApiService";
 import Article from "../models/Article";
+import Score from "../models/Score";
 
 //* functional React component used to provide data about a users auth stat TO child components.
 function AuthContextProvider({ children }: { children: ReactNode }) {
@@ -46,10 +47,35 @@ function AuthContextProvider({ children }: { children: ReactNode }) {
     });
   }, []);
 
+  const addGameResults = (errors: number, totalTyped: number, acpm: number) => {
+    //* First checks to verify account exists. if(account exists) then the function creates a copy of the 'account' object and 'scores' array and appends the results to the end of the 'scores' array within the account object.
+    if (account) {
+      const copyOfAccount: Account = { ...account };
+      const copyOfScores: Score[] = [...copyOfAccount.scores];
+      copyOfScores.unshift({
+        errors: errors,
+        total: totalTyped,
+        adjustedCharactersPerMinute: acpm,
+        userName: account.userName,
+        profilePic: account.profilePic,
+      });
+      copyOfAccount.scores = copyOfScores;
+      updateAccountDetails(copyOfAccount).then((res) => {
+        getUserData(account.uid).then((response) => {
+          setAccount(response);
+        });
+      });
+    }
+  };
+
+  const isFav = (idToCheck: number): boolean => {
+    return account!.favoritedArticles.some((fav) => fav.id === idToCheck);
+  };
+
   const addFavorite = (article: Article): void => {
     const copyOfAccount = { ...account! };
     const copyOfFavoriteArticles = copyOfAccount.favoritedArticles;
-    copyOfFavoriteArticles?.push(article);
+    copyOfFavoriteArticles?.unshift(article);
     copyOfAccount.favoritedArticles = copyOfFavoriteArticles;
     updateAccountDetails(copyOfAccount).then((res) => {
       getUserData(account!.uid).then((response) => {
@@ -76,27 +102,21 @@ function AuthContextProvider({ children }: { children: ReactNode }) {
     }
   };
 
-  const isFav = (idToCheck: number): boolean => {
-    return account!.favoritedArticles.some((fav) => fav.id === idToCheck);
-  };
-
   return (
     //* provides account data to child components so the child components can access and update the auth state.
     <AuthContext.Provider
-      value={{ user, account, setAccount, addFavorite, deleteFavorite, isFav }}
+      value={{
+        user,
+        account,
+        setAccount,
+        addGameResults,
+        isFav,
+        addFavorite,
+        deleteFavorite,
+      }}
     >
       {children}
     </AuthContext.Provider>
   );
 }
 export default AuthContextProvider;
-
-//swing the hammer!!
-
-// step one you want to set yp a put in your router object replaceOne as mongo command.
-// step one part two: Make a function to make that endponint and thats in your serviec file endpoint
-// step two: conditional show(render) a up form within one of our compoents frontend base on the intial setup logic.
-// MVP notes creat a go fuck yourself****
-//step three; In that form withing that submission on that form you will forms submission call your submission **call James and Andrea , function that we had to make in step one part two.
-
-//THANK YOU
