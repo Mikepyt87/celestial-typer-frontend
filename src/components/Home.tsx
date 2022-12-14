@@ -21,15 +21,6 @@ import {
 } from "./utils/functions";
 import SingleArticle from "./SingleArticle";
 
-const typeWriterExpectedTxt =
-  "Sign in to improve your performance and maybe one day you will type at the speed of light!"; /* The text */
-
-const arrayOfTypedTxt = [
-  "Sign in to improve uypr performance and maybedone day you will typreat the speed of light!",
-  // "Sign in to improve ypur performance and maybefone day you will type at the speed of light!",
-  // "tign in to improve ypur performance and maybefone day you will type at the speed of light!",
-];
-
 //* React component used to display the home page
 const Home = () => {
   //* useContext hook to access the 'account' object from 'AuthContext'
@@ -42,13 +33,15 @@ const Home = () => {
 
   useEffect(() => {
     setTimeout(() => {
+      //* calls Space Flight Api service function
       getAllArticles().then((res) => {
         //* sets articles to ten random 'Article' objects from endpoint (if app is running in mobile, titles will be cut off after 45 characters)
         setArticles(shortenTitles(randomArticles(res, 10), isTouchDevice()));
       });
     }, 800);
-    //* calls Space Flight Api service function
+  }, []);
 
+  useEffect(() => {
     //* array of 'Account' objects sorted by score
     getallUsersScores().then((res) => {
       setAllUserScores(() => {
@@ -57,7 +50,7 @@ const Home = () => {
         return res;
       });
     });
-  }, [account]);
+  }, []);
 
   //* updates the users account with a username when 'UsernameForm' is submitted
   const insertAccountname = (username: string) => {
@@ -68,6 +61,25 @@ const Home = () => {
       updateAccountDetails(copyOfAccount).then((res) => setAccount(res));
     }
   };
+
+  const typeWriterExpectedTxt =
+    "Sign in to improve your performance and maybe one day you will type at the speed of light!"; /* The text */
+
+  let arrayOfTypedTxt: string[] = [];
+
+  if (account) {
+    arrayOfTypedTxt = [
+      "Sign in to improve uypr performance and maybedone day you will typreat the speed of light!",
+      // "Sign in to improve ypur performance and maybefone day you will type at the speed of light!",
+      // "tign in to improve ypur performance and maybefone day you will type at the speed of light!",
+    ];
+  } else {
+    arrayOfTypedTxt = [
+      "Sign in to improve uypr performance and maybedone day you will typreat the speed of light!",
+      // "Sign in to improve ypur performance and maybefone day you will type at the speed of light!",
+      // "tign in to improve ypur performance and maybefone day you will type at the speed of light!",
+    ];
+  }
 
   useEffect(() => {
     let i = 0;
