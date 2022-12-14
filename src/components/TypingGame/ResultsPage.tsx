@@ -1,9 +1,10 @@
 import { useContext, useEffect, useState } from "react";
-import { Link, Navigate } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 import AuthContext from "../../context/AuthContext";
 import ResultsContext from "../../context/ResultsContext";
 import Account from "../../models/Account";
 import { getUserData } from "../../services/AccountApiService";
+import Header from "../Header";
 import SingleArticle from "../SingleArticle";
 import Results from "./Results";
 import "./ResultsPage.css";
@@ -28,12 +29,7 @@ const ResultsPage = () => {
         <div className="results-page-header">
           <nav>
             <ul className="results-page-header-list">
-              <Link to="/">
-                <li>Home</li>
-              </Link>
-              <Link to="/typing-page">
-                <li>Typing Page</li>
-              </Link>
+              <Header />
             </ul>
           </nav>
         </div>

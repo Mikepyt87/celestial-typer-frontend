@@ -27,9 +27,12 @@
   padding: 0;
 }
 
-.AccountMenu .sign-out-button {
-  /* background-color: transparent;
-  border: none; */
+.AccountMenu .account-details {
+  color: rgb(250 204 21);
+  font-size: 18px;
+}
+.AccountMenu .account-details:hover {
+  color: rgb(142, 116, 13);
 }
 
 .invisible-wall {
@@ -51,4 +54,10 @@
 }
 .AccountMenu .sign-out-button:hover {
   color: #7da184;
+}
+
+@media only screen and (min-width: 600px) {
+  .AccountMenu .account-details {
+    padding-left: 10px;
+  }
 }

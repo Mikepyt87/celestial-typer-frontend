@@ -40,7 +40,7 @@ const AccountMenu = ({ toggleMenu, setToggleMenu }: Props) => {
             </li>
           )}
           <Link to={`/account-details/${account!.uid}`}>
-            <li>Account Details</li>
+            <li className="account-details">Account Details</li>
           </Link>
           <button
             className="sign-out-button"
