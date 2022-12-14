@@ -8,6 +8,8 @@
   width: 400px;
   border-radius: 8px;
   border: solid 2px rgb(30 41 59);
+  box-shadow: 1px 6px 10px 1px rgb(30 41 59);
+  z-index: 10;
 }
 .UsernameForm .input-button {
   display: flex;
@@ -32,15 +34,21 @@
   inline-size: 200px;
   padding: 10px;
   border-radius: 5px;
+  box-shadow: 3px 4px 9px 1px rgb(30 41 59);
 }
 .UsernameForm label {
   color: rgb(30 41 59);
   font-size: 12px;
   padding-bottom: 5px;
+  margin-top: 15px;
 }
 .UsernameForm .submit-button {
   background-color: #b4d3ba;
   color: rgb(10 41 59);
   font-size: 18px;
   border: none;
+}
+.UsernameForm .submit-button:hover {
+  color: #7da184;
+  text-shadow: 3px 4px 9px 1px rgb(30 41 59);
 }

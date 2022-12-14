@@ -1,17 +1,8 @@
 .ResultsPage {
-  margin: 30px;
-}
-.ResultsPage .results-page-header-list {
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  padding: 0px 0px 40px 0px;
+  /* margin: 30px; */
 }
 .ResultsPage li {
   padding: 0 10px;
-}
-.ResultsPage li:hover {
-  color: #7da184;
 }
 .ResultsPage .results-article-container {
   display: flex;
