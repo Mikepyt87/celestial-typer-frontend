@@ -1,5 +1,5 @@
 .Leaderboard {
-  background-color: rgb(250 204 21);
+  background-color: #facc15;
   color: rgb(30 41 59);
   font-size: 18px;
   border-radius: 10px;
@@ -8,6 +8,6 @@
   margin: 10px 40px 40px 40px;
 }
 .Leaderboard li {
-  color: rgb(100 116 139);
+  color: #64748b;
   font-size: 16px;
 }

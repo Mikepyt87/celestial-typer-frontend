@@ -7,17 +7,6 @@ import "./AccountDetails.css";
 import DoughnutChart from "./DoughnutChart";
 import Header from "./Header";
 
-const data = {
-  datasets: [
-    {
-      data: [10, 20, 30],
-      backgroundColor: ["red", "blue", "yellow"],
-    },
-  ],
-  // These labels appear in the legend and in the tooltips when hovering different arcs
-  labels: ["Red", "Yellow", "Blue"],
-};
-
 //* shows the details of a users account.
 const AccountDetails = () => {
   //* AuthContext to get the userser account info
