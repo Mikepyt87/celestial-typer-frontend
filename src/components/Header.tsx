@@ -44,9 +44,12 @@ const Header = () => {
           <AccountMenu toggleMenu={toggleMenu} setToggleMenu={setToggleMenu} />
         </div>
       ) : (
-        <button onClick={signInWithGoogle} className="sign-in-button">
-          Sign In
-        </button>
+        <>
+          <p className="keepTrack">Keep track of your scores → </p>
+          <button onClick={signInWithGoogle} className="sign-in-button">
+            Sign In
+          </button>
+        </>
       )}
     </header>
   );

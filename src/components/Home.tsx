@@ -64,21 +64,24 @@ const Home = () => {
   const typeWriterExpectedTxt =
     "Sign in to improve your performance and maybe one day you will type at the speed of light!"; /* The text */
 
+  // let arrayOfTypedTxt: string[] = [];
+
+  // if (account) {
+
+  // } else {
+  //   arrayOfTypedTxt = [
+  //     "Sign in to improve uypr proformance and maybedone day you will typreat the spead of light!",
+  //     // "Sign in to improve ypur performance and maybefone day you will type at the speed of light!",
+  //     // "tign in to improve ypur performance and maybefone day you will type at the speed of light!",
+  //   ];
+  // }
+
   useEffect(() => {
-    // let arrayOfTypedTxt: string[] = [];
-    // if (account) {
     let arrayOfTypedTxt = [
       "Sign in to improve uypr performance and maybedone day you will typreat the speed of light!",
       // "Sign in to improve ypur performance and maybefone day you will type at the speed of light!",
       // "tign in to improve ypur performance and maybefone day you will type at the speed of light!",
     ];
-    // } else {
-    //   arrayOfTypedTxt = [
-    //     "Sign in to improve uypr performance and maybedone day you will typreat the speed of light!",
-    //     // "Sign in to improve ypur performance and maybefone day you will type at the speed of light!",
-    //     // "tign in to improve ypur performance and maybefone day you will type at the speed of light!",
-    //   ];
-    // }
     let i = 0;
     const speed = 150; /* The speed/duration of the effect in milliseconds */
 
