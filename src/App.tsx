@@ -9,7 +9,6 @@ import AccountDetails from "./components/AccountDetails";
 import ArticlesPage from "./components/ArticlesPage";
 
 import Home from "./components/Home";
-import Leaderboard from "./components/Leaderboard";
 import LeaderboardPage from "./components/LeaderboardPage";
 import ResultsPage from "./components/TypingGame/ResultsPage";
 import TypingMainPage from "./components/TypingGame/TypingMainPage";

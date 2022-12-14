@@ -1,51 +1,46 @@
-import { useContext, useEffect, useState } from "react";
-import Article from "../models/Article";
-import { getAllArticles } from "../services/spaceFlightApiService";
 import "./Home.css";
-import replacementImg from "../assets/nasa_logo.jpg";
+import { useContext, useEffect, useState } from "react";
 import AuthContext from "../context/AuthContext";
-import UsernameForm from "./UsernameForm";
+import Account from "../models/Account";
+import Article from "../models/Article";
 import {
   getallUsersScores,
   updateAccountDetails,
 } from "../services/AccountApiService";
-import Account from "../models/Account";
-import Leaderboard from "./Leaderboard";
+import { getAllArticles } from "../services/spaceFlightApiService";
+import Canvas from "./Canvas";
 import Header from "./Header";
+import UserTypings from "./TypingGame/UserTypings";
+import UsernameForm from "./UsernameForm";
 import {
   isTouchDevice,
   randomArticles,
   shortenTitles,
   sortScores,
 } from "./utils/functions";
-import Canvas from "./Canvas";
-import useWindowDimensions from "./custom hooks/useWindowDimensions";
-import { Link } from "react-router-dom";
-import { all } from "q";
-import UserTypings from "./TypingGame/UserTypings";
+import SingleArticle from "./SingleArticle";
 
 //* React component used to display the home page
 const Home = () => {
-  // will be used for canvas element
-  const { width } = useWindowDimensions();
   //* useContext hook to access the 'account' object from 'AuthContext'
   const { account, setAccount } = useContext(AuthContext);
   const [txtOnScreen, setTxtOnScreen] = useState("");
 
   //* useState that holds an array of ten randomized objects from Space Flight Api endpoint
   const [articles, setArticles] = useState<Article[]>([]);
-  //* console.log(articles);
   const [allUserScores, setAllUserScores] = useState<Account[]>([]);
 
   useEffect(() => {
     setTimeout(() => {
+      //* calls Space Flight Api service function
       getAllArticles().then((res) => {
         //* sets articles to ten random 'Article' objects from endpoint (if app is running in mobile, titles will be cut off after 45 characters)
         setArticles(shortenTitles(randomArticles(res, 10), isTouchDevice()));
       });
     }, 800);
-    //* calls Space Flight Api service function
+  }, []);
 
+  useEffect(() => {
     //* array of 'Account' objects sorted by score
     getallUsersScores().then((res) => {
       setAllUserScores(() => {
@@ -54,7 +49,7 @@ const Home = () => {
         return res;
       });
     });
-  }, [account]);
+  }, []);
 
   //* updates the users account with a username when 'UsernameForm' is submitted
   const insertAccountname = (username: string) => {
@@ -67,30 +62,44 @@ const Home = () => {
   };
 
   const expectedTxt =
-    "Click here to improve your performance and maybe one day you will type at the speed of light!"; /* The text */
+    "Sign in to improve your performance and maybe one day you will type at the speed of light!"; /* The text */
 
   const typedTxtArray = [
-    "Click here to improve uypr proformance and mabye one day you will typreat the speed of light!",
+    "Sign in to improve uypr performance and maybe one day you will typreat the speed of light!",
     // "Sign in to improve ypur performance and maybefone day you will type at the speed of light!",
     // "tign in to improve ypur performance and maybefone day you will type at the speed of light!",
   ];
 
   useEffect(() => {
+    // let arrayOfTypedTxt: string[] = [];
+    // if (account) {
+    let arrayOfTypedTxt = [
+      "Sign in to improve uypr performance and maybedone day you will typreat the speed of light!",
+      // "Sign in to improve ypur performance and maybefone day you will type at the speed of light!",
+      // "tign in to improve ypur performance and maybefone day you will type at the speed of light!",
+    ];
+    // } else {
+    //   arrayOfTypedTxt = [
+    //     "Sign in to improve uypr performance and maybedone day you will typreat the speed of light!",
+    //     // "Sign in to improve ypur performance and maybefone day you will type at the speed of light!",
+    //     // "tign in to improve ypur performance and maybefone day you will type at the speed of light!",
+    //   ];
+    // }
     let i = 0;
     const speed = 150; /* The speed/duration of the effect in milliseconds */
 
     const getRandomIndex = () =>
-      Math.floor(Math.random() * typedTxtArray.length);
+      Math.floor(Math.random() * arrayOfTypedTxt.length);
 
-    let typedTxt = typedTxtArray[getRandomIndex()];
+    let typedTxt = arrayOfTypedTxt[getRandomIndex()];
 
     const typeWriter = () => {
       // first conditional is for testing purposes
-      if (typedTxt.length === expectedTxt.length) {
-        if (expectedTxt[i - 3] !== typedTxt[i - 3]) {
+      if (typedTxt.length === typeWriterExpectedTxt.length) {
+        if (typeWriterExpectedTxt[i - 3] !== typedTxt[i - 3]) {
           setTimeout(() => {
             setTxtOnScreen(typedTxt.slice(0, i - 2));
-            typedTxt = expectedTxt.slice(0, i) + typedTxt.slice(i);
+            typedTxt = typeWriterExpectedTxt.slice(0, i) + typedTxt.slice(i);
             i = i - 3;
           }, 0);
           setTimeout(typeWriter, speed);
@@ -103,7 +112,7 @@ const Home = () => {
                 i = 0;
                 setTxtOnScreen("");
                 setTimeout(typeWriter, speed);
-                typedTxt = typedTxtArray[getRandomIndex()];
+                typedTxt = arrayOfTypedTxt[getRandomIndex()];
               }, 1000);
             }
             setTimeout(typeWriter, speed);
@@ -126,8 +135,11 @@ const Home = () => {
         {allUserScores[0] && (
           <>
             <div className="words-container">
-              <div className="words">{expectedTxt}</div>
-              <UserTypings words={expectedTxt} userInput={txtOnScreen} />
+              <div className="words">{typeWriterExpectedTxt}</div>
+              <UserTypings
+                words={typeWriterExpectedTxt}
+                userInput={txtOnScreen}
+              />
             </div>
             <Canvas
               allUserScores={allUserScores}
@@ -140,31 +152,17 @@ const Home = () => {
       {/* <Leaderboard topScores={topFive(allUserScores)} /> */}
       <section>
         <p className="articles-header">↓Browse Articles↓</p>
-        <div className="articles-container">
+        <ul className="articles-container">
           {/* if articles array is not empty, map the objects to the page */}
 
           {/* //* maps over the 'articles' array, rendering a title and image */}
           {articles.map((article) => (
-            <Link
-              to={`/articlesPage/${article.id}`}
+            <SingleArticle
               key={`${article.id}_${article.publishedAt}`}
-            >
-              <div className="article">
-                {/* renders title and image from each object */}
-                <p className="article-title">{article.title}</p>
-                <img
-                  src={article.imageUrl}
-                  alt={article.title}
-                  className="article-image"
-                  // if image is not found, then load replacementImg
-                  onError={({ currentTarget }) => {
-                    currentTarget.src = replacementImg;
-                  }}
-                />
-              </div>
-            </Link>
+              article={article}
+            />
           ))}
-        </div>
+        </ul>
       </section>
     </div>
   );

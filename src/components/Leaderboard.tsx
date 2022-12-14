@@ -1,8 +1,7 @@
-import { Link, Navigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import Account from "../models/Account";
 import "./Leaderboard.css";
 
-//* USED ON LINE 98 of Home.tsx
 interface Props {
   topScores: Account[];
 }
@@ -13,7 +12,6 @@ const Leaderboard = ({ topScores }: Props) => {
     <Link to="/leaderboard">
       <div className="Leaderboard">
         <h2>TOP SCORES:</h2>
-
         <ul>
           {/* //* maps over 'topScores' array */}
           {topScores.map((account, index) => (
@@ -21,12 +19,6 @@ const Leaderboard = ({ topScores }: Props) => {
             <li key={index}>
               <p>
                 {index + 1}.{" "}
-                {/* <img
-                  src={account.scores[account.scores.length - 1].profilePic}
-                  alt={`${
-                    account.scores[account.scores.length - 1].userName
-                  }'s icon`}
-                /> */}
                 {account.scores[account.scores.length - 1].userName}{" "}
                 {
                   account.scores[account.scores.length - 1]

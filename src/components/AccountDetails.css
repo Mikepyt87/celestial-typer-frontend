@@ -20,7 +20,7 @@ span {
 
 .AccountDetails ul {
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
 }
 
 .AccountDetails .account-favorited-articles li p {
