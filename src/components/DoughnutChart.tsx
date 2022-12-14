@@ -7,9 +7,13 @@ import { Doughnut } from "react-chartjs-2";
 import Account from "../models/Account";
 
 ChartJs.register(Tooltip, Title, ArcElement, Legend);
+
 interface Dataset {
   data: number[];
   backgroundColor: string[];
+  borderColor: string;
+  borderWidth: number;
+  animationSpeed: number;
 }
 interface Data {
   datasets: Dataset[];
@@ -41,15 +45,18 @@ const DoughnutChart = () => {
     datasets: [
       {
         data: [totalErrors!, totalAttempted!],
-        backgroundColor: ["red", "blue"],
+        backgroundColor: ["#facc15", "#64748b"],
+        borderColor: "#bcd8c1",
+        borderWidth: 2,
+        animationSpeed: 1,
       },
     ],
-    labels: ["Errors", "Total"],
+    labels: ["Errors", "Total attempted"],
   };
 
   return (
-    <div className="DoughnutChart" style={{ width: "30%", height: "30%" }}>
-      <Doughnut data={doughnutData} />
+    <div className="doughnutChart" style={{ width: "100%", height: "100%" }}>
+      <Doughnut data={doughnutData} className="doughnut" />
     </div>
   );
 };
