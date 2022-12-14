@@ -10,7 +10,8 @@ interface Props {
 }
 
 const SingleArticle = ({ article }: Props) => {
-  const { isFav, addFavorite, deleteFavorite } = useContext(AuthContext);
+  const { account, isFav, addFavorite, deleteFavorite } =
+    useContext(AuthContext);
 
   return (
     <>
@@ -38,10 +39,9 @@ const SingleArticle = ({ article }: Props) => {
         ) : (
           <button
             onClick={() => deleteFavorite(article.id)}
-            className="favorite-button-unfavorite"
+            className="favorite-button"
           >
-            <span className="star">★</span> Favorite{" "}
-            <span className="star">★</span>
+            Unfavorite Article
           </button>
         )}
       </li>

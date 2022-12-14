@@ -1,4 +1,4 @@
-import { ReactNode, useEffect, useState } from "react";
+import { ReactNode, useState } from "react";
 import Results from "../models/Results";
 import ResultsContext from "./ResultsContext";
 

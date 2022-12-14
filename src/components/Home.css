@@ -73,7 +73,6 @@
   line-height: 1.625;
   min-width: 305px;
   height: 200px;
-  user-select: none;
 }
 
 .Home .words,
@@ -85,6 +84,7 @@
 
 .Home .words {
   color: rgb(100 116 139);
+  user-select: none;
 }
 
 .Home .Caret {
