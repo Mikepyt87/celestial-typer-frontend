@@ -19,6 +19,7 @@ import {
   sortScores,
 } from "./utils/functions";
 import SingleArticle from "./SingleArticle";
+import { Link } from "react-router-dom";
 
 //* React component used to display the home page
 const Home = () => {
@@ -84,7 +85,7 @@ const Home = () => {
 
     // let typedTxt = arrayOfTypedTxt[getRandomIndex()];
     let typedTxt =
-      "Start game to improve uypr typing performance and maybedone day you will typreat the speed of light!";
+      "Start game to improve ###r typing performance and maybe#one day you will typ##at the speed of light!";
 
     const typeWriter = () => {
       // first conditional is for testing purposes
@@ -134,6 +135,14 @@ const Home = () => {
                 words={typeWriterExpectedTxt}
                 userInput={txtOnScreen}
               />
+              <Link to="/typing-page">
+                <button
+                  className={`play-button ${!!!account}-button`}
+                  disabled={!!!account}
+                >
+                  play game
+                </button>
+              </Link>
             </div>
             <Canvas
               allUserScores={allUserScores}
@@ -143,7 +152,6 @@ const Home = () => {
           </>
         )}
       </div>
-      {/* <Leaderboard topScores={topFive(allUserScores)} /> */}
       <section>
         <p className="articles-header">
           <span className="browse-arrow">↓</span>Browse Articles

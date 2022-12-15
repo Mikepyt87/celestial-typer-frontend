@@ -56,7 +56,7 @@ const Header = () => {
             animate={animate}
             transition={{ duration: 3 }}
           >
-            Keep track of your scores <span className="arrow">→</span>{" "}
+            Sign in to play <span className="arrow">→</span>{" "}
           </motion.p>
           <button onClick={signInWithGoogle} className="sign-in-button">
             Sign In

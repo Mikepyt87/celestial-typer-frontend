@@ -50,12 +50,6 @@
   color: rgb(239 68 68);
 }
 
-@media only screen and (min-width: 600px) {
-  .Home canvas {
-    height: 400px;
-  }
-}
-
 .Home .canvas-container {
   display: flex;
   flex-direction: column;
@@ -84,7 +78,8 @@
   position: relative;
   line-height: 1.625;
   min-width: 305px;
-  height: 200px;
+  height: 250px;
+  margin-bottom: 35px;
 }
 
 .Home .words,
@@ -101,6 +96,27 @@
 .Home .Caret {
   height: 1.3125rem;
   width: 0.09375rem;
+}
+
+.Home .play-button {
+  position: absolute;
+  text-transform: uppercase;
+  font-size: medium;
+  bottom: 0px;
+  left: 50%;
+  transform: translatex(-50%);
+  padding: 20px;
+  border-radius: 10px;
+  color: rgb(239 68 68);
+  background-color: rgb(30 41 65);
+  border: 1px solid rgb(239 68 68);
+  cursor: pointer;
+}
+
+.Home .true-button {
+  border: 1px solid rgb(100 68 68);
+  color: rgb(100 68 68);
+  cursor: default;
 }
 
 @media only screen and (min-width: 600px) {
@@ -124,6 +140,11 @@
   .Home .words,
   .UserTypings {
     font-size: 30px;
+  }
+
+  .Home .play-button {
+    font-size: xx-large;
+    padding: 20px;
   }
 }
 
@@ -149,7 +170,7 @@
   }
 
   .Home .words-container {
-    height: 165px;
+    height: 250px;
   }
 }
 
@@ -169,5 +190,10 @@
   .Home .canvas-container {
     flex-direction: row-reverse;
     padding-left: 30px;
+  }
+
+  .Home .play-button {
+    font-size: xx-large;
+    padding: 20px;
   }
 }

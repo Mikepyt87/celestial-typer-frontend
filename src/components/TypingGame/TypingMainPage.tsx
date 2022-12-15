@@ -1,5 +1,5 @@
 import "./TypingMainPage.css";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import Article from "../../models/Article";
 import { getAllArticles } from "../../services/spaceFlightApiService";
 import UserTypings from "./UserTypings";
@@ -7,13 +7,17 @@ import { motion } from "framer-motion";
 import useEngine from "./custom typingGame hooks/useEngine";
 import { isTouchDevice, randomArticles } from "../utils/functions";
 import { RingLoader } from "react-spinners";
-import Header from "../Header";
+import { Navigate } from "react-router";
+import AuthContext from "../../context/AuthContext";
+import Logo from "../Logo";
 
 const mobileChecker = isTouchDevice();
 
 //* React component that displays the game.
 const TypingMainPage = () => {
   const [articles, setArticles] = useState<Article[]>([]);
+
+  const { account } = useContext(AuthContext);
 
   useEffect(() => {
     getAllArticles().then((res) => setArticles(randomArticles(res, 100)));
@@ -23,11 +27,14 @@ const TypingMainPage = () => {
   //* hook to manage the state of the game
   const { words, typed, timeLeft } = useEngine(articles);
 
+  if (!account) {
+    return <Navigate to="/" />;
+  }
   //* once articles load, page is rendered
-  if (articles[0]) {
+  else if (articles[0]) {
     return (
       <div className="TypingMainPage">
-        <Header />
+        <Logo className={"typer"} />
         <main>
           <h2 className="CountdownTimer">Time: {timeLeft}</h2>
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
@@ -51,7 +58,7 @@ const TypingMainPage = () => {
   } else {
     return (
       <div className="loading">
-        <p>loading...</p>
+        {/* <p>loading...</p> */}
         <RingLoader className="loader" />
       </div>
     );
