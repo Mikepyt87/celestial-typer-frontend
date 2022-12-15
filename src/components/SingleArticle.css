@@ -1,23 +1,36 @@
+.article {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
 .favorite-button {
   background-color: rgb(30 41 59);
   color: #bcd8c1;
   font-size: 16px;
-  border: none;
+  border: 1px solid #7da184;
+  border-radius: 2px;
   margin: 10px 10px 0 10px;
 }
+
 .favorite-button:hover {
   color: #7da184;
 }
+
 .favorite-button-unfavorite {
   background-color: rgb(30 41 59);
   color: #7da184;
   font-size: 16px;
-  border: none;
+  border: 1px solid #7da184;
+  border-radius: 2px;
   margin: 10px 10px 0 10px;
 }
+
 .favorite-button-unfavorite:hover {
   color: #bcd8c1;
 }
+
 .star {
   color: rgb(250 204 21);
 }

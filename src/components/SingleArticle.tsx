@@ -43,7 +43,8 @@ const SingleArticle = ({ article }: Props) => {
                 onClick={() => deleteFavorite(article.id)}
                 className="favorite-button"
               >
-                <span>★</span>Favorite<span>★</span>
+                <span className="star">★</span>Favorited
+                <span className="star">★</span>
               </button>
             )}
           </>

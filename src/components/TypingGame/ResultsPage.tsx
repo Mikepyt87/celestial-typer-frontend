@@ -26,13 +26,7 @@ const ResultsPage = () => {
   if (results) {
     return (
       <div className="ResultsPage">
-        <div className="results-page-header">
-          <nav>
-            <ul className="results-page-header-list">
-              <Header />
-            </ul>
-          </nav>
-        </div>
+        <Header />
         <Results
           state={"finish"}
           errors={results.errors}

@@ -6,6 +6,7 @@ import "./Header.css";
 import Logo from "./Logo";
 import AccountMenu from "./AccountMenu";
 import useWindowDimensions from "./custom hooks/useWindowDimensions";
+import { motion } from "framer-motion";
 
 const Header = () => {
   //* access info about current user: photo URL and display name
@@ -14,6 +15,10 @@ const Header = () => {
   const [toggleMenu, setToggleMenu] = useState(false);
 
   const { width } = useWindowDimensions();
+
+  const initial = { opacity: 0 };
+
+  const animate = { opacity: 1 };
 
   return (
     <header className={`Header logged-out-${!user && !account}`}>
@@ -44,12 +49,19 @@ const Header = () => {
           <AccountMenu toggleMenu={toggleMenu} setToggleMenu={setToggleMenu} />
         </div>
       ) : (
-        <>
-          <p className="keepTrack">Keep track of your scores → </p>
+        <div className="sign-in-container">
+          <motion.p
+            className="keep-track"
+            initial={initial}
+            animate={animate}
+            transition={{ duration: 3 }}
+          >
+            Keep track of your scores <span className="arrow">→</span>{" "}
+          </motion.p>
           <button onClick={signInWithGoogle} className="sign-in-button">
             Sign In
           </button>
-        </>
+        </div>
       )}
     </header>
   );

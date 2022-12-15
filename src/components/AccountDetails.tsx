@@ -35,8 +35,11 @@ const AccountDetails = () => {
     return (
       <div className="AccountDetails">
         <Header />
-        <section className="account-details">
-          <button onClick={() => setdeleteAccountConfirmation(true)}>
+        <section>
+          <button
+            onClick={() => setdeleteAccountConfirmation(true)}
+            className="delete-account-button"
+          >
             Delete Account
           </button>
           {deleteAccountConfirmation && (
@@ -45,31 +48,34 @@ const AccountDetails = () => {
                 onClick={() => {
                   deleteAccount();
                 }}
+                className="sure-button"
               >
                 Are you sure?
               </button>
             </div>
           )}
-          <h3>Username: {account?.userName}</h3>
-          <div className="doughnutChart">
-            <DoughnutChart />
-          </div>
-          <h3>Scores:</h3>
-          <ul className="scores-ul">
-            {account?.scores.map((score, index) => (
-              <AccountScores key={index} score={score} />
-            ))}
-          </ul>
-          <h3>Favorited Articles:</h3>
-          <div className="account-favorited-articles-container">
-            <ul className="account-favorited-articles">
-              {account?.favoritedArticles.map((article) => (
-                <SingleArticle
-                  article={article}
-                  key={`${article.id}_${article.publishedAt}`}
-                />
+          <div className="account-details">
+            <h3>Username: {account?.userName}</h3>
+            <div className="doughnutChart">
+              <DoughnutChart />
+            </div>
+            <h3>Scores:</h3>
+            <ul className="scores-ul">
+              {account?.scores.map((score, index) => (
+                <AccountScores key={index} score={score} />
               ))}
             </ul>
+            <h3>Favorited Articles:</h3>
+            <div className="account-favorited-articles-container">
+              <ul className="account-favorited-articles">
+                {account?.favoritedArticles.map((article) => (
+                  <SingleArticle
+                    article={article}
+                    key={`${article.id}_${article.publishedAt}`}
+                  />
+                ))}
+              </ul>
+            </div>
           </div>
         </section>
       </div>

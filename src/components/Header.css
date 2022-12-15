@@ -30,7 +30,6 @@
 .Header li:hover {
   color: #7da184;
 }
-
 /* When user logs out. Header border doubles to account for loss of AccountMenu component's border */
 .logged-out-true {
   border-bottom: solid 2px rgb(239 68 68);
@@ -38,6 +37,21 @@
 
 .Header .header-logo {
   inline-size: 225px;
+}
+.Header .sign-in-container {
+  display: flex;
+  justify-content: flex-end;
+}
+.Header .keep-track {
+  color: #7da184;
+  font-size: 16px;
+  padding: 0 15px 10px 15px;
+  border: 1px rgb(250 204 21) solid;
+  border-radius: 2px;
+}
+.Header .arrow {
+  color: rgb(239 68 68);
+  font-size: 28px;
 }
 .Header .sign-in-button {
   background-color: rgb(30 41 59);
@@ -57,7 +71,7 @@
   .Header .header-logo {
     inline-size: 160px;
   }
-  .keepTrack {
+  .keep-track {
     display: none;
   }
 }
