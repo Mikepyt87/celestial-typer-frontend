@@ -84,7 +84,7 @@ const Home = () => {
 
     // let typedTxt = arrayOfTypedTxt[getRandomIndex()];
     let typedTxt =
-      "Start game to improve uypr typing performance and maybedone day you will typreat the speed of light!";
+      "Start game to improve ###r typing performance and maybe#one day you will typ##at the speed of light!";
 
     const typeWriter = () => {
       // first conditional is for testing purposes

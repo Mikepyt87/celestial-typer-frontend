@@ -16,10 +16,6 @@ const Header = () => {
 
   const { width } = useWindowDimensions();
 
-  const initial = { opacity: 0 };
-
-  const animate = { opacity: 1 };
-
   return (
     <header className={`Header logged-out-${!user && !account}`}>
       {/* <img src={LogoImg} alt="Celstial Typer" width="250px" /> */}
@@ -52,8 +48,8 @@ const Header = () => {
         <div className="sign-in-container">
           <motion.p
             className="keep-track"
-            initial={initial}
-            animate={animate}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
             transition={{ duration: 3 }}
           >
             Keep track of your scores <span className="arrow">→</span>{" "}
