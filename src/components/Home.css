@@ -2,6 +2,11 @@
   margin: 0;
 }
 
+.Home .words-container {
+  display: flex;
+  align-content: flex;
+}
+
 .Home .articles-container {
   display: flex;
   justify-content: center;
@@ -40,6 +45,11 @@
   height: 240px;
 }
 
+.Home .browse-arrow {
+  font-size: 32px;
+  color: rgb(239 68 68);
+}
+
 @media only screen and (min-width: 600px) {
   .Home canvas {
     height: 400px;
@@ -49,8 +59,9 @@
 .Home .canvas-container {
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
+  justify-content: space-evenly;
   align-items: center;
+  margin: 50px 0;
 }
 
 .Home canvas {
@@ -66,6 +77,7 @@
 .Home .articles-header {
   font-size: 25px;
   text-transform: uppercase;
+  margin: 25px 0 0 0;
 }
 
 .Home .words-container {
@@ -86,7 +98,6 @@
   color: rgb(100 116 139);
   user-select: none;
 }
-
 .Home .Caret {
   height: 1.3125rem;
   width: 0.09375rem;
@@ -157,5 +168,6 @@
 
   .Home .canvas-container {
     flex-direction: row-reverse;
+    padding-left: 30px;
   }
 }

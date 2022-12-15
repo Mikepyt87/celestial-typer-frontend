@@ -129,6 +129,7 @@ const Home = () => {
           <>
             <div className="words-container">
               <div className="words">{typeWriterExpectedTxt}</div>
+
               <UserTypings
                 words={typeWriterExpectedTxt}
                 userInput={txtOnScreen}
@@ -144,7 +145,10 @@ const Home = () => {
       </div>
       {/* <Leaderboard topScores={topFive(allUserScores)} /> */}
       <section>
-        <p className="articles-header">↓Browse Articles↓</p>
+        <p className="articles-header">
+          <span className="browse-arrow">↓</span>Browse Articles
+          <span className="browse-arrow">↓</span>
+        </p>
         <ul className="articles-container">
           {/* if articles array is not empty, map the objects to the page */}
 
