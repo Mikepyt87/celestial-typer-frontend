@@ -10,7 +10,7 @@ import useWords from "./useWords";
 
 export type State = "start" | "run" | "finish";
 
-const COUNTDOWN_SECONDS = 5;
+const COUNTDOWN_SECONDS = 60;
 
 //* takes an array of 'Article' as input
 const useEngine = (articles: Article[]) => {
