@@ -7,7 +7,6 @@ import { motion } from "framer-motion";
 import useEngine from "./custom typingGame hooks/useEngine";
 import { isTouchDevice, randomArticles } from "../utils/functions";
 import { RingLoader } from "react-spinners";
-import Header from "../Header";
 import { Navigate } from "react-router";
 import AuthContext from "../../context/AuthContext";
 import Logo from "../Logo";
