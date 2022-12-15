@@ -65,25 +65,10 @@ const Home = () => {
   const typeWriterExpectedTxt =
     "Start game to improve your typing performance and maybe one day you will type at the speed of light!"; /* The text */
 
-  // let arrayOfTypedTxt: string[] = [];
-
-  // if (account) {
-  // } else {
-  //   arrayOfTypedTxt = [
-  //     "Start game to improve uypr typing performance and maybedone day you will typreat the speed of light!",
-  //     // "Sign in to improve ypur performance and maybefone day you will type at the speed of light!",
-  //     // "tign in to improve ypur performance and maybefone day you will type at the speed of light!",
-  //   ];
-  // }
-
   useEffect(() => {
     let i = 0;
     const speed = 150; /* The speed/duration of the effect in milliseconds */
 
-    // const getRandomIndex = () =>
-    //   Math.floor(Math.random() * arrayOfTypedTxt.length);
-
-    // let typedTxt = arrayOfTypedTxt[getRandomIndex()];
     let typedTxt =
       "Start game to improve ###r typing performance and maybe#one day you will typ##at the speed of light!";
 

@@ -36,6 +36,10 @@ const ResultsPage = () => {
           )}
           total={results.total}
         />
+        <p className="articles-header">
+          <span className="results-arrow">↓</span>Article Summaries Typed
+          <span className="results-arrow">↓</span>
+        </p>
         <ul className="results-article-container">
           {results.article.map((article, index) => (
             <SingleArticle key={`${article.id} ${index}`} article={article} />

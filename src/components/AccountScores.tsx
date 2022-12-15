@@ -8,7 +8,7 @@ const AccountScores = ({ score }: Props) => {
   return (
     <li>
       <p>
-        {score.errors} Errors, {score.total} Keystrokes,
+        {score.errors} Errors, {score.total} Keystrokes,{" "}
         {score.adjustedCharactersPerMinute}cpm
       </p>
     </li>

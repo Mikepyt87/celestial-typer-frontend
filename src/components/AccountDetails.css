@@ -14,14 +14,6 @@
   color: rgb(239 68 68);
 }
 
-.AccountDetails .sure-button {
-  background-color: rgb(30 41 59);
-  color: rgb(239 68 68);
-  font-size: 18px;
-  padding: 5px 20px;
-  border: none;
-}
-
 .AccountDetails .sure-button:hover {
   color: rgb(239 68 68 / 0.5);
 }
@@ -35,7 +27,7 @@
 
 h3 {
   color: #7da184;
-  font-size: 22px;
+  font-size: 25px;
 }
 
 span {
@@ -44,9 +36,10 @@ span {
 
 .AccountDetails .scores-ul {
   padding-left: 40px;
+  list-style: disc;
 }
 
-.AccountDetails ul {
+.AccountDetails .account-favorited-articles {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
@@ -64,4 +57,53 @@ span {
 
 .AccountDetails .account-favorited-articles li img {
   width: 350px;
+}
+
+.AccountDetails .favorites-arrow {
+  font-size: 32px;
+  color: rgb(239 68 68);
+}
+
+.AccountDetails .delete-confirmation {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #b4d3ba;
+  height: 300px;
+  width: 400px;
+  border-radius: 8px;
+  border: solid 2px rgb(30 41 59);
+  box-shadow: 1px 6px 10px 1px rgb(30 41 59);
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-direction: column;
+}
+
+.AccountDetails .warning {
+  color: rgb(239 68 68);
+  font-size: 30px;
+  text-transform: uppercase;
+}
+
+.AccountDetails .warning-text {
+  color: rgb(30 41 59);
+  font-weight: bold;
+  font-size: 20px;
+  text-align: center;
+}
+
+.AccountDetails .deleting-button {
+  color: rgb(239 68 68);
+  font-size: 18px;
+  padding: 5px 20px;
+  border: none;
+  border-radius: 5px;
+  background-color: rgb(30 41 59);
+  cursor: pointer;
+}
+
+.AccountDetails .confirm {
+  font-size: 16px;
 }

@@ -45,3 +45,14 @@
 .Re li:hover {
   color: #7da184;
 }
+
+.ResultsPage .articles-header {
+  text-align: center;
+  text-transform: uppercase;
+  font-size: 25px;
+}
+
+.ResultsPage .results-arrow {
+  font-size: 32px;
+  color: rgb(239 68 68);
+}
