@@ -20,7 +20,9 @@ const Character = ({ actual, expected }: Props) => {
     (actual === "i" && expected === "í") ||
     (actual === "e" && expected === "é") ||
     (actual === "a" && expected === "á") ||
-    (actual === "'" && expected === "’");
+    (actual === "'" && expected === "’") ||
+    (actual === `"` && expected === `“`) ||
+    (actual === `"` && expected === `”`);
 
   return (
     <span
